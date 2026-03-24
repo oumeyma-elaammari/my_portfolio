@@ -1,0 +1,294 @@
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligner le contenu à gauche */
+  text-align: left; /* Texte aligné à gauche */
+  padding: 120px 0 80px;
+  overflow: hidden;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Greeting animation */
+.hero .greeting {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  animation: fadeInLeft 0.8s ease;
+}
+
+/* Main title - NO underline */
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.3;
+  color: var(--heading-color);
+  animation: fadeInLeft 0.8s ease 0.2s both;
+}
+
+.hero .highlight {
+  color: var(--accent-color);
+  font-size: 2.5rem;
+  font-weight: 800;
+  display: inline-block;
+}
+
+/* Typed text - WITH underline */
+.hero .tagline {
+  font-size: 1.5rem;
+  margin: 25px 0 0;
+  color: var(--default-color);
+  animation: fadeInLeft 0.8s ease 0.4s both;
+}
+
+
+.hero .tagline span {
+  margin-left: 8px;
+  padding-bottom: 4px;
+  font-weight: 500;
+  color: var(--default-color);
+  border-bottom: 2px solid var(--accent-color); 
+}
+
+.typed-cursor {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Buttons - Centered */
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center; /* Centrer les boutons */
+  margin-top: 3rem;
+  animation: fadeInUp 0.8s ease 0.6s both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(20, 157, 221, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(20, 157, 221, 0.2);
+  background: color-mix(in srgb, var(--accent-color), transparent 3%);
+}
+
+.btn-primary:active {
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline:hover {
+  background: rgba(20, 157, 221, 0.2);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: translateY(-4px);
+}
+
+.btn-outline:active {
+  transform: translateY(-2px);
+}
+
+.btn i {
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover i {
+  transform: translateX(3px);
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero .container {
+    padding: 0 30px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero .highlight {
+    font-size: 2.2rem;
+  }
+  
+  .hero .tagline {
+    font-size: 1.3rem;
+  }
+  
+  .typed-cursor {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 0 60px;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero .container {
+    padding: 0 20px;
+    text-align: center;
+  }
+  
+  .hero .greeting {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    animation: fadeInUp 0.8s ease;
+  }
+  
+  .hero h1 {
+    font-size: 1.6rem;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  
+  .hero .highlight {
+    font-size: 1.8rem;
+  }
+  
+  .hero .tagline {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+  }
+  
+  .typed-cursor {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    animation: fadeInUp 0.8s ease 0.6s both;
+  }
+  
+  .btn {
+    padding: 10px 28px;
+    font-size: 0.9rem;
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 80px 0 50px;
+  }
+  
+  .hero .greeting {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+  
+  .hero h1 {
+    font-size: 1.3rem;
+  }
+  
+  .hero .highlight {
+    font-size: 1.5rem;
+  }
+  
+  .hero .tagline {
+    font-size: 1rem;
+  }
+  
+  .typed-cursor {
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: 8px 24px;
+    font-size: 0.85rem;
+    width: 180px;
+  }
+  
+  .btn i {
+    font-size: 0.9rem;
+  }
+}
+
+/* Optional: Add a subtle gradient overlay for better text readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
