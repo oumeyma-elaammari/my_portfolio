@@ -141,7 +141,7 @@ const Contact = () => {
                   <label htmlFor="message-field" className="pb-2">Message</label>
                   <textarea
                     name="message"
-                    rows="10"
+                    rows="5"
                     id="message-field"
                     className="form-control"
                     value={formData.message}
@@ -155,8 +155,8 @@ const Contact = () => {
                   {status.type === 'error' && <div className="error-message">{status.message}</div>}
                   {status.type === 'success' && <div className="sent-message">{status.message}</div>}
 
-                  <button type="submit" className="btn btn-primary" disabled={isLoading}>
-                    Send Message <i className="bi bi-send ms-2"></i>
+                  <button type="submit" className="btn btn-primary send" disabled={isLoading}>
+                    Send Message
                   </button>
                 </div>
               </div>
