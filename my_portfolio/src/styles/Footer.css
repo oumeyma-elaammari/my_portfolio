@@ -48,20 +48,15 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(20, 157, 221, 0.08);
   border-radius: 12px;
   color: #cbd5e1;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   font-size: 18px;
-  border: 1px solid rgba(20, 157, 221, 0.15);
 }
 
 .footer-social a:hover {
-  background: var(--accent-color);
   color: #fff;
-  transform: translateY(-4px);
-  border-color: transparent;
-  box-shadow: 0 5px 15px rgba(20, 157, 221, 0.3);
+  transform: translateY(-3px);
 }
 
 .footer-copyright p {
@@ -89,15 +84,120 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.15); }
 }
-
 @media (max-width: 768px) {
   .footer {
-    padding: 30px 0 20px;
+    padding: 15px 0;
+  }
+  
+  .footer .row {
+    display: flex;
+    flex-direction: row; /* Garder en ligne */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .footer .col-lg-4 {
+    width: auto;
+    flex: 1;
+    text-align: center;
+  }
+  
+  /* Brand section - left */
+  .footer .col-lg-4:first-child {
+    text-align: left;
+    flex: 1;
+  }
+  
+  /* Social section - center */
+  .footer .col-lg-4:nth-child(2) {
+    text-align: center;
+    flex: 0 0 auto;
+  }
+  
+  /* Copyright section - right */
+  .footer .col-lg-4:last-child {
+    text-align: right;
+    flex: 1;
+  }
+  
+  .footer-brand {
+    align-items: flex-start;
+  }
+  
+  .footer-name {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+  
+  .footer-tagline {
+    font-size: 0.6rem;
+    white-space: nowrap;
   }
   
   .footer-social a {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  
+  .footer-copyright {
+    text-align: right;
+  }
+  
+  .footer-copyright p {
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 650px) {
+  .footer .row {
+    gap: 8px;
+  }
+  
+  .footer-name {
+    font-size: 0.75rem;
+  }
+  
+  .footer-tagline {
+    font-size: 0.55rem;
+  }
+  
+  .footer-social a {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+  
+  .footer-copyright p {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .footer .row {
+    flex-direction: column; /* Passe en colonne si trop petit */
+    gap: 12px;
+  }
+  
+  .footer .col-lg-4:first-child,
+  .footer .col-lg-4:nth-child(2),
+  .footer .col-lg-4:last-child {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .footer-brand {
+    align-items: center;
+  }
+  
+  .footer-copyright {
+    text-align: center;
+  }
+  
+  .footer-name, .footer-tagline {
+    white-space: normal;
   }
 }
