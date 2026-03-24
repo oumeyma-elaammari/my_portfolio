@@ -14,6 +14,7 @@
 .contact .info-item i {
   font-size: 20px;
   color: var(--accent-color);
+  background: rgba(20, 157, 221, 0.1);
   width: 44px;
   height: 44px;
   display: flex;
@@ -24,8 +25,9 @@
 }
 
 .contact .info-item:hover i {
+  background: var(--accent-color);
   color: #fff;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .contact .info-item h3 {
