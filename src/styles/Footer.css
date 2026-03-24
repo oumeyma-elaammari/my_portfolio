@@ -179,7 +179,7 @@
 @media (max-width: 550px) {
   .footer .row {
     flex-direction: column; /* Passe en colonne si trop petit */
-    gap: 12px;
+    gap: 10px;
   }
   
   .footer .col-lg-4:first-child,
