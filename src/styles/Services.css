@@ -1,18 +1,41 @@
+/*--------------------------------------------------------------
+# Services Section
+--------------------------------------------------------------*/
+.services .container {
+  justify-content: center;
+}
+
+.services .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: -12px;
+}
+
+.services [class*="col-"] {
+  display: flex;
+  padding: 12px;
+}
+
 .services .service-item {
   position: relative;
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 16px;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 15px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   border: 1px solid rgba(20, 157, 221, 0.1);
+    max-width: 23em;
+    margin : 5px
 }
 
 .services .service-item:hover {
   transform: translateY(-5px);
   border-color: var(--accent-color);
   background: rgba(20, 157, 221, 0.05);
+  box-shadow: 0 10px 30px rgba(20, 157, 221, 0.1);
 }
 
 .services .service-item .icon {
@@ -35,7 +58,7 @@
 
 .services .service-item:hover .icon {
   background: var(--surface-color);
-  transform: rotate(360deg);
+  transform: rotate(360deg) scale(1.05);
 }
 
 .services .service-item:hover .icon i {
@@ -47,10 +70,115 @@
   margin-bottom: 12px;
   font-size: 18px;
   color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
+.services .service-item:hover .title {
+  color: var(--accent-color);
 }
 
 .services .service-item .description {
   line-height: 24px;
   font-size: 14px;
   color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0;
+}
+
+/* Grand écran - 3 colonnes */
+@media (min-width: 992px) {
+  .services .col-lg-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+}
+
+/* Tablette - 2 colonnes */
+@media (max-width: 991px) and (min-width: 768px) {
+  .services .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  
+  .services .service-item {
+    padding: 20px;
+    gap: 15px;
+    min-height: auto;
+  }
+  
+  .services .service-item .icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .services .service-item .icon i {
+    font-size: 20px;
+  }
+  
+  .services .service-item .title {
+    font-size: 16px;
+  }
+  
+  .services .service-item .description {
+    font-size: 13px;
+    line-height: 22px;
+  }
+}
+
+/* Mobile - 1 colonne */
+@media (max-width: 767px) {
+  .services .row {
+    margin: -10px;
+  }
+  
+  .services [class*="col-"] {
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .services .service-item {
+    padding: 18px;
+    gap: 12px;
+    min-height: auto;
+  }
+  
+  .services .service-item .icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .services .service-item .icon i {
+    font-size: 18px;
+  }
+  
+  .services .service-item .title {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  
+  .services .service-item .description {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+/* Très petit mobile - icône centrée en haut */
+@media (max-width: 480px) {
+  .services .service-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .services .service-item .icon {
+    margin-bottom: 8px;
+  }
+  
+  .services .service-item .title {
+    text-align: center;
+  }
+  
+  .services .service-item .description {
+    text-align: center;
+  }
 }
