@@ -16,7 +16,7 @@
 
 .quote-content i {
   font-size: 28px;
-  color: var(--accent-color);
+  color: #fff;
   opacity: 0.6;
   margin-bottom: 15px;
   display: inline-block;
