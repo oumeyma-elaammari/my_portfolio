@@ -58,7 +58,7 @@ const projectsData = [
     demoType: 'video'
   }
 ];
-
+ 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState(projectsData);
