@@ -7,9 +7,9 @@ const Resume = () => {
       <div className="container section-title" data-aos="fade-up">
         <h2>Resume</h2>
         <p>
-          <em>
+          <em >
             Software Engineering student at ENSAO, specializing in full-stack development and artificial intelligence. 
-            Passionate about building scalable and intelligent applications using modern technologies such as React, Laravel, and AI tools. 
+            Passionate about building scalable and intelligent applications using modern technologies. 
             Highly motivated, team-oriented, and actively seeking a PFA internship to apply and expand my technical skills in real-world projects.
           </em>
         </p>
@@ -72,7 +72,7 @@ const Resume = () => {
             </div>
 
             <div className="resume-item">
-              <h4>Computer Science Club - ENSAO</h4>
+              <h4>Club Génie Informatique - ENSAO</h4>
               <h5>2024 - 2025</h5>
               <p><em>Active Member - Design Cell</em></p>
             </div>

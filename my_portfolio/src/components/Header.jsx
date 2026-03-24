@@ -35,57 +35,62 @@ const Header = () => {
   ];
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="header-container">
-        {/* Logo and Name */}
-        <div className="header-brand">
-          <img src={logo} alt="Oumeyma" className="header-logo" />
-          <div className="header-info">
-            <h1 className="header-name">Oumeyma ELAAMMARI</h1>
-            <p className="header-title">Software Engineering Student • AI Enthusiast</p>
+    <>
+      <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="header-container">
+          {/* Profile Section */}
+          <div className="header-profile">
+            <img src={logo} alt="Oumeyma" className="header-profile-img" />
+            <div className="header-info">
+              <div className="header-name">Oumeyma ELAAMMARI</div>
+              <div className="header-tag">Software Engineering student • AI Enthusiast</div>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="navmenu">
+            <ul>
+              {navItems.map((item) => (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                    activeClass="active"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Social Links + Mobile Toggle */}
+          <div className="header-social">
+            <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
+            </a>
+            <a href="mailto:elaammarioumeima@gmail.com">
+              <FaEnvelope />
+            </a>
+            <button className="mobile-nav-toggle" onClick={toggleMobileMenu}>
+              {isMobileMenuOpen ? <HiX /> : <HiMenu />}
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Desktop Navigation */}
-        <nav className="navmenu">
-          <ul>
-            {navItems.map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  spy={true}
-                  smooth={true}
-                  offset={-80}
-                  duration={500}
-                  onClick={closeMobileMenu}
-                  activeClass="active"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Social Links */}
-        <div className="header-social">
-          <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">
-            <FaGithub />
-          </a>
-          <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin />
-          </a>
-          <a href="mailto:elaammarioumeima@gmail.com">
-            <FaEnvelope />
-          </a>
-          <button className="mobile-toggle" onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <HiX /> : <HiMenu />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Menu (separate) */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'active' : ''}`}>
+        {/* Close button inside mobile menu */}
+        <button className="mobile-nav-close" onClick={toggleMobileMenu}>
+          <HiX />
+        </button>
         <ul>
           {navItems.map((item) => (
             <li key={item.to}>
@@ -93,7 +98,7 @@ const Header = () => {
                 to={item.to}
                 spy={true}
                 smooth={true}
-                offset={-80}
+                offset={-70}
                 duration={500}
                 onClick={closeMobileMenu}
                 activeClass="active"
@@ -104,7 +109,7 @@ const Header = () => {
           ))}
         </ul>
       </div>
-    </header>
+    </>
   );
 };
 

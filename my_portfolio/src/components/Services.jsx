@@ -6,14 +6,14 @@ const servicesData = [
     id: 1,
     icon: 'bi-braces',
     title: 'Web Development',
-    description: 'Full-stack web applications using React.js, Angular, Symfony, and Laravel. Responsive and modern user interfaces with clean backend architecture.',
+    description: 'Full-stack web applications using React.js, Angular, Symfony, and Spring Boot. Responsive and modern user interfaces with clean backend architecture.',
     delay: 100
   },
   {
     id: 2,
     icon: 'bi-phone',
     title: 'Mobile App Development',
-    description: 'Android applications using Java, XML, and Firebase. Feature-rich mobile solutions for HR management, attendance tracking, and more.',
+    description: 'Android applications using Java,and React Native for cross-platform solutions. User-friendly interfaces and seamless performance on mobile devices.',
     delay: 200
   },
   {
