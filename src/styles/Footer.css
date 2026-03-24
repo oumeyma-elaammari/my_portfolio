@@ -7,7 +7,7 @@
   backdrop-filter: blur(16px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 14px;
-  padding: 25px 0;
+  padding: 15px 20px;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
@@ -49,7 +49,7 @@
 }
 
 .footer-name {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   margin-bottom: 2px;
   color: #fff;
@@ -61,7 +61,7 @@
 }
 
 .footer-tagline {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #94a3b8;
   margin: 0;
   white-space: nowrap;
@@ -100,7 +100,7 @@
 
 .footer-copyright p {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #94a3b8;
   white-space: nowrap;
 }

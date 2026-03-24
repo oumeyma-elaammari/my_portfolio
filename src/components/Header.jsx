@@ -42,7 +42,7 @@ const Header = () => {
           <div className="header-profile">
             <img src={logo} alt="Oumeyma" className="header-profile-img" />
             <div className="header-info">
-              <div className="header-name">Oumeyma ELAAMMARI</div>
+              <div className="header-name">OUMEYMA ELAAMMARI</div>
               <div className="header-tag">Software Engineering student • AI Enthusiast</div>
             </div>
           </div>

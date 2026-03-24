@@ -49,7 +49,7 @@
 }
 
 .header-name {
-  font-size: 1.1rem;
+  font-size:  0.9rem;
   font-weight: 600;
   background: linear-gradient(160deg, #b6c9e3,#4e5660);
   -webkit-background-clip: text;
@@ -58,7 +58,7 @@
 }
 
 .header-tag {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #94a3b8;
 }
 /*--------------------------------------------------------------
