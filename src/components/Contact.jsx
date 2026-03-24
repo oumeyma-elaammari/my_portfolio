@@ -25,7 +25,7 @@ const Contact = () => {
 
     try {
       // Remplacer par ton endpoint
-      const response = await fetch('https://formspree.io/f/ton-id-formspree', {
+      const response = await fetch('https://formspree.io/f/mdapneeo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
