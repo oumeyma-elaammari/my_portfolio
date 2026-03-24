@@ -13,7 +13,9 @@ import Certificates from './components/Certificates';
 import Portfolio from './components/Portfolio';
 import Services from './components/Services';
 import Contact from './components/Contact';
+import Quote from './components/Quote';
 import Footer from './components/Footer';
+
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -54,6 +56,7 @@ function App() {
         <Portfolio />
         <Services />
         <Contact />
+        <Quote />
       </main>
       <Footer />
       

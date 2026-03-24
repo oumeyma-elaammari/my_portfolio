@@ -1,0 +1,71 @@
+/*--------------------------------------------------------------
+# Quote Section
+--------------------------------------------------------------*/
+.quote-section {
+  padding: 30px 0;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.quote-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-content i {
+  font-size: 28px;
+  color: var(--accent-color);
+  opacity: 0.6;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.quote-content p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  text-align: center;
+  border-radius: 12px;
+  line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quote-section {
+    padding: 25px 0;
+  }
+  
+  .quote-content i {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  
+  .quote-content p {
+    font-size: 0.8rem;
+    padding: 12px 20px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .quote-section {
+    padding: 20px 0;
+  }
+  
+  .quote-content i {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .quote-content p {
+    font-size: 0.7rem;
+    padding: 10px 15px;
+    line-height: 1.5;
+  }
+}
