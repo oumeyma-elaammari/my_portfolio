@@ -56,7 +56,6 @@ const Hero = () => {
           <a 
             href={cv} 
             className="btn btn-outline"
-           
           >
           
             My Resume
