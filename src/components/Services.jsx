@@ -6,7 +6,7 @@ const servicesData = [
     id: 1,
     icon: 'bi-braces',
     title: 'Web Development',
-    description: 'Full-stack web applications using React.js, Angular, Symfony, and Spring Boot. Responsive and modern user interfaces with clean backend architecture.',
+    description: 'Full-stack web applications using React.js, Angular, Symfony,Spring Boot and JEE. Responsive and modern user interfaces with clean backend architecture.',
     delay: 100
   },
   {
