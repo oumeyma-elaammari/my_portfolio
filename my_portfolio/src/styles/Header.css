@@ -49,7 +49,7 @@
 }
 
 .header-name {
-  font-size: 1.1rem;
+  font-size:  0.9rem;
   font-weight: 600;
   background: linear-gradient(160deg, #b6c9e3,#4e5660);
   -webkit-background-clip: text;
@@ -58,7 +58,7 @@
 }
 
 .header-tag {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #94a3b8;
 }
 /*--------------------------------------------------------------
@@ -149,9 +149,9 @@
     height: 100vh;
     width: 75%;
     max-width: 300px;
-    background: rgba(10, 25, 47, 0.98);
+    background: rgba(10, 25, 47, 0.8);
     backdrop-filter: blur(20px);
-    padding: 80px 20px 30px;
+    padding: 80px 10px;
     transition: 0.3s ease-out;
     z-index: 1050;
     border-left: 1px solid rgba(20, 157, 221, 0.2);
@@ -185,11 +185,11 @@
   right: -100%;
   top: 0;
   height: 100vh;
-  width: 75%;
+  width: 60%;
   max-width: 300px;
-  background: rgba(10, 25, 47, 0.98);
+  background: rgba(10, 25, 47, 0.2);
   backdrop-filter: blur(20px);
-  padding: 50px 20px;
+  padding: 50px 10px;
   transition: 0.3s ease-out;
   z-index: 1050;
   border-left: 1px solid rgba(20, 157, 221, 0.2);
@@ -213,7 +213,7 @@
   border: none;
   border-radius: 50%;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -234,7 +234,7 @@
 }
 
 .mobile-nav li a {
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 12px 16px;
   display: block;
   color: #cbd5e1;

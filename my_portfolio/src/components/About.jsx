@@ -62,7 +62,7 @@ const About = () => {
               As a passionate software engineering student, I've worked on various projects that combine my love for coding with practical problem-solving. From developing full-stack web applications to exploring machine learning algorithms, I'm constantly pushing myself to learn and implement new technologies.
             </p>
             <p>
-              Currently seeking a PFA internship opportunity where I can contribute my skills in software development and AI to meaningful projects. I'm particularly interested in roles that allow me to work on innovative solutions, collaborate with experienced professionals, and grow as a developer. Let's connect and build something amazing together!
+              Currently seeking a PFA internship opportunity where I can contribute my skills in software development and AI to meaningful projects. I'm particularly interested in roles that allow me to work on innovative solutions, collaborate with experienced professionals, and grow as a developer. 
             </p>
           </div>
         </div>

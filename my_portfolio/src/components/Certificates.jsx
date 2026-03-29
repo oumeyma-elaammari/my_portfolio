@@ -43,6 +43,13 @@ const certificatesData = [
     issuer: 'SoloLearn',
     skills: ['Java', 'Programming Fundamentals'],
     link: 'https://www.sololearn.com/certificates/CC-QNLQHX6X'
+  },
+  {
+    id: 7,
+    title: 'Version Control',
+    issuer: 'Meta',
+    skills: ['Git', 'GitHub'],
+    link: 'https://coursera.org/share/e2ee333a5b585c2a80708ec4ea4441f0'
   }
 ];
 

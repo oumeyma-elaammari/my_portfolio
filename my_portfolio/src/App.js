@@ -3,7 +3,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -14,7 +13,9 @@ import Certificates from './components/Certificates';
 import Portfolio from './components/Portfolio';
 import Services from './components/Services';
 import Contact from './components/Contact';
+import Quote from './components/Quote';
 import Footer from './components/Footer';
+
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -55,6 +56,7 @@ function App() {
         <Portfolio />
         <Services />
         <Contact />
+        <Quote />
       </main>
       <Footer />
       
