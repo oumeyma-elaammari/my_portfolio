@@ -62,7 +62,12 @@ const Resume = () => {
               <p><em>Participation in the Science Festival (12th edition)</em></p>
             </div>
 
-            <h3 className="resume-title">Languages</h3>
+           
+          </div>
+
+          {/* Right Column */}
+          <div className="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+             <h3 className="resume-title">Languages</h3>
             <div className="resume-item">
               <ul>
                 <li><strong>Arabic:</strong> Native</li>
@@ -70,10 +75,6 @@ const Resume = () => {
                 <li><strong>English:</strong> Fluent</li>
               </ul>
             </div>
-          </div>
-
-          {/* Right Column */}
-          <div className="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <h3 className="resume-title">Professional Experience</h3>
             <div className="resume-item">
               <h4>Business Process Automation Intern (PFA)</h4>
