@@ -17,6 +17,9 @@ const skillsData = [
   { name: 'Jakarta EE', icon: 'bi-cup-hot', category: 'frameworks' },
   { name: 'Symfony', icon: 'bi-code-square', category: 'frameworks' },
   { name: '.NET', icon: 'bi-window', category: 'frameworks' },
+  { name: 'Laravel', icon: 'bi-hexagon', category: 'frameworks' },
+  { name: 'JavaFX', icon: 'bi-window-stack', category: 'frameworks' },
+  { name: 'Tkinter', icon: 'bi-app', category: 'frameworks' },
 
   // Databases
   { name: 'SQL', icon: 'bi-database', category: 'databases' },
@@ -38,6 +41,9 @@ const skillsData = [
   { name: 'Jira', icon: 'bi-kanban', category: 'devops' },
   { name: 'Scrum', icon: 'bi-arrow-repeat', category: 'devops' },
   { name: 'Kanban', icon: 'bi-columns', category: 'devops' },
+  { name: 'Firebase', icon: 'bi-fire', category: 'devops' },
+  { name: 'Power Automate', icon: 'bi-lightning-charge', category: 'devops' },
+  { name: 'SharePoint', icon: 'bi-share', category: 'devops' },
 
   // Machine Learning & Data
   { name: 'Machine Learning', icon: 'bi-robot', category: 'ml-data' },
