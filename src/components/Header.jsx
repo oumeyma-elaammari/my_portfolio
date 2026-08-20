@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
-import logo from '../assets/img/logo_oumeyma.png';
+import logo from '../assets/img/logo_oumeyma.webp';
 import '../styles/Header.css';
 
 const Header = () => {

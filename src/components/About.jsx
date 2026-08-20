@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/img/logo_oumeyma.png';
+import logo from '../assets/img/logo_oumeyma.webp';
 import '../styles/About.css';
 
 const About = () => {
@@ -19,10 +19,11 @@ const About = () => {
               alt="Oumeyma ELAAMMARI"
               width="800"
               height="800"
+              loading="lazy"
             />
           </div>
           <div className="col-lg-8 content">
-            <h2>Software Engineering Student & AI Enthusiast</h2>
+            <h3>Software Engineering Student & AI Enthusiast</h3>
             <p className="fst-italic py-3">
               I'm dedicated to building intelligent systems and web applications that solve real-world problems. Currently pursuing my engineering degree with a focus on software development and artificial intelligence.
             </p>

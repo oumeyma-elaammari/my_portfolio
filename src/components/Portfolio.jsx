@@ -8,7 +8,7 @@ const projectsData = [
     category: 'web',
     techStack: 'Symfony • PHP • MySQL',
     description: 'E-learning platform for progressive learning modules with student progress tracking.',
-    image: 'ROADMAPDEV.png',
+    image: 'ROADMAPDEV.webp',
     imgWidth: 1263,
     imgHeight: 608,
     github: 'https://github.com/oumeyma-elaammari/roadmapdev',
@@ -21,7 +21,7 @@ const projectsData = [
     category: 'mobile',
     techStack: 'Java • Firebase • Android',
     description: 'HR management app for attendance, leave requests, meetings and certificates.',
-    image: 'RhVerse_Logo.png',
+    image: 'RhVerse_Logo.webp',
     imgWidth: 420,
     imgHeight: 231,
     github: 'https://github.com/LamyaeHamdaoui/AppRH_Android',
@@ -34,7 +34,7 @@ const projectsData = [
     category: 'desktop',
     techStack: 'Python • Tkinter • Matplotlib',
     description: 'Library management system for books, members and borrowing with statistics.',
-    image: 'ArchivoxLib_logo.png',
+    image: 'ArchivoxLib_logo.webp',
     imgWidth: 583,
     imgHeight: 300,
     github: 'https://github.com/oumeyma-elaammari/Gestion_Bibliotheque_ELAAMMARI_OUMEYMA',
@@ -47,7 +47,7 @@ const projectsData = [
     category: 'desktop',
     techStack: 'JavaFX • MySQL • SceneBuilder',
     description: 'Medical follow-up system for patient management and appointment tracking.',
-    image: 'memopharma_logo.png',
+    image: 'memopharma_logo.webp',
     imgWidth: 426,
     imgHeight: 273,
     github: 'https://github.com/oumeyma-elaammari/memoPharma',
@@ -60,7 +60,7 @@ const projectsData = [
     category: 'web',
     techStack: 'React.js • Laravel • MySQL',
     description: 'Full-stack e-commerce platform with admin dashboard and role-based authentication.',
-    image: 'my_store_logo.png',
+    image: 'my_store_logo.webp',
     imgWidth: 886,
     imgHeight: 435,
     github: 'https://github.com/oumeyma-elaammari/my-store',
@@ -137,6 +137,7 @@ const Portfolio = () => {
                       alt={project.title}
                       width={project.imgWidth}
                       height={project.imgHeight}
+                      loading="lazy"
                     />
                     <div className="portfolio-info">
                       <h4>{project.title}</h4>
