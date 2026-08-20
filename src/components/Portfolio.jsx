@@ -111,6 +111,7 @@ const Portfolio = () => {
         <div className="container section-title" data-aos="fade-up">
           <h2>Projects</h2>
           <p>Here are some of my academic projects showcasing my skills in web development, mobile applications, and software engineering.</p>
+          <p>Here are some of my academic and internship projects — spanning web, mobile, and desktop development — showcasing my approach to building practical, well-structured software.</p>
         </div>
 
         <div className="container">

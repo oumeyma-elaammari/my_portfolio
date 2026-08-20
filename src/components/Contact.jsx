@@ -51,7 +51,7 @@ const Contact = () => {
       <div className="container section-title" data-aos="fade-up">
         <h2>Contact Me</h2>
         <p>
-          Have a project in mind or looking for a PFA intern? 
+          Have a project in mind or looking for a PFE intern?
           <br /><br />
           Feel free to reach out! I'm always open to discussing new opportunities, collaborations, or just tech conversations ^_^
         </p>

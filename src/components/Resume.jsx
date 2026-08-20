@@ -10,7 +10,7 @@ const Resume = () => {
           <em >
             Software Engineering student at ENSAO, specializing in full-stack development and artificial intelligence. 
             Passionate about building scalable and intelligent applications using modern technologies. 
-            Highly motivated, team-oriented, and actively seeking a PFA internship to apply and expand my technical skills in real-world projects.
+            Highly motivated, team-oriented, and actively seeking a PFE internship to apply and expand my technical skills in real-world projects.
           </em>
         </p>
       </div>

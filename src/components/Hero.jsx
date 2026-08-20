@@ -10,9 +10,10 @@ const Hero = () => {
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
       strings: [
-        'a Software Engineering student',
-        'passionate about AI',
-        'looking for a PFA Internship opportunity'
+        'Software Engineering Student',
+        'Full-Stack Developer',
+        'AI Enthusiast',
+        'PFE Intern Candidate'
       ],
       typeSpeed: 90,
       backSpeed: 50,

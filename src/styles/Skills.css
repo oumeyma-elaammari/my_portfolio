@@ -3,6 +3,13 @@
   overflow: hidden;
 }
 
+.skills-group-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin: 20px 0 0 0;
+}
+
 .skills-carousel {
   width: 100%;
   overflow: hidden;

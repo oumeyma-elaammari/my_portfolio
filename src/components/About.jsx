@@ -7,7 +7,7 @@ const About = () => {
     <section id="about" className="about section">
       <div className="container section-title" data-aos="fade-up">
         <h2>About Me</h2>
-        <p>Passionate software engineering student with a strong interest in Artificial Intelligence and full-stack development, seeking opportunities to innovate and create impactful solutions.</p>
+        <p>Passionate Software Engineering student specializing in full-stack development and Artificial Intelligence. I build intelligent systems and web applications that solve real-world problems — from full-stack platforms to machine learning experiments — and I'm constantly expanding my skill set through hands-on projects.</p>
       </div>
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
@@ -25,7 +25,7 @@ const About = () => {
           <div className="col-lg-8 content">
             <h3>Software Engineering Student & AI Enthusiast</h3>
             <p className="fst-italic py-3">
-              I'm dedicated to building intelligent systems and web applications that solve real-world problems. Currently pursuing my engineering degree with a focus on software development and artificial intelligence.
+              Currently pursuing my engineering degree at ENSAO with a focus on software development and AI, and actively seeking a PFE internship where I can contribute to meaningful projects, collaborate with experienced teams, and grow as a developer.
             </p>
             <div className="row">
               <div className="col-lg-6">
@@ -56,7 +56,7 @@ const About = () => {
                   </li>
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
-                    <strong>Availability:</strong> <span>Open to PFA Internship Opportunities</span>
+                    <strong>Availability:</strong> <span>Open to PFE Internship Opportunities</span>
                   </li>
                 </ul>
               </div>
