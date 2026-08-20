@@ -5,7 +5,7 @@ const projectsData = [
   {
     id: 1,
     title: 'RoadmapDev',
-    category: 'web',
+    category: ['web'],
     techStack: 'Symfony • PHP • MySQL',
     description: 'E-learning platform for progressive learning modules with student progress tracking.',
     image: 'ROADMAPDEV.webp',
@@ -18,7 +18,7 @@ const projectsData = [
   {
     id: 2,
     title: 'RhVerse',
-    category: 'mobile',
+    category: ['mobile'],
     techStack: 'Java • Firebase • Android',
     description: 'HR management app for attendance, leave requests, meetings and certificates.',
     image: 'RhVerse_Logo.webp',
@@ -31,7 +31,7 @@ const projectsData = [
   {
     id: 3,
     title: 'ArchvoxLib',
-    category: 'desktop',
+    category: ['desktop'],
     techStack: 'Python • Tkinter • Matplotlib',
     description: 'Library management system for books, members and borrowing with statistics.',
     image: 'ArchivoxLib_logo.webp',
@@ -44,7 +44,7 @@ const projectsData = [
   {
     id: 4,
     title: 'MemoPharma',
-    category: 'desktop',
+    category: ['desktop'],
     techStack: 'JavaFX • MySQL • SceneBuilder',
     description: 'Medical follow-up system for patient management and appointment tracking.',
     image: 'memopharma_logo.webp',
@@ -57,7 +57,7 @@ const projectsData = [
   {
     id: 5,
     title: 'My-Store',
-    category: 'web',
+    category: ['web'],
     techStack: 'React.js • Laravel • MySQL',
     description: 'Full-stack e-commerce platform with admin dashboard and role-based authentication.',
     image: 'my_store_logo.webp',
@@ -66,9 +66,22 @@ const projectsData = [
     github: 'https://github.com/oumeyma-elaammari/my-store',
     demo: '/videos/mystore.mp4',
     demoType: 'video'
+  },
+  {
+    id: 6,
+    title: 'SmarTest',
+    category: ['web', 'desktop'],
+    techStack: '.NET • React.js • Spring Boot • MySQL • Groq API',
+    description: 'Secure, intelligent quiz and exam management platform with real-time communication, JWT authentication, and AI-powered question generation via the Groq API.',
+    image: 'SmarTest-AppIcon.webp',
+    imgWidth: 512,
+    imgHeight: 512,
+    github: 'https://github.com/oumeyma-elaammari/smarTest',
+    demo: null,
+    demoType: null
   }
 ];
- 
+
 const Portfolio = () => {
   const [filter, setFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState(projectsData);
@@ -77,12 +90,12 @@ const Portfolio = () => {
 
   useEffect(() => {
     setIsAnimating(true);
-    
+
     const timer = setTimeout(() => {
       if (filter === 'all') {
         setFilteredProjects(projectsData);
       } else {
-        setFilteredProjects(projectsData.filter(project => project.category === filter));
+        setFilteredProjects(projectsData.filter(project => project.category.includes(filter)));
       }
       setIsAnimating(false);
     }, 300);
@@ -148,7 +161,7 @@ const Portfolio = () => {
                         <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code on GitHub`}>
                           <i className="bi bi-github"></i>
                         </a>
-                        {project.demoType === 'video' ? (
+                        {project.demoType === 'video' && (
                           <button
                             className="demo-video-btn"
                             onClick={() => openVideoModal(project.demo)}
@@ -156,7 +169,8 @@ const Portfolio = () => {
                           >
                             <i className="bi bi-play-circle-fill"></i>
                           </button>
-                        ) : (
+                        )}
+                        {project.demoType === 'link' && (
                           <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} demo`}>
                             <i className="bi bi-box-arrow-up-right"></i>
                           </a>
