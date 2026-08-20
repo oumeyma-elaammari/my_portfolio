@@ -2,35 +2,71 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Skills.css';
 
 const skillsData = [
+  // Languages
   { name: 'HTML', icon: 'bi-filetype-html', category: 'languages' },
   { name: 'CSS', icon: 'bi-filetype-css', category: 'languages' },
   { name: 'JavaScript', icon: 'bi-filetype-js', category: 'languages' },
-  { name: 'Java', icon: 'bi-filetype-java', category: 'languages' },
   { name: 'PHP', icon: 'bi-filetype-php', category: 'languages' },
-  { name: 'Python', icon: 'bi-filetype-py', category: 'languages' },
   { name: 'C#', icon: 'bi-filetype-cs', category: 'languages' },
-  { name: 'SQL', icon: 'bi-database', category: 'languages' },
+  { name: 'Python', icon: 'bi-filetype-py', category: 'languages' },
+  { name: 'Java', icon: 'bi-filetype-java', category: 'languages' },
+
+  // Frameworks & Libraries
   { name: 'React.js', icon: 'bi-braces', category: 'frameworks' },
-  { name: 'Angular', icon: 'bi-braces-asterisk', category: 'frameworks' },
   { name: 'Spring Boot', icon: 'bi-flower1', category: 'frameworks' },
+  { name: 'Jakarta EE', icon: 'bi-cup-hot', category: 'frameworks' },
   { name: 'Symfony', icon: 'bi-code-square', category: 'frameworks' },
-  { name: 'Machine Learning', icon: 'bi-robot', category: 'data-ai' },
-  { name: 'Pandas', icon: 'bi-table', category: 'data-ai' },
-  { name: 'OpenCV', icon: 'bi-camera', category: 'data-ai' },
-  { name: 'Git', icon: 'bi-git', category: 'tools-devops' },
-  { name: 'GitHub', icon: 'bi-github', category: 'tools-devops' },
-  { name: 'MySQL', icon: 'bi-database-fill', category: 'tools-devops' },
-  { name: 'Docker', icon: 'bi-box', category: 'tools-devops' },
-  { name: 'Linux', icon: 'bi-ubuntu', category: 'tools-devops' },
+  { name: '.NET', icon: 'bi-window', category: 'frameworks' },
+
+  // Databases
+  { name: 'SQL', icon: 'bi-database', category: 'databases' },
+  { name: 'MySQL', icon: 'bi-database-fill', category: 'databases' },
+  { name: 'PL/SQL', icon: 'bi-database-gear', category: 'databases' },
+
+  // Design & Modeling
+  { name: 'UML', icon: 'bi-diagram-3', category: 'design-modeling' },
+  { name: 'Merise', icon: 'bi-diagram-2', category: 'design-modeling' },
+
+  // Project Management & DevOps
+  { name: 'Git', icon: 'bi-git', category: 'devops' },
+  { name: 'GitHub', icon: 'bi-github', category: 'devops' },
+  { name: 'Docker', icon: 'bi-box', category: 'devops' },
+  { name: 'Jenkins', icon: 'bi-gear-wide-connected', category: 'devops' },
+  { name: 'Maven', icon: 'bi-box-seam', category: 'devops' },
+  { name: 'Linux', icon: 'bi-ubuntu', category: 'devops' },
+  { name: 'SonarQube', icon: 'bi-shield-check', category: 'devops' },
+  { name: 'Jira', icon: 'bi-kanban', category: 'devops' },
+  { name: 'Scrum', icon: 'bi-arrow-repeat', category: 'devops' },
+  { name: 'Kanban', icon: 'bi-columns', category: 'devops' },
+
+  // Machine Learning & Data
+  { name: 'Machine Learning', icon: 'bi-robot', category: 'ml-data' },
+  { name: 'Pandas', icon: 'bi-table', category: 'ml-data' },
+  { name: 'NumPy', icon: 'bi-grid-3x3', category: 'ml-data' },
+  { name: 'Matplotlib', icon: 'bi-bar-chart-line', category: 'ml-data' },
+  { name: 'OpenCV', icon: 'bi-camera', category: 'ml-data' },
+  { name: 'scikit-learn', icon: 'bi-cpu', category: 'ml-data' },
 ];
 
 const filters = [
   { key: 'all', label: 'All' },
   { key: 'languages', label: 'Languages' },
-  { key: 'frameworks', label: 'Frameworks' },
-  { key: 'data-ai', label: 'Data & AI' },
-  { key: 'tools-devops', label: 'Tools & DevOps' }
+  { key: 'frameworks', label: 'Frameworks & Libraries' },
+  { key: 'databases', label: 'Databases' },
+  { key: 'design-modeling', label: 'Design & Modeling' },
+  { key: 'devops', label: 'Project Management & DevOps' },
+  { key: 'ml-data', label: 'Machine Learning & Data' }
 ];
+
+// Ensures the marquee track always has enough cards to scroll smoothly,
+// even for small categories like Design & Modeling (2 items).
+const MIN_TRACK_ITEMS = 10;
+
+const buildLoopedSkills = (skills) => {
+  const repeatCount = Math.max(1, Math.ceil(MIN_TRACK_ITEMS / skills.length));
+  const repeated = Array.from({ length: repeatCount }, () => skills).flat();
+  return [...repeated, ...repeated];
+};
 
 const Skills = () => {
   const [filter, setFilter] = useState('all');
@@ -52,7 +88,7 @@ const Skills = () => {
     return () => clearTimeout(timer);
   }, [filter]);
 
-  const loopedSkills = [...filteredSkills, ...filteredSkills];
+  const loopedSkills = buildLoopedSkills(filteredSkills);
 
   return (
     <section id="skills" className="skills section">
