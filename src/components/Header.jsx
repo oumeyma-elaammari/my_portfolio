@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { HiMenu, HiX } from 'react-icons/hi';
 import logo from '../assets/img/logo_oumeyma.webp';
+import SocialLinks from './SocialLinks';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -69,15 +69,7 @@ const Header = () => {
 
           {/* Social Links + Mobile Toggle */}
           <div className="header-social">
-            <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-              <FaGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-              <FaLinkedin />
-            </a>
-            <a href="mailto:elaammarioumeima@gmail.com" aria-label="Send email">
-              <FaEnvelope />
-            </a>
+            <SocialLinks />
             <button
               className="mobile-nav-toggle"
               onClick={toggleMobileMenu}

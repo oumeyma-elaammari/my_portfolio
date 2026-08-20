@@ -191,8 +191,13 @@ section, .section {
   section, .section {
     padding: 60px 0;
   }
-  
+
   .section-title h2 {
     font-size: 28px;
+  }
+
+  body {
+    /* Fixed backgrounds cause scroll jank/repaints on mobile browsers */
+    background-attachment: scroll;
   }
 }

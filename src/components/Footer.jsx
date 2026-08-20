@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import SocialLinks from './SocialLinks';
 import '../styles/Footer.css';
 
 const Footer = () => {
@@ -18,15 +18,7 @@ const Footer = () => {
 
           <div className="col-lg-4 col-md-6 text-center mb-3 mb-md-0">
             <div className="footer-social">
-              <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-                <FaGithub />
-              </a>
-              <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-                <FaLinkedin />
-              </a>
-              <a href="mailto:elaammarioumeima@gmail.com" aria-label="Send email">
-                <FaEnvelope />
-              </a>
+              <SocialLinks />
             </div>
           </div>
 

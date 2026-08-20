@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Oumeyma ELAAMMARI - Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio of Oumeyma ELAAMMARI, a Software Engineering student at ENSA Oujda specializing in full-stack development and artificial intelligence. The site presents her background, skills, certifications, academic projects and a contact form, and is built as a single-page React application.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- **React 19** with **Create React App** (`react-scripts`)
+- **Bootstrap 5** / **react-bootstrap** for layout utilities
+- **Bootstrap Icons** for iconography
+- **AOS** (Animate On Scroll) for scroll animations
+- **Typed.js** for the animated hero tagline
+- **react-scroll** for smooth in-page navigation
+- **react-icons** for social icons
+- **Formspree** as the contact form backend
+- **@testing-library/react** + **Jest** for unit tests
 
-### `npm start`
+## Project structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+public/            Static assets served as-is (index.html, manifest, videos, robots/sitemap)
+src/
+  assets/          Images (WebP) and the downloadable CV (PDF)
+  components/      One component per section (Header, Hero, About, Resume, Skills,
+                    Certificates, Portfolio, Services, Contact, Quote, Footer)
+  styles/          One CSS file per component
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js 18+ and npm
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Development server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000). The page reloads on changes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Launches Jest in interactive watch mode. Unit tests currently cover the Contact form (submission, success/error states) and the Portfolio project filter.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Production build
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Builds an optimized, minified production bundle into the `build/` folder, ready to be deployed to any static host.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deployment
 
-### Code Splitting
+The app is a static bundle (output of `npm run build`) and can be deployed to any static hosting provider, for example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Netlify**: drag-and-drop the `build/` folder in the Netlify dashboard, or connect the repository and set the build command to `npm run build` with publish directory `build`.
+- **Vercel**: import the repository and Vercel will auto-detect the Create React App preset (build command `npm run build`, output directory `build`).
+- **GitHub Pages**: add a `homepage` field to `package.json`, install `gh-pages`, and run `npm run build` followed by `npx gh-pages -d build`.
 
-### Analyzing the Bundle Size
+After the first deployment, update the placeholder URL in `public/sitemap.xml` with the real domain.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Contact form
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The contact form (`src/components/Contact.jsx`) submits to a [Formspree](https://formspree.io/) endpoint. To point it at a different Formspree form (or another backend), update the `fetch` URL in that component.

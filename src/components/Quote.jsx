@@ -7,8 +7,8 @@ const Quote = () => {
   <div className="container text-center">
     <div className="quote-content">
       <i className="bi bi-quote"></i>
-      <p>
-    .. نسير في الدنيا لا نملك أماناً سوى الله .. ولا أملاً إلا إيماننا فيه .. ولا قوةً إلا بالإستعانة به 
+      <p lang="ar" dir="rtl">
+    .. نسير في الدنيا لا نملك أماناً سوى الله .. ولا أملاً إلا إيماننا فيه .. ولا قوةً إلا بالإستعانة به
           <br /> وهو حسبنا ويكفينا
       </p>
     </div>
