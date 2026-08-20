@@ -40,6 +40,18 @@ const Resume = () => {
             </div>
          <h3 className="resume-title">Professional Experience</h3>
             <div className="resume-item">
+              <h4>Business Process Automation Intern (PFA)</h4>
+              <h5>July – August 2026</h5>
+              <p><em>Novelis, Oujda</em></p>
+              <ul>
+                <li>Designed and developed a generic business-process automation solution using Power Automate, SharePoint, Teams/Outlook, and Excel — covering request validation, notifications, and status tracking with a role-based approach for reusability</li>
+                <li>Built an onboarding automation workflow: HR data entry → IT notification for M365/Outlook account creation → resource preparation tracking → automated welcome email → final confirmation to HR</li>
+                <li>Designed SharePoint list architectures with detailed field definitions to support multiple business workflows</li>
+                <li>Produced comprehensive technical documentation in LaTeX with custom diagrams</li>
+              </ul>
+            </div>
+
+            <div className="resume-item">
               <h4>Full-Stack Development Intern</h4>
               <h5>July 2025</h5>
               <p><em>Cleverix, Morocco</em></p>
