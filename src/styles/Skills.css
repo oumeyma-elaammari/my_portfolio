@@ -15,6 +15,20 @@
   opacity: 0.5;
 }
 
+/* Static (non-scrolling) layout used when a specific category filter is active */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 30px 0;
+  transition: opacity 0.3s ease;
+}
+
+.skills-grid.animating {
+  opacity: 0.5;
+}
+
 .skills-carousel::before,
 .skills-carousel::after {
   content: '';

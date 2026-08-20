@@ -58,15 +58,14 @@ const filters = [
   { key: 'ml-data', label: 'Machine Learning & Data' }
 ];
 
-// Ensures the marquee track always has enough cards to scroll smoothly,
-// even for small categories like Design & Modeling (2 items).
-const MIN_TRACK_ITEMS = 10;
-
-const buildLoopedSkills = (skills) => {
-  const repeatCount = Math.max(1, Math.ceil(MIN_TRACK_ITEMS / skills.length));
-  const repeated = Array.from({ length: repeatCount }, () => skills).flat();
-  return [...repeated, ...repeated];
-};
+const SkillCard = ({ skill }) => (
+  <div className="skill-card">
+    <div className="skill-icon">
+      <i className={`bi ${skill.icon}`}></i>
+    </div>
+    <h4>{skill.name}</h4>
+  </div>
+);
 
 const Skills = () => {
   const [filter, setFilter] = useState('all');
@@ -77,18 +76,16 @@ const Skills = () => {
     setIsAnimating(true);
 
     const timer = setTimeout(() => {
-      if (filter === 'all') {
-        setFilteredSkills(skillsData);
-      } else {
-        setFilteredSkills(skillsData.filter(skill => skill.category === filter));
-      }
+      setFilteredSkills(
+        filter === 'all' ? skillsData : skillsData.filter(skill => skill.category === filter)
+      );
       setIsAnimating(false);
     }, 300);
 
     return () => clearTimeout(timer);
   }, [filter]);
 
-  const loopedSkills = buildLoopedSkills(filteredSkills);
+  const isAllSelected = filter === 'all';
 
   return (
     <section id="skills" className="skills section">
@@ -111,20 +108,25 @@ const Skills = () => {
         </ul>
       </div>
 
-      <div className="container-fluid" data-aos="fade-up" data-aos-delay="100">
-        <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
-          <div className="skills-track" key={filter}>
-            {loopedSkills.map((skill, index) => (
-              <div key={index} className="skill-card">
-                <div className="skill-icon">
-                  <i className={`bi ${skill.icon}`}></i>
-                </div>
-                <h4>{skill.name}</h4>
-              </div>
+      {isAllSelected ? (
+        <div className="container-fluid" data-aos="fade-up" data-aos-delay="100">
+          <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
+            <div className="skills-track">
+              {[...filteredSkills, ...filteredSkills].map((skill, index) => (
+                <SkillCard key={index} skill={skill} />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="container" data-aos="fade-up" data-aos-delay="100">
+          <div className={`skills-grid ${isAnimating ? 'animating' : ''}`}>
+            {filteredSkills.map((skill) => (
+              <SkillCard key={skill.name} skill={skill} />
             ))}
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
