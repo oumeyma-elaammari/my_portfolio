@@ -21,7 +21,7 @@ const Resume = () => {
           <div className="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3 className="resume-title">Education</h3>
             <div className="resume-item">
-              <h4>Engineering Cycle - Software Engineering</h4>
+              <h4>Engineering Cycle - Software Engineering and Artificial Intelligence</h4>
               <h5>2024 - 2027</h5>
               <p><em>ENSA Oujda, Morocco</em></p>
             </div>
@@ -82,7 +82,6 @@ const Resume = () => {
               <p><em>Novelis, Oujda</em></p>
               <ul>
                 <li>Designed and developed a generic business-process automation solution using Power Automate, SharePoint, Teams/Outlook, and Excel — covering request validation, notifications, and status tracking with a role-based approach for reusability</li>
-                <li>Built an onboarding automation workflow: HR data entry → IT notification for M365/Outlook account creation → resource preparation tracking → automated welcome email → final confirmation to HR</li>
                 <li>Designed SharePoint list architectures with detailed field definitions to support multiple business workflows</li>
                 <li>Produced comprehensive technical documentation in LaTeX with custom diagrams</li>
               </ul>
