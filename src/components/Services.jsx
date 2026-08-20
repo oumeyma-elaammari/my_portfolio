@@ -6,42 +6,42 @@ const servicesData = [
     id: 1,
     icon: 'bi-braces',
     title: 'Web Development',
-    description: 'Full-stack web applications using React.js, Angular, Symfony,Spring Boot and JEE. Responsive and modern user interfaces with clean backend architecture.',
+    description: 'Building full-stack web applications with responsive, modern user interfaces and clean, scalable server-side architecture — from concept to deployment.',
     delay: 100
   },
   {
     id: 2,
-    icon: 'bi-phone',
-    title: 'Mobile App Development',
-    description: 'Android applications using Java,and React Native for cross-platform solutions. User-friendly interfaces and seamless performance on mobile devices.',
+    icon: 'bi-pc-display',
+    title: 'Desktop Application Development',
+    description: 'Designing cross-platform desktop applications, from database-driven business tools to interactive user interfaces.',
     delay: 200
   },
   {
     id: 3,
     icon: 'bi-robot',
     title: 'AI & Data Science',
-    description: 'Machine learning solutions using Python, Pandas, NumPy, and OpenCV. Data analysis and visualization for intelligent decision-making.',
+    description: 'Developing machine learning and data analysis solutions — from predictive models to image processing pipelines — focused on turning data into actionable insights.',
     delay: 300
   },
   {
     id: 4,
     icon: 'bi-database',
     title: 'Database Design',
-    description: 'Efficient database architecture with MySQL, PostgreSQL, and Firebase. Data modeling, optimization, and management for scalable applications.',
+    description: 'Designing efficient database architectures with a focus on data modeling, optimization, and scalability.',
     delay: 400
   },
   {
     id: 5,
     icon: 'bi-git',
     title: 'DevOps & Version Control',
-    description: 'Git/GitHub workflow, Docker containerization, Jenkins CI/CD pipelines. Professional code management and deployment strategies.',
+    description: 'Managing professional code workflows, containerized deployments, and business process automation, from development to production.',
     delay: 500
   },
   {
     id: 6,
     icon: 'bi-kanban',
     title: 'Project Management',
-    description: 'Agile methodologies including Scrum and Kanban. Project planning, task management with Jira, and team collaboration.',
+    description: 'Applying Agile methodologies for planning, task management, and effective team collaboration throughout the project lifecycle.',
     delay: 600
   }
 ];
