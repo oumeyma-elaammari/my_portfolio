@@ -25,6 +25,8 @@ const skillsData = [
   { name: 'SQL', icon: 'bi-database', category: 'databases' },
   { name: 'MySQL', icon: 'bi-database-fill', category: 'databases' },
   { name: 'PL/SQL', icon: 'bi-database-gear', category: 'databases' },
+  { name: 'SQLite', icon: 'bi-database-check', category: 'databases' },
+  { name: 'Firebase', icon: 'bi-fire', category: 'databases' },
 
   // Design & Modeling
   { name: 'UML', icon: 'bi-diagram-3', category: 'design-modeling' },
@@ -41,7 +43,6 @@ const skillsData = [
   { name: 'Jira', icon: 'bi-kanban', category: 'devops' },
   { name: 'Scrum', icon: 'bi-arrow-repeat', category: 'devops' },
   { name: 'Kanban', icon: 'bi-columns', category: 'devops' },
-  { name: 'Firebase', icon: 'bi-fire', category: 'devops' },
   { name: 'Power Automate', icon: 'bi-lightning-charge', category: 'devops' },
   { name: 'SharePoint', icon: 'bi-share', category: 'devops' },
 
