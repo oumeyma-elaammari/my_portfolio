@@ -40,7 +40,7 @@ const Header = () => {
         <div className="header-container">
           {/* Profile Section */}
           <div className="header-profile">
-            <img src={logo} alt="Oumeyma" className="header-profile-img" />
+            <img src={logo} alt="Oumeyma" className="header-profile-img" width="45" height="45" />
             <div className="header-info">
               <div className="header-name">OUMEYMA ELAAMMARI</div>
               <div className="header-tag">Software Engineering student • AI Enthusiast</div>
@@ -69,16 +69,21 @@ const Header = () => {
 
           {/* Social Links + Mobile Toggle */}
           <div className="header-social">
-            <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
               <FaGithub />
             </a>
-            <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
               <FaLinkedin />
             </a>
-            <a href="mailto:elaammarioumeima@gmail.com">
+            <a href="mailto:elaammarioumeima@gmail.com" aria-label="Send email">
               <FaEnvelope />
             </a>
-            <button className="mobile-nav-toggle" onClick={toggleMobileMenu}>
+            <button
+              className="mobile-nav-toggle"
+              onClick={toggleMobileMenu}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+            >
               {isMobileMenuOpen ? <HiX /> : <HiMenu />}
             </button>
           </div>
@@ -88,7 +93,7 @@ const Header = () => {
       {/* Mobile Navigation Menu (separate) */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'active' : ''}`}>
         {/* Close button inside mobile menu */}
-        <button className="mobile-nav-close" onClick={toggleMobileMenu}>
+        <button className="mobile-nav-close" onClick={toggleMobileMenu} aria-label="Close menu">
           <HiX />
         </button>
         <ul>

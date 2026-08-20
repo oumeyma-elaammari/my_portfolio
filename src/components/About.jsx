@@ -13,10 +13,12 @@ const About = () => {
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row gy-4 justify-content-center align-items-center">
           <div className="col-lg-4 text-center">
-            <img 
-              src={logo} 
-              className="img-fluid shadow-lg about-img" 
-              alt="Oumeyma ELAAMMARI" 
+            <img
+              src={logo}
+              className="img-fluid shadow-lg about-img"
+              alt="Oumeyma ELAAMMARI"
+              width="800"
+              height="800"
             />
           </div>
           <div className="col-lg-8 content">

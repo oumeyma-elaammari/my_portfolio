@@ -18,13 +18,13 @@ const Footer = () => {
 
           <div className="col-lg-4 col-md-6 text-center mb-3 mb-md-0">
             <div className="footer-social">
-              <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
                 <FaGithub />
               </a>
-              <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
                 <FaLinkedin />
               </a>
-              <a href="mailto:elaammarioumeima@gmail.com">
+              <a href="mailto:elaammarioumeima@gmail.com" aria-label="Send email">
                 <FaEnvelope />
               </a>
             </div>

@@ -60,12 +60,13 @@ function App() {
       </main>
       <Footer />
       
-      <div 
-        className={`scroll-top ${showScrollTop ? 'active' : ''}`} 
+      <button
+        className={`scroll-top ${showScrollTop ? 'active' : ''}`}
         onClick={scrollToTop}
+        aria-label="Scroll to top"
       >
         <i className="bi bi-arrow-up-short"></i>
-      </div>
+      </button>
       
       <div id="preloader"></div>
     </div>

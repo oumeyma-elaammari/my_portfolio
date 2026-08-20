@@ -9,6 +9,8 @@ const projectsData = [
     techStack: 'Symfony • PHP • MySQL',
     description: 'E-learning platform for progressive learning modules with student progress tracking.',
     image: 'ROADMAPDEV.png',
+    imgWidth: 1263,
+    imgHeight: 608,
     github: 'https://github.com/oumeyma-elaammari/roadmapdev',
     demo: '/videos/roadmapdev.mp4',
     demoType: 'video'
@@ -20,6 +22,8 @@ const projectsData = [
     techStack: 'Java • Firebase • Android',
     description: 'HR management app for attendance, leave requests, meetings and certificates.',
     image: 'RhVerse_Logo.png',
+    imgWidth: 420,
+    imgHeight: 231,
     github: 'https://github.com/LamyaeHamdaoui/AppRH_Android',
     demo: 'https://drive.google.com/drive/folders/17vJvRvBq4b09NaqqP6iFsyCyZGLJRvB9?usp=drive_link',
     demoType: 'link'
@@ -31,6 +35,8 @@ const projectsData = [
     techStack: 'Python • Tkinter • Matplotlib',
     description: 'Library management system for books, members and borrowing with statistics.',
     image: 'ArchivoxLib_logo.png',
+    imgWidth: 583,
+    imgHeight: 300,
     github: 'https://github.com/oumeyma-elaammari/Gestion_Bibliotheque_ELAAMMARI_OUMEYMA',
     demo: '/videos/archivoxlib.mp4',
     demoType: 'video'
@@ -42,6 +48,8 @@ const projectsData = [
     techStack: 'JavaFX • MySQL • SceneBuilder',
     description: 'Medical follow-up system for patient management and appointment tracking.',
     image: 'memopharma_logo.png',
+    imgWidth: 426,
+    imgHeight: 273,
     github: 'https://github.com/oumeyma-elaammari/memoPharma',
     demo: '/videos/MemoPharmaApp.mp4',
     demoType: 'video'
@@ -53,6 +61,8 @@ const projectsData = [
     techStack: 'React.js • Laravel • MySQL',
     description: 'Full-stack e-commerce platform with admin dashboard and role-based authentication.',
     image: 'my_store_logo.png',
+    imgWidth: 886,
+    imgHeight: 435,
     github: 'https://github.com/oumeyma-elaammari/my-store',
     demo: '/videos/mystore.mp4',
     demoType: 'video'
@@ -121,28 +131,31 @@ const Portfolio = () => {
               {filteredProjects.map((project) => (
                 <div key={project.id} className="col-lg-4 col-md-6 portfolio-item">
                   <div className="portfolio-content">
-                    <img 
-                      src={require(`../assets/img/${project.image}`)} 
-                      className="img-fluid" 
+                    <img
+                      src={require(`../assets/img/${project.image}`)}
+                      className="img-fluid"
                       alt={project.title}
+                      width={project.imgWidth}
+                      height={project.imgHeight}
                     />
                     <div className="portfolio-info">
                       <h4>{project.title}</h4>
                       <p className="tech-stack">{project.techStack}</p>
                       <p className="description">{project.description}</p>
                       <div className="portfolio-links">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code on GitHub`}>
                           <i className="bi bi-github"></i>
                         </a>
                         {project.demoType === 'video' ? (
-                          <button 
+                          <button
                             className="demo-video-btn"
                             onClick={() => openVideoModal(project.demo)}
+                            aria-label={`Play ${project.title} demo video`}
                           >
                             <i className="bi bi-play-circle-fill"></i>
                           </button>
                         ) : (
-                          <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                          <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} demo`}>
                             <i className="bi bi-box-arrow-up-right"></i>
                           </a>
                         )}
@@ -160,7 +173,7 @@ const Portfolio = () => {
       {selectedVideo && (
         <div className="video-modal" onClick={closeVideoModal}>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="video-modal-close" onClick={closeVideoModal}>
+            <button className="video-modal-close" onClick={closeVideoModal} aria-label="Close video">
               <i className="bi bi-x-lg"></i>
             </button>
             <video controls autoPlay className="video-player">
