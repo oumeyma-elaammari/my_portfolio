@@ -1,14 +1,15 @@
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
-.portfolio .portfolio-filters {
+/* Shared filter-pill list style, reused by any section (Portfolio, Skills, ...) */
+.portfolio-filters {
   padding: 0;
   margin: 0 auto 30px auto;
   list-style: none;
   text-align: center;
 }
 
-.portfolio .portfolio-filters li {
+.portfolio-filters li {
   cursor: pointer;
   display: inline-block;
   padding: 8px 20px;
@@ -22,13 +23,13 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.portfolio .portfolio-filters li:hover {
+.portfolio-filters li:hover {
   color: var(--accent-color);
   background: rgba(20, 157, 221, 0.1);
   transform: translateY(-2px);
 }
 
-.portfolio .portfolio-filters li.filter-active {
+.portfolio-filters li.filter-active {
   color: var(--accent-color);
   background: rgba(20, 157, 221, 0.15);
 }
@@ -219,7 +220,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .portfolio .portfolio-filters li {
+  .portfolio-filters li {
     padding: 6px 16px;
     font-size: 12px;
     margin: 0 3px;
