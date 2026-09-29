@@ -14,18 +14,4 @@
   z-index: 0;
   pointer-events: none;
   display: block;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.55) 78%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 58%,
-    rgba(0, 0, 0, 0.55) 78%,
-    transparent 100%
-  );
 }
