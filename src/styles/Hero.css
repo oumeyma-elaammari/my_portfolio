@@ -7,10 +7,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Aligner le contenu à gauche */
-  text-align: left; /* Texte aligné à gauche */
+  justify-content: flex-start;
+  text-align: left;
   padding: 120px 0 80px;
   overflow: hidden;
+  background: transparent;
 }
 
 .hero .container {
