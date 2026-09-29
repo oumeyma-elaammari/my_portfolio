@@ -5,8 +5,15 @@ import '../styles/HomeBackground.css';
 const ZONE_PADDING = 16;
 const ZONE_RADIUS = 14;
 const ZONE_FEATHER = 12;
+const LINE_FADE_BAND = 18;
 
-const CONTENT_SELECTORS = ['.greeting', 'h1', '.tagline', '.hero-buttons'];
+const CONTENT_SELECTORS = [
+  '.greeting',
+  'h1',
+  '.tagline',
+  '.availability',
+  '.hero-buttons'
+];
 
 const getTheme = () =>
   document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
@@ -33,6 +40,13 @@ const connectionDistance = (width) => {
 
 const pointInRect = (x, y, rect) =>
   x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
+
+const distanceToRect = (x, y, rect) => {
+  if (pointInRect(x, y, rect)) return 0;
+  const nearestX = Math.max(rect.x, Math.min(x, rect.x + rect.w));
+  const nearestY = Math.max(rect.y, Math.min(y, rect.y + rect.h));
+  return Math.hypot(x - nearestX, y - nearestY);
+};
 
 const traceRoundedRect = (context, x, y, w, h, radius) => {
   const r = Math.min(radius, w / 2, h / 2);
@@ -179,14 +193,70 @@ const HomeBackground = () => {
     const isPointerBlocked = (x, y) =>
       clearZones.some((zone) => pointInRect(x, y, zone));
 
-    const createNodes = (count) =>
-      Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.4 + 1.2
-      }));
+    const minDistanceToZones = (x, y) => {
+      let min = Infinity;
+      clearZones.forEach((zone) => {
+        min = Math.min(min, distanceToRect(x, y, zone));
+      });
+      return min;
+    };
+
+    const lineZoneOpacity = (x1, y1, x2, y2) => {
+      if (!clearZones.length) return 1;
+
+      const endPad = ZONE_FEATHER + 4;
+      if (
+        minDistanceToZones(x1, y1) <= endPad ||
+        minDistanceToZones(x2, y2) <= endPad
+      ) {
+        return 0;
+      }
+
+      let minDist = Infinity;
+      const samples = 16;
+
+      for (let i = 0; i <= samples; i += 1) {
+        const t = i / samples;
+        const x = x1 + (x2 - x1) * t;
+        const y = y1 + (y2 - y1) * t;
+        const dist = minDistanceToZones(x, y);
+        if (dist <= endPad) return 0;
+        minDist = Math.min(minDist, dist);
+      }
+
+      if (minDist >= endPad + LINE_FADE_BAND) return 1;
+      return (minDist - endPad) / LINE_FADE_BAND;
+    };
+
+    const createNodes = (count) => {
+      const aspect = width / Math.max(height, 1);
+      const cols = Math.max(3, Math.round(Math.sqrt(count * aspect)));
+      const rows = Math.max(3, Math.ceil(count / cols));
+      const cellW = width / cols;
+      const cellH = height / rows;
+      const created = [];
+
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          if (created.length >= count) break;
+
+          const jitterX = (Math.random() - 0.5) * cellW * 0.42;
+          const jitterY = (Math.random() - 0.5) * cellH * 0.42;
+          const x = Math.max(6, Math.min(width - 6, (col + 0.5) * cellW + jitterX));
+          const y = Math.max(6, Math.min(height - 6, (row + 0.5) * cellH + jitterY));
+
+          created.push({
+            x,
+            y,
+            vx: (Math.random() - 0.5) * 0.28,
+            vy: (Math.random() - 0.5) * 0.28,
+            r: Math.random() * 1.2 + 1.1
+          });
+        }
+      }
+
+      return created;
+    };
 
     const eraseSoftRoundedRect = (zone) => {
       ctx.save();
@@ -236,9 +306,12 @@ const HomeBackground = () => {
           const distSq = dx * dx + dy * dy;
           if (distSq > maxDistSq) continue;
 
-          const alpha = 1 - Math.sqrt(distSq) / linkDist;
+          const zoneFade = lineZoneOpacity(a.x, a.y, other.x, other.y);
+          if (zoneFade <= 0.02) continue;
+
+          const alpha = (1 - Math.sqrt(distSq) / linkDist) * 0.55 * zoneFade;
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.55})`;
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
           ctx.lineWidth = 1;
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(other.x, other.y);
@@ -251,9 +324,12 @@ const HomeBackground = () => {
           const distSq = dx * dx + dy * dy;
           const mouseDist = linkDist * 1.15;
           if (distSq <= mouseDist * mouseDist) {
-            const alpha = 1 - Math.sqrt(distSq) / mouseDist;
+            const zoneFade = lineZoneOpacity(a.x, a.y, mouse.x, mouse.y);
+            if (zoneFade <= 0.02) continue;
+
+            const alpha = (1 - Math.sqrt(distSq) / mouseDist) * 0.75 * zoneFade;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.75})`;
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
             ctx.lineWidth = 1.25;
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(mouse.x, mouse.y);
@@ -267,13 +343,27 @@ const HomeBackground = () => {
       const palette = themePalette(theme);
 
       nodes.forEach((node) => {
+        const dist = minDistanceToZones(node.x, node.y);
+        if (dist <= 0) return;
+
+        let fade = 1;
+        if (dist < LINE_FADE_BAND) fade = dist / LINE_FADE_BAND;
+        if (fade <= 0.02) return;
+
+        const match = palette.node.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+        const coreMatch = palette.nodeCore.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+
         ctx.beginPath();
-        ctx.fillStyle = palette.node;
+        ctx.fillStyle = match
+          ? `rgba(${match[1]}, ${match[2]}, ${match[3]}, ${parseFloat(match[4]) * fade})`
+          : palette.node;
         ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.beginPath();
-        ctx.fillStyle = palette.nodeCore;
+        ctx.fillStyle = coreMatch
+          ? `rgba(${coreMatch[1]}, ${coreMatch[2]}, ${coreMatch[3]}, ${parseFloat(coreMatch[4]) * fade})`
+          : palette.nodeCore;
         ctx.arc(node.x, node.y, Math.max(0.8, node.r * 0.35), 0, Math.PI * 2);
         ctx.fill();
       });

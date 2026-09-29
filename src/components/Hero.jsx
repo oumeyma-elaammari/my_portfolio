@@ -31,10 +31,10 @@ const Hero = () => {
       <HomeBackground />
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
-          <p className="greeting"> Welcome to my portfolio ! </p>
+          <p className="greeting">Welcome to my portfolio!</p>
 
           <h1>
-            Hello ! My name is <span className="highlight">OUMEYMA ELAAMMARI</span>
+            Hello! My name is <span className="highlight">OUMEYMA ELAAMMARI</span>
           </h1>
 
           <p className="tagline">

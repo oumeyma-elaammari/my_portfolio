@@ -6,10 +6,10 @@
   min-height: 100vh;
   position: relative;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 100px 0 48px;
+  padding: 72px 0;
   overflow: hidden;
   background: transparent;
 }
@@ -20,9 +20,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 3.5rem;
-  min-height: calc(100vh - 148px);
+  gap: 2.25rem;
 }
 
 .hero .hero-content,
@@ -30,10 +30,13 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 1200px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 24px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Greeting animation */
@@ -41,9 +44,11 @@
   font-size: 1.1rem;
   color: var(--accent-color);
   letter-spacing: 3px;
-  margin-bottom: 20px;
+  margin: 0 0 16px;
   font-weight: 500;
   text-transform: uppercase;
+  text-align: center;
+  width: 100%;
   animation: fadeInUp 0.8s ease;
 }
 
@@ -51,9 +56,11 @@
 .hero h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin: 0 0 16px;
   line-height: 1.3;
   color: var(--heading-color);
+  text-align: center;
+  width: 100%;
   animation: fadeInUp 0.8s ease 0.2s both;
 }
 
@@ -61,33 +68,36 @@
   color: var(--accent-color);
   font-size: 2.5rem;
   font-weight: 800;
-  display: inline-block;
+  display: inline;
 }
 
 /* Typed text - WITH underline */
 .hero .tagline {
   font-size: 1.5rem;
-  margin: 25px 0 0;
+  margin: 0;
   color: var(--default-color);
+  text-align: center;
+  width: 100%;
   animation: fadeInUp 0.8s ease 0.4s both;
 }
 
 .hero .availability {
   font-size: 1rem;
-  margin: 18px 0 0;
+  margin: 16px 0 0;
   color: var(--accent-color);
   font-weight: 500;
   letter-spacing: 0.3px;
+  text-align: center;
+  width: 100%;
   animation: fadeInUp 0.8s ease 0.5s both;
 }
-
 
 .hero .tagline span {
   margin-left: 8px;
   padding-bottom: 4px;
   font-weight: 500;
   color: var(--default-color);
-  border-bottom: 2px solid var(--accent-color); 
+  border-bottom: 2px solid var(--accent-color);
 }
 
 .typed-cursor {
@@ -106,7 +116,10 @@
   display: flex;
   gap: 1.5rem;
   justify-content: center;
-  margin-top: 3rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  width: 100%;
   animation: fadeInUp 0.8s ease 0.6s both;
 }
 
@@ -224,9 +237,14 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 100px 0 60px;
+    padding: 72px 0;
+    align-items: center;
     justify-content: center;
     text-align: center;
+  }
+
+  .hero-stack {
+    gap: 1.75rem;
   }
   
   .hero .container,
@@ -238,12 +256,13 @@
   .hero .greeting {
     font-size: 0.9rem;
     letter-spacing: 2px;
-    margin-bottom: 15px;
+    margin: 0 0 12px;
     animation: fadeInUp 0.8s ease;
   }
   
   .hero h1 {
     font-size: 1.6rem;
+    margin: 0 0 12px;
     animation: fadeInUp 0.8s ease 0.2s both;
   }
   
@@ -253,7 +272,7 @@
   
   .hero .tagline {
     font-size: 1.1rem;
-    margin-top: 20px;
+    margin: 0;
     animation: fadeInUp 0.8s ease 0.4s both;
   }
   
@@ -265,7 +284,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     animation: fadeInUp 0.8s ease 0.6s both;
   }
   
@@ -279,7 +298,11 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 80px 0 50px;
+    padding: 68px 0;
+  }
+
+  .hero-stack {
+    gap: 1.5rem;
   }
   
   .hero .greeting {
