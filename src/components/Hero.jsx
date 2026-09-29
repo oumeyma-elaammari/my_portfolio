@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import { Link } from 'react-scroll';
 import cv from '../assets/cv/cv_oumeyma_elaammari.pdf';
+import { HERO_TYPED_STRINGS } from '../data/heroTypedStrings';
 import HomeBackground from './HomeBackground';
 import Stats from './Stats';
 import '../styles/Hero.css';
@@ -11,12 +12,7 @@ const Hero = () => {
 
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
-      strings: [
-        'Software Engineering Student',
-        'Full-Stack Developer',
-        'AI Enthusiast',
-        'PFE Intern Candidate'
-      ],
+      strings: HERO_TYPED_STRINGS,
       typeSpeed: 90,
       backSpeed: 50,
       backDelay: 2000,

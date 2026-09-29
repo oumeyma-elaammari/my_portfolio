@@ -1,8 +1,13 @@
 import React, { useEffect, useRef } from 'react';
+import { HERO_TYPED_STRINGS } from '../data/heroTypedStrings';
 import '../styles/HomeBackground.css';
 
-const CONTENT_MARGIN = 40;
-const FADE_BAND = 44;
+const CONTENT_MARGIN = 14;
+const FADE_BAND = 20;
+const HALO_DEPTH = 130;
+const MIN_SIDE_BAND = 22;
+
+const ZONE_SELECTORS = ['.greeting', 'h1', '.tagline', '.hero-buttons'];
 
 const getTheme = () =>
   document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
@@ -14,17 +19,16 @@ const isCoarsePointer = () =>
   window.matchMedia('(pointer: coarse)').matches ||
   window.matchMedia('(hover: none)').matches;
 
-const nodeCountForSize = (width, height) => {
-  const area = width * height;
-  if (width < 480) return Math.max(28, Math.min(42, Math.floor(area / 14000)));
-  if (width < 900) return Math.max(45, Math.min(70, Math.floor(area / 16000)));
-  return Math.max(70, Math.min(110, Math.floor(area / 18000)));
+const nodeCountForSize = (width) => {
+  if (width < 480) return Math.max(22, Math.min(32, Math.floor(width / 14)));
+  if (width < 900) return Math.max(40, Math.min(62, Math.floor(width / 16)));
+  return Math.max(68, Math.min(100, Math.floor(width / 14)));
 };
 
 const connectionDistance = (width) => {
-  if (width < 480) return 90;
-  if (width < 900) return 110;
-  return 130;
+  if (width < 480) return 88;
+  if (width < 900) return 108;
+  return 128;
 };
 
 const createEmptyZone = () => ({
@@ -35,8 +39,11 @@ const createEmptyZone = () => ({
   active: false
 });
 
-const pointInRect = (x, y, rect) =>
-  x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h;
+const pointInRect = (x, y, rect, inset = 0) =>
+  x >= rect.x + inset &&
+  x <= rect.x + rect.w - inset &&
+  y >= rect.y + inset &&
+  y <= rect.y + rect.h - inset;
 
 const segmentIntersectsRect = (x1, y1, x2, y2, rect) => {
   if (pointInRect(x1, y1, rect) || pointInRect(x2, y2, rect)) return true;
@@ -57,28 +64,6 @@ const segmentIntersectsRect = (x1, y1, x2, y2, rect) => {
     const d4 = cross(x1, y1, x2, y2, ex2, ey2);
     return d1 * d2 < 0 && d3 * d4 < 0;
   });
-};
-
-const createNodes = (count, width, height, isBlocked) => {
-  const nodes = [];
-  let attempts = 0;
-
-  while (nodes.length < count && attempts < count * 30) {
-    attempts += 1;
-    const x = Math.random() * width;
-    const y = Math.random() * height;
-    if (isBlocked(x, y)) continue;
-
-    nodes.push({
-      x,
-      y,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.4 + 1.2
-    });
-  }
-
-  return nodes;
 };
 
 const themePalette = (theme) => {
@@ -116,9 +101,9 @@ const HomeBackground = () => {
     let width = 0;
     let height = 0;
     let dpr = 1;
-    let linkDist = 130;
-    let mobileRestricted = false;
+    let linkDist = 128;
     let contentZone = createEmptyZone();
+    let measureNode = null;
     let mouse = { x: null, y: null, active: false };
     let lastFrame = 0;
 
@@ -128,35 +113,109 @@ const HomeBackground = () => {
       return `rgba(${match[1]}, ${match[2]}, ${match[3]}, ${parseFloat(match[4]) * alpha})`;
     };
 
-    const updateContentZone = () => {
-      if (!contentEl || !section) {
-        contentZone = createEmptyZone();
-        mobileRestricted = width < 768;
-        return;
+    const toLocalRect = (rect, sectionRect) => ({
+      x: rect.left - sectionRect.left,
+      y: rect.top - sectionRect.top,
+      w: rect.width,
+      h: rect.height
+    });
+
+    const measureMaxTypedWidth = (taglineEl) => {
+      if (!measureNode) {
+        measureNode = document.createElement('span');
+        measureNode.style.position = 'absolute';
+        measureNode.style.visibility = 'hidden';
+        measureNode.style.pointerEvents = 'none';
+        measureNode.style.whiteSpace = 'nowrap';
+        document.body.appendChild(measureNode);
       }
 
+      const typedEl = taglineEl.querySelector('.typed-text') || taglineEl;
+      const typedStyle = window.getComputedStyle(typedEl);
+      measureNode.style.font = typedStyle.font;
+      measureNode.style.fontSize = typedStyle.fontSize;
+      measureNode.style.fontWeight = typedStyle.fontWeight;
+      measureNode.style.letterSpacing = typedStyle.letterSpacing;
+
+      let maxWidth = 0;
+      HERO_TYPED_STRINGS.forEach((value) => {
+        measureNode.textContent = value;
+        maxWidth = Math.max(maxWidth, measureNode.offsetWidth);
+      });
+
+      measureNode.textContent = '|';
+      maxWidth = Math.max(maxWidth, measureNode.offsetWidth);
+
+      const taglineStyle = window.getComputedStyle(taglineEl);
+      measureNode.style.font = taglineStyle.font;
+      measureNode.style.fontSize = taglineStyle.fontSize;
+      measureNode.style.fontWeight = taglineStyle.fontWeight;
+      measureNode.textContent = "I'm ";
+      const prefixWidth = measureNode.offsetWidth;
+
+      return prefixWidth + maxWidth + 10;
+    };
+
+    const getTextRects = () => {
+      if (!contentEl || !section) return [];
+
       const sectionRect = section.getBoundingClientRect();
-      const contentRect = contentEl.getBoundingClientRect();
+      const rects = [];
 
-      let zoneX = contentRect.left - sectionRect.left - CONTENT_MARGIN;
-      let zoneY = contentRect.top - sectionRect.top - CONTENT_MARGIN;
-      let zoneW = contentRect.width + CONTENT_MARGIN * 2;
-      let zoneH = contentRect.height + CONTENT_MARGIN * 2;
+      ZONE_SELECTORS.forEach((selector) => {
+        const el = contentEl.querySelector(selector);
+        if (!el) return;
 
-      zoneX = Math.max(0, zoneX);
-      zoneY = Math.max(0, zoneY);
-      if (zoneX + zoneW > width) zoneW = Math.max(0, width - zoneX);
-      if (zoneY + zoneH > height) zoneH = Math.max(0, height - zoneY);
+        const local = toLocalRect(el.getBoundingClientRect(), sectionRect);
 
-      contentZone = {
-        x: zoneX,
-        y: zoneY,
-        w: zoneW,
-        h: zoneH,
-        active: zoneW > 0 && zoneH > 0
+        if (selector === '.tagline') {
+          const maxWidth = measureMaxTypedWidth(el);
+          const centerX = local.x + local.w / 2;
+          local.w = Math.max(local.w, maxWidth);
+          local.x = centerX - local.w / 2;
+        }
+
+        rects.push(local);
+      });
+
+      return rects;
+    };
+
+    const unionRects = (rects) => {
+      if (!rects.length) return createEmptyZone();
+
+      let minX = Infinity;
+      let minY = Infinity;
+      let maxX = -Infinity;
+      let maxY = -Infinity;
+
+      rects.forEach((rect) => {
+        minX = Math.min(minX, rect.x);
+        minY = Math.min(minY, rect.y);
+        maxX = Math.max(maxX, rect.x + rect.w);
+        maxY = Math.max(maxY, rect.y + rect.h);
+      });
+
+      return {
+        x: minX - CONTENT_MARGIN,
+        y: minY - CONTENT_MARGIN,
+        w: maxX - minX + CONTENT_MARGIN * 2,
+        h: maxY - minY + CONTENT_MARGIN * 2,
+        active: true
       };
+    };
 
-      mobileRestricted = width < 768 || contentZone.w / Math.max(width, 1) > 0.82;
+    const clampZone = (zone) => {
+      let { x, y, w, h } = zone;
+      x = Math.max(0, x);
+      y = Math.max(0, y);
+      if (x + w > width) w = Math.max(0, width - x);
+      if (y + h > height) h = Math.max(0, height - y);
+      return { x, y, w, h, active: w > 0 && h > 0 };
+    };
+
+    const updateContentZone = () => {
+      contentZone = clampZone(unionRects(getTextRects()));
     };
 
     const distanceToHardZone = (x, y) => {
@@ -165,9 +224,7 @@ const HomeBackground = () => {
       const { x: zx, y: zy, w, h } = contentZone;
       const clampedX = Math.max(zx, Math.min(x, zx + w));
       const clampedY = Math.max(zy, Math.min(y, zy + h));
-      const dx = x - clampedX;
-      const dy = y - clampedY;
-      return Math.hypot(dx, dy);
+      return Math.hypot(x - clampedX, y - clampedY);
     };
 
     const zoneOpacityAt = (x, y) => {
@@ -179,61 +236,117 @@ const HomeBackground = () => {
       return dist / FADE_BAND;
     };
 
-    const mobileOpacityAt = (y) => {
-      if (!mobileRestricted) return 1;
-
-      const topBand = height * 0.17;
-      const bottomStart = height * 0.8;
-      if (y <= topBand || y >= bottomStart) return 1;
-      return 0.07;
-    };
-
-    const elementOpacityAt = (x, y) => zoneOpacityAt(x, y) * mobileOpacityAt(y);
-
     const isHardBlocked = (x, y) =>
       contentZone.active && pointInRect(x, y, contentZone);
 
-    const isSpawnBlocked = (x, y) => {
-      if (isHardBlocked(x, y)) return true;
-      if (mobileRestricted) {
-        const topBand = height * 0.17;
-        const bottomStart = height * 0.8;
-        if (y > topBand && y < bottomStart && Math.random() > 0.12) return true;
+    const spawnInHalo = () => {
+      if (!contentZone.active) {
+        return { x: Math.random() * width, y: Math.random() * height };
       }
-      return false;
+
+      const { x: zx, y: zy, w, h } = contentZone;
+      const side = Math.floor(Math.random() * 4);
+      const nearEdge = Math.random() * Math.random();
+      const depth = nearEdge * HALO_DEPTH + CONTENT_MARGIN * 0.5;
+      const spread = Math.random();
+
+      const leftSpace = zx;
+      const rightSpace = width - (zx + w);
+      const topSpace = zy;
+      const bottomSpace = height - (zy + h);
+
+      if (side === 0 && topSpace > 6) {
+        return {
+          x: zx - HALO_DEPTH + spread * (w + HALO_DEPTH * 2),
+          y: Math.max(6, zy - depth)
+        };
+      }
+
+      if (side === 1 && rightSpace > 6) {
+        const band = Math.max(MIN_SIDE_BAND, Math.min(rightSpace - 4, depth + 16));
+        return {
+          x: Math.min(width - 6, zx + w + band * (0.15 + nearEdge * 0.85)),
+          y: zy - HALO_DEPTH + spread * (h + HALO_DEPTH * 2)
+        };
+      }
+
+      if (side === 2 && bottomSpace > 6) {
+        return {
+          x: zx - HALO_DEPTH + spread * (w + HALO_DEPTH * 2),
+          y: Math.min(height - 6, zy + h + depth)
+        };
+      }
+
+      if (leftSpace > 6) {
+        const band = Math.max(MIN_SIDE_BAND, Math.min(leftSpace - 4, depth + 16));
+        return {
+          x: Math.max(6, zx - band * (0.15 + nearEdge * 0.85)),
+          y: zy - HALO_DEPTH + spread * (h + HALO_DEPTH * 2)
+        };
+      }
+
+      if (topSpace > 6) {
+        return { x: Math.random() * width, y: Math.max(6, zy - depth) };
+      }
+
+      if (bottomSpace > 6) {
+        return { x: Math.random() * width, y: Math.min(height - 6, zy + h + depth) };
+      }
+
+      return {
+        x: spread < 0.5 ? 6 : width - 6,
+        y: zy + spread * h
+      };
+    };
+
+    const createHaloNodes = (count) => {
+      const created = [];
+      let attempts = 0;
+
+      while (created.length < count && attempts < count * 40) {
+        attempts += 1;
+        const point = spawnInHalo();
+        const x = Math.max(4, Math.min(width - 4, point.x));
+        const y = Math.max(4, Math.min(height - 4, point.y));
+        if (isHardBlocked(x, y)) continue;
+
+        created.push({
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 1.4 + 1.2
+        });
+      }
+
+      return created;
     };
 
     const repelNodeFromZone = (node) => {
-      if (!contentZone.active) return;
+      if (!contentZone.active || !pointInRect(node.x, node.y, contentZone)) return;
 
       const { x: zx, y: zy, w, h } = contentZone;
-      if (!pointInRect(node.x, node.y, contentZone)) return;
-
       const cx = zx + w / 2;
       const cy = zy + h / 2;
       const dx = node.x - cx;
       const dy = node.y - cy;
       const len = Math.max(Math.hypot(dx, dy), 0.001);
-      const half = Math.max(w, h) / 2 + 10;
+      const half = Math.max(w, h) / 2 + 8;
 
       node.x = cx + (dx / len) * half;
       node.y = cy + (dy / len) * half;
-      node.vx += (dx / len) * 0.45;
-      node.vy += (dy / len) * 0.45;
+      node.vx += (dx / len) * 0.4;
+      node.vy += (dy / len) * 0.4;
     };
 
     const bounceNodeFromZone = (node) => {
-      if (!contentZone.active) return;
+      if (!contentZone.active || !pointInRect(node.x, node.y, contentZone)) return;
 
       const { x: zx, y: zy, w, h } = contentZone;
-      const pad = 1.5;
-      const left = zx - pad;
-      const right = zx + w + pad;
-      const top = zy - pad;
-      const bottom = zy + h + pad;
-
-      if (node.x <= left || node.x >= right || node.y <= top || node.y >= bottom) return;
-      if (!pointInRect(node.x, node.y, contentZone)) return;
+      const left = zx;
+      const right = zx + w;
+      const top = zy;
+      const bottom = zy + h;
 
       const distLeft = node.x - left;
       const distRight = right - node.x;
@@ -268,7 +381,7 @@ const HomeBackground = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       linkDist = connectionDistance(width);
       updateContentZone();
-      nodes = createNodes(nodeCountForSize(width, height), width, height, isSpawnBlocked);
+      nodes = createHaloNodes(nodeCountForSize(width));
       drawFrame(true);
     };
 
@@ -281,7 +394,7 @@ const HomeBackground = () => {
         return;
       }
 
-      const fade = Math.min(elementOpacityAt(x1, y1), elementOpacityAt(x2, y2));
+      const fade = Math.min(zoneOpacityAt(x1, y1), zoneOpacityAt(x2, y2));
       if (fade <= 0.01) return;
 
       const [r, g, b] = themePalette(theme).line;
@@ -326,7 +439,7 @@ const HomeBackground = () => {
       const palette = themePalette(theme);
 
       nodes.forEach((node) => {
-        const fade = elementOpacityAt(node.x, node.y);
+        const fade = zoneOpacityAt(node.x, node.y);
         if (fade <= 0.01 || isHardBlocked(node.x, node.y)) return;
 
         ctx.beginPath();
@@ -361,11 +474,8 @@ const HomeBackground = () => {
       });
     };
 
-    const drawFrame = (forceStatic = false) => {
+    const drawFrame = () => {
       drawBackground();
-      if (!forceStatic && !reduceMotion) {
-        // movement applied in loop with delta
-      }
       drawLinks();
       drawNodes();
     };
@@ -375,7 +485,7 @@ const HomeBackground = () => {
         const delta = lastFrame ? now - lastFrame : 16.67;
         lastFrame = now;
         stepNodes(Math.min(delta, 33));
-        drawFrame(false);
+        drawFrame();
       }
       animationId = requestAnimationFrame(loop);
     };
@@ -385,21 +495,19 @@ const HomeBackground = () => {
       if (visible) {
         lastFrame = 0;
         updateContentZone();
-        if (reduceMotion) {
-          drawFrame(true);
-        }
+        if (reduceMotion) drawFrame();
       }
     };
 
     const onThemeChange = () => {
       theme = getTheme();
-      drawFrame(true);
+      drawFrame();
     };
 
     const onMotionChange = (event) => {
       reduceMotion = event.matches;
       lastFrame = 0;
-      drawFrame(true);
+      drawFrame();
     };
 
     const onPointerChange = () => {
@@ -433,7 +541,7 @@ const HomeBackground = () => {
 
     const onLayoutChange = () => {
       updateContentZone();
-      drawFrame(true);
+      drawFrame();
     };
 
     const observer = new IntersectionObserver(onVisibility, { threshold: 0.05 });
@@ -450,10 +558,24 @@ const HomeBackground = () => {
       attributeFilter: ['data-theme']
     });
 
-    const contentObserver = contentEl
-      ? new ResizeObserver(onLayoutChange)
+    const layoutObserver = new ResizeObserver(onLayoutChange);
+    if (contentEl) {
+      layoutObserver.observe(contentEl);
+      ZONE_SELECTORS.forEach((selector) => {
+        const el = contentEl.querySelector(selector);
+        if (el) layoutObserver.observe(el);
+      });
+    }
+
+    const typedEl = contentEl?.querySelector('.typed-text');
+    const typedObserver = typedEl
+      ? new MutationObserver(onLayoutChange)
       : null;
-    contentObserver?.observe(contentEl);
+    typedObserver?.observe(typedEl, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
 
     window.addEventListener('resize', resize);
     section.addEventListener('mousemove', onMouseMove);
@@ -466,12 +588,15 @@ const HomeBackground = () => {
       cancelAnimationFrame(animationId);
       observer.disconnect();
       themeObserver.disconnect();
-      contentObserver?.disconnect();
+      layoutObserver.disconnect();
+      typedObserver?.disconnect();
       motionMedia.removeEventListener('change', onMotionChange);
       pointerMedia.removeEventListener('change', onPointerChange);
       window.removeEventListener('resize', resize);
       section.removeEventListener('mousemove', onMouseMove);
       section.removeEventListener('mouseleave', onMouseLeave);
+      measureNode?.remove();
+      measureNode = null;
     };
   }, []);
 
