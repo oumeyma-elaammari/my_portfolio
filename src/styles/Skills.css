@@ -53,7 +53,7 @@
 .skills-track {
   display: flex;
   gap: 25px;
-  animation: scroll 40s linear infinite;
+  animation: scroll 52s linear infinite;
   width: fit-content;
 }
 
