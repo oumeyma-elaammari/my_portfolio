@@ -86,7 +86,7 @@
   border-radius: 20px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  border: 1px solid var(--card-border);
+  border: 1.5px solid var(--card-border);
   box-shadow: var(--card-shadow);
   backdrop-filter: blur(10px);
   cursor: pointer;
@@ -95,15 +95,15 @@
 .skill-card:hover {
   transform: translateY(-12px) scale(1.05);
   border-color: var(--accent-color);
-  background: rgba(20, 157, 221, 0.15);
-  box-shadow: 0 15px 35px rgba(20, 157, 221, 0.25);
+  background: color-mix(in srgb, var(--card-bg), var(--accent-color) 12%);
+  box-shadow: 0 15px 35px color-mix(in srgb, var(--accent-color), transparent 75%);
 }
 
 .skill-icon {
   width: 65px;
   height: 65px;
   margin: 0 auto 12px auto;
-  background: rgba(20, 157, 221, 0.12);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
   border-radius: 18px;
   display: flex;
   align-items: center;
@@ -112,7 +112,7 @@
 }
 
 .skill-card:hover .skill-icon {
-  background: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 70%);
   transform: rotate(5deg) scale(1.05);
   border-radius: 25px;
 }
@@ -123,16 +123,35 @@
   transition: all 0.3s ease;
 }
 
+.skill-icon i[class*="devicon-"] {
+  font-size: 34px;
+  line-height: 1;
+}
+
+html[data-theme="light"] .skill-icon i.devicon-github-original,
+html[data-theme="light"] .skill-icon i.devicon-symfony-original {
+  color: #24292f;
+}
+
+html[data-theme="dark"] .skill-icon i.devicon-github-original,
+html[data-theme="dark"] .skill-icon i.devicon-symfony-original {
+  color: #f1f5f9;
+}
+
 .skill-card:hover .skill-icon i {
-  color: #fff;
-  transform: scale(1.1);
+  color: var(--accent-color);
+  transform: scale(1.08);
+}
+
+.skill-card:hover .skill-icon i[class*="devicon-"] {
+  filter: none;
 }
 
 .skill-card h4 {
   font-size: 13px;
   font-weight: 600;
   margin: 0;
-  color: var(--default-color);
+  color: var(--heading-color);
   letter-spacing: 0.3px;
 }
 

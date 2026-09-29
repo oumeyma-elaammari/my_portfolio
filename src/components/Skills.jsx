@@ -15,7 +15,11 @@ const filters = [
 const SkillCard = ({ skill }) => (
   <div className="skill-card" tabIndex={0}>
     <div className="skill-icon">
-      <i className={`bi ${skill.icon}`} aria-hidden="true"></i>
+      {skill.iconType === 'devicon' ? (
+        <i className={skill.icon} aria-hidden="true"></i>
+      ) : (
+        <i className={`bi ${skill.icon}`} aria-hidden="true"></i>
+      )}
     </div>
     <h4>{skill.name}</h4>
   </div>

@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'devicon/devicon.min.css';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
