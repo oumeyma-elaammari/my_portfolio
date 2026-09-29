@@ -31,21 +31,92 @@
 }
 
 .about-facts {
-  margin-top: 8px;
+  margin-top: 0;
+}
+
+.about-fact {
+  margin-bottom: 1.25rem;
+}
+
+.about-fact:last-child {
+  margin-bottom: 0;
+}
+
+.about-fact .about-subtitle {
+  margin: 0 0 8px;
+}
+
+.about-fact p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: none;
+  padding-left: 1.35rem;
+}
+
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 1.35rem;
+}
+
+.about-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(20, 157, 221, 0.15);
+  color: var(--accent-color);
+  line-height: 1.35;
+  white-space: normal;
+}
+
+html[data-theme="light"] .about-badge {
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+}
+
+.about-fact a {
+  color: var(--default-color);
+  word-break: break-word;
+}
+
+.about-fact a:hover {
+  color: var(--accent-color);
 }
 
 .about-details {
   margin-top: 40px;
+  align-items: flex-start !important;
+}
+
+.about-details > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.about-details > [class*="col-"] > .about-subtitle:first-child,
+.about-facts > .about-fact:first-child {
+  margin-top: 0;
+}
+
+.about-education {
+  max-width: none;
 }
 
 .about-subtitle {
   font-size: 1.35rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  line-height: 1.3;
 }
 
-.about-education {
-  max-width: 900px;
+.about-subtitle i {
+  font-size: 1rem;
 }
 
 .about-timeline-item {
@@ -92,18 +163,6 @@
   margin-bottom: 4px;
   font-size: 0.95rem;
   max-width: 70ch;
-}
-
-.about-timeline-compact {
-  padding-top: 2px;
-}
-
-.about-compact-line {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.5;
-  max-width: none;
 }
 
 @media (max-width: 768px) {

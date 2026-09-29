@@ -14,16 +14,29 @@ const educationData = [
     place: 'ENSA Oujda (ENSAO)'
   },
   {
-    compact: true,
-    line: 'Baccalaureate in Physical Sciences · Lycée Ibn Sina Oujda · 2022 · Mention Très Bien'
+    title: 'Baccalaureate in Physical Sciences',
+    period: '2021 - 2022',
+    place: 'Lycée Ibn Sina Oujda',
+    note: 'Mention Très Bien'
   }
 ];
+
+const softSkills = [
+  'Autonomy & responsibility',
+  'Teamwork',
+  'Adaptability',
+  'Motivation & commitment',
+  'Rigor & organization'
+];
+
+const interests = ['Artificial Intelligence', 'Web Development', 'DevOps'];
 
 const About = () => {
   return (
     <section id="about" className="about section">
       <div className="container section-title" data-aos="fade-up">
         <h2>About Me</h2>
+        <p>A quick look at who I am, my background and what I'm looking for.</p>
       </div>
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
@@ -48,41 +61,72 @@ const About = () => {
               my years in student clubs taught me to organize, lead and work well in a team.
               I'm now looking for a PFE internship where I can grow alongside experienced engineers.
             </p>
-            <ul className="about-facts list-unstyled">
-              <li className="mb-2">
-                <i className="bi bi-chevron-right text-primary me-2"></i>
-                <strong>Location:</strong>{' '}
-                <span>Oujda / Marrakech – open to relocation anywhere in Morocco</span>
-              </li>
-              <li className="mb-2">
-                <i className="bi bi-chevron-right text-primary me-2"></i>
-                <strong>Email:</strong> <span>elaammarioumeima@gmail.com</span>
-              </li>
-              <li className="mb-2">
-                <i className="bi bi-chevron-right text-primary me-2"></i>
-                <strong>Languages:</strong>{' '}
-                <span>Arabic (native), French &amp; English (fluent)</span>
-              </li>
-            </ul>
           </div>
         </div>
 
-        <div className="about-details" data-aos="fade-up" data-aos-delay="150">
-          <h3 className="about-subtitle">Education</h3>
-          <div className="about-education">
-            {educationData.map((item) =>
-              item.compact ? (
-                <div key={item.line} className="about-timeline-item about-timeline-compact">
-                  <p className="about-compact-line">{item.line}</p>
-                </div>
-              ) : (
+        <div className="row gy-4 about-details" data-aos="fade-up" data-aos-delay="150">
+          <div className="col-lg-7">
+            <h3 className="about-subtitle">
+              <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+              Education
+            </h3>
+            <div className="about-education">
+              {educationData.map((item) => (
                 <div key={item.title} className="about-timeline-item">
                   <h4>{item.title}</h4>
                   <span className="about-period">{item.period}</span>
                   <p><em>{item.place}</em></p>
+                  {item.note && <p>{item.note}</p>}
                 </div>
-              )
-            )}
+              ))}
+            </div>
+          </div>
+          <div className="col-lg-5 about-facts">
+            <div className="about-fact">
+              <h3 className="about-subtitle">
+                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+                Location
+              </h3>
+              <p>Oujda / Marrakech – open to relocation anywhere in Morocco</p>
+            </div>
+            <div className="about-fact">
+              <h3 className="about-subtitle">
+                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+                Email
+              </h3>
+              <p>
+                <a href="mailto:elaammarioumeima@gmail.com">elaammarioumeima@gmail.com</a>
+              </p>
+            </div>
+            <div className="about-fact">
+              <h3 className="about-subtitle">
+                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+                Languages
+              </h3>
+              <p>Arabic (native), French &amp; English (fluent)</p>
+            </div>
+            <div className="about-fact">
+              <h3 className="about-subtitle">
+                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+                Soft Skills
+              </h3>
+              <div className="about-badges">
+                {softSkills.map((skill) => (
+                  <span key={skill} className="about-badge">{skill}</span>
+                ))}
+              </div>
+            </div>
+            <div className="about-fact">
+              <h3 className="about-subtitle">
+                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
+                Interests
+              </h3>
+              <div className="about-badges">
+                {interests.map((interest) => (
+                  <span key={interest} className="about-badge">{interest}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
