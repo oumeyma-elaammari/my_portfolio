@@ -17,7 +17,7 @@ const educationData = [
     title: 'Baccalaureate in Physical Sciences',
     period: '2021 - 2022',
     place: 'Lycée Ibn Sina Oujda',
-    note: 'Mention Très Bien'
+    note: 'High Honors (Mention Très Bien)'
   }
 ];
 
@@ -28,8 +28,6 @@ const softSkills = [
   'Motivation & commitment',
   'Rigor & organization'
 ];
-
-const interests = ['Artificial Intelligence', 'Web Development', 'DevOps'];
 
 const About = () => {
   return (
@@ -83,14 +81,14 @@ const About = () => {
           </div>
           <div className="col-lg-5 about-facts">
             <div className="about-fact">
-              <h3 className="about-subtitle">
+              <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
                 Location
               </h3>
               <p>Oujda / Marrakech – open to relocation anywhere in Morocco</p>
             </div>
             <div className="about-fact">
-              <h3 className="about-subtitle">
+              <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
                 Email
               </h3>
@@ -99,31 +97,20 @@ const About = () => {
               </p>
             </div>
             <div className="about-fact">
-              <h3 className="about-subtitle">
+              <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
                 Languages
               </h3>
               <p>Arabic (native), French &amp; English (fluent)</p>
             </div>
             <div className="about-fact">
-              <h3 className="about-subtitle">
+              <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
                 Soft Skills
               </h3>
               <div className="about-badges">
                 {softSkills.map((skill) => (
                   <span key={skill} className="about-badge">{skill}</span>
-                ))}
-              </div>
-            </div>
-            <div className="about-fact">
-              <h3 className="about-subtitle">
-                <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-                Interests
-              </h3>
-              <div className="about-badges">
-                {interests.map((interest) => (
-                  <span key={interest} className="about-badge">{interest}</span>
                 ))}
               </div>
             </div>

@@ -46,6 +46,14 @@
   margin: 0 0 8px;
 }
 
+.about-subtitle-sm {
+  font-size: 1.1rem;
+}
+
+.about-subtitle-sm i {
+  font-size: 0.9rem;
+}
+
 .about-fact p {
   margin: 0;
   font-size: 0.95rem;
@@ -69,7 +77,6 @@
   background: rgba(20, 157, 221, 0.15);
   color: var(--accent-color);
   line-height: 1.35;
-  white-space: normal;
 }
 
 html[data-theme="light"] .about-badge {
