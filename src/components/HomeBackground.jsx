@@ -1,34 +1,58 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/HomeBackground.css';
 
-const STAR_COUNT = 140;
-const PARTICLE_COUNT = 36;
-
 const getTheme = () =>
   document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const createStars = (width, height) =>
-  Array.from({ length: STAR_COUNT }, () => ({
+const isCoarsePointer = () =>
+  window.matchMedia('(pointer: coarse)').matches ||
+  window.matchMedia('(hover: none)').matches;
+
+const nodeCountForSize = (width, height) => {
+  const area = width * height;
+  if (width < 480) return Math.max(28, Math.min(42, Math.floor(area / 14000)));
+  if (width < 900) return Math.max(45, Math.min(70, Math.floor(area / 16000)));
+  return Math.max(70, Math.min(110, Math.floor(area / 18000)));
+};
+
+const connectionDistance = (width) => {
+  if (width < 480) return 90;
+  if (width < 900) return 110;
+  return 130;
+};
+
+const createNodes = (count, width, height) =>
+  Array.from({ length: count }, () => ({
     x: Math.random() * width,
     y: Math.random() * height,
-    r: Math.random() * 1.6 + 0.3,
-    base: Math.random() * 0.6 + 0.3,
-    speed: Math.random() * 0.02 + 0.005,
-    phase: Math.random() * Math.PI * 2
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35,
+    r: Math.random() * 1.4 + 1.2
   }));
 
-const createParticles = (width, height) =>
-  Array.from({ length: PARTICLE_COUNT }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    r: Math.random() * 2 + 0.8,
-    vx: (Math.random() - 0.5) * 0.15,
-    vy: (Math.random() - 0.5) * 0.15,
-    alpha: Math.random() * 0.25 + 0.08
-  }));
+const themePalette = (theme) => {
+  if (theme === 'light') {
+    return {
+      bgTop: '#e8f2fb',
+      bgMid: '#f3f7fc',
+      bgBottom: '#f8fafc',
+      node: 'rgba(11, 123, 184, 0.85)',
+      nodeCore: 'rgba(11, 123, 184, 1)',
+      line: [11, 123, 184]
+    };
+  }
+  return {
+    bgTop: '#070b14',
+    bgMid: '#0e1626',
+    bgBottom: '#0a192f',
+    node: 'rgba(226, 236, 255, 0.9)',
+    nodeCore: 'rgba(255, 255, 255, 0.95)',
+    line: [20, 157, 221]
+  };
+};
 
 const HomeBackground = () => {
   const canvasRef = useRef(null);
@@ -37,19 +61,20 @@ const HomeBackground = () => {
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     const section = canvas.parentElement;
     let animationId = 0;
-    let stars = [];
-    let particles = [];
-    let shooting = null;
-    let nextShootingAt = performance.now() + 4000 + Math.random() * 6000;
+    let nodes = [];
     let visible = true;
     let reduceMotion = prefersReducedMotion();
+    let allowPointer = !isCoarsePointer();
     let theme = getTheme();
     let width = 0;
     let height = 0;
     let dpr = 1;
+    let linkDist = 130;
+    let mouse = { x: null, y: null, active: false };
+    let lastFrame = 0;
 
     const resize = () => {
       const rect = section.getBoundingClientRect();
@@ -61,140 +86,162 @@ const HomeBackground = () => {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = createStars(width, height);
-      particles = createParticles(width, height);
-      drawFrame(performance.now(), true);
+      linkDist = connectionDistance(width);
+      nodes = createNodes(nodeCountForSize(width, height), width, height);
+      drawFrame(true);
     };
 
-    const drawGradient = () => {
+    const drawBackground = () => {
+      const palette = themePalette(theme);
       const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      if (theme === 'light') {
-        gradient.addColorStop(0, '#dbeafe');
-        gradient.addColorStop(0.45, '#eef6ff');
-        gradient.addColorStop(1, '#f8fafc');
-      } else {
-        gradient.addColorStop(0, '#070b14');
-        gradient.addColorStop(0.55, '#0e1626');
-        gradient.addColorStop(1, '#0a192f');
-      }
+      gradient.addColorStop(0, palette.bgTop);
+      gradient.addColorStop(0.55, palette.bgMid);
+      gradient.addColorStop(1, palette.bgBottom);
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
     };
 
-    const drawStars = (now) => {
-      stars.forEach((star) => {
-        const twinkle = reduceMotion
-          ? star.base
-          : star.base * (0.55 + 0.45 * Math.sin(now * star.speed + star.phase));
+    const drawLinks = () => {
+      const [r, g, b] = themePalette(theme).line;
+      const maxDistSq = linkDist * linkDist;
+
+      for (let i = 0; i < nodes.length; i += 1) {
+        const a = nodes[i];
+        for (let j = i + 1; j < nodes.length; j += 1) {
+          const other = nodes[j];
+          const dx = a.x - other.x;
+          const dy = a.y - other.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq > maxDistSq) continue;
+          const alpha = 1 - Math.sqrt(distSq) / linkDist;
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.55})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
+
+        if (allowPointer && mouse.active && mouse.x != null) {
+          const dx = a.x - mouse.x;
+          const dy = a.y - mouse.y;
+          const distSq = dx * dx + dy * dy;
+          const mouseDist = linkDist * 1.15;
+          if (distSq <= mouseDist * mouseDist) {
+            const alpha = 1 - Math.sqrt(distSq) / mouseDist;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.75})`;
+            ctx.lineWidth = 1.25;
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    const drawNodes = () => {
+      const palette = themePalette(theme);
+      nodes.forEach((node) => {
         ctx.beginPath();
-        ctx.fillStyle = `rgba(255, 255, 255, ${twinkle})`;
-        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = palette.node;
+        ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = palette.nodeCore;
+        ctx.arc(node.x, node.y, Math.max(0.8, node.r * 0.35), 0, Math.PI * 2);
         ctx.fill();
       });
     };
 
-    const drawParticles = () => {
-      particles.forEach((p) => {
-        if (!reduceMotion) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < 0) p.x = width;
-          if (p.x > width) p.x = 0;
-          if (p.y < 0) p.y = height;
-          if (p.y > height) p.y = 0;
+    const stepNodes = (delta) => {
+      const speed = Math.min(delta / 16.67, 2);
+      nodes.forEach((node) => {
+        node.x += node.vx * speed;
+        node.y += node.vy * speed;
+
+        if (node.x <= 0 || node.x >= width) {
+          node.vx *= -1;
+          node.x = Math.max(0, Math.min(width, node.x));
         }
-        ctx.beginPath();
-        ctx.fillStyle =
-          theme === 'light'
-            ? `rgba(100, 140, 190, ${p.alpha})`
-            : `rgba(180, 210, 255, ${p.alpha * 0.5})`;
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
+        if (node.y <= 0 || node.y >= height) {
+          node.vy *= -1;
+          node.y = Math.max(0, Math.min(height, node.y));
+        }
       });
     };
 
-    const spawnShootingStar = () => {
-      shooting = {
-        x: Math.random() * width * 0.7,
-        y: Math.random() * height * 0.4,
-        len: 80 + Math.random() * 70,
-        speed: 10 + Math.random() * 6,
-        life: 0,
-        maxLife: 45 + Math.random() * 20
-      };
-    };
-
-    const drawShootingStar = () => {
-      if (!shooting) return;
-      shooting.x += shooting.speed;
-      shooting.y += shooting.speed * 0.35;
-      shooting.life += 1;
-
-      const alpha = 1 - shooting.life / shooting.maxLife;
-      const gradient = ctx.createLinearGradient(
-        shooting.x,
-        shooting.y,
-        shooting.x - shooting.len,
-        shooting.y - shooting.len * 0.35
-      );
-      gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
-      gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(shooting.x, shooting.y);
-      ctx.lineTo(shooting.x - shooting.len, shooting.y - shooting.len * 0.35);
-      ctx.stroke();
-
-      if (shooting.life >= shooting.maxLife || shooting.x > width + 50) {
-        shooting = null;
-        nextShootingAt = performance.now() + 5000 + Math.random() * 8000;
+    const drawFrame = (forceStatic = false) => {
+      drawBackground();
+      if (!forceStatic && !reduceMotion) {
+        // movement applied in loop with delta
       }
-    };
-
-    const drawFrame = (now, forceStatic = false) => {
-      drawGradient();
-      if (theme === 'dark') {
-        drawStars(now);
-        if (!reduceMotion && !forceStatic) {
-          if (!shooting && now >= nextShootingAt) spawnShootingStar();
-          drawShootingStar();
-        }
-      } else {
-        drawParticles();
-      }
+      drawLinks();
+      drawNodes();
     };
 
     const loop = (now) => {
       if (visible && !reduceMotion) {
-        drawFrame(now);
+        const delta = lastFrame ? now - lastFrame : 16.67;
+        lastFrame = now;
+        // Cap catch-up after tab switch to keep motion smooth near 60fps.
+        stepNodes(Math.min(delta, 33));
+        drawFrame(false);
       }
       animationId = requestAnimationFrame(loop);
     };
 
     const onVisibility = ([entry]) => {
       visible = entry.isIntersecting;
-      if (visible && reduceMotion) {
-        drawFrame(performance.now(), true);
+      if (visible) {
+        lastFrame = 0;
+        if (reduceMotion) {
+          drawFrame(true);
+        }
       }
     };
 
     const onThemeChange = () => {
       theme = getTheme();
-      drawFrame(performance.now(), true);
+      drawFrame(true);
     };
 
     const onMotionChange = (event) => {
       reduceMotion = event.matches;
-      drawFrame(performance.now(), true);
+      lastFrame = 0;
+      drawFrame(true);
+    };
+
+    const onPointerChange = () => {
+      allowPointer = !isCoarsePointer();
+      if (!allowPointer) {
+        mouse.active = false;
+        mouse.x = null;
+        mouse.y = null;
+      }
+    };
+
+    const onMouseMove = (event) => {
+      if (!allowPointer) return;
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = event.clientX - rect.left;
+      mouse.y = event.clientY - rect.top;
+      mouse.active = true;
+    };
+
+    const onMouseLeave = () => {
+      mouse.active = false;
+      mouse.x = null;
+      mouse.y = null;
     };
 
     const observer = new IntersectionObserver(onVisibility, { threshold: 0.05 });
     observer.observe(section);
 
     const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointerMedia = window.matchMedia('(pointer: coarse)');
     motionMedia.addEventListener('change', onMotionChange);
+    pointerMedia.addEventListener('change', onPointerChange);
 
     const themeObserver = new MutationObserver(onThemeChange);
     themeObserver.observe(document.documentElement, {
@@ -203,6 +250,9 @@ const HomeBackground = () => {
     });
 
     window.addEventListener('resize', resize);
+    section.addEventListener('mousemove', onMouseMove);
+    section.addEventListener('mouseleave', onMouseLeave);
+
     resize();
     animationId = requestAnimationFrame(loop);
 
@@ -211,7 +261,10 @@ const HomeBackground = () => {
       observer.disconnect();
       themeObserver.disconnect();
       motionMedia.removeEventListener('change', onMotionChange);
+      pointerMedia.removeEventListener('change', onPointerChange);
       window.removeEventListener('resize', resize);
+      section.removeEventListener('mousemove', onMouseMove);
+      section.removeEventListener('mouseleave', onMouseLeave);
     };
   }, []);
 
