@@ -2,11 +2,20 @@
   padding: 60px 0;
 }
 
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
 .certificates .certificate-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
   background: var(--card-bg);
-  border-radius: 15px;
-  padding: 25px 20px;
-  text-align: center;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
   transition: all 0.3s ease;
   height: 100%;
   border: 1px solid var(--card-border);
@@ -14,21 +23,42 @@
 }
 
 .certificates .certificate-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   border-color: var(--accent-color);
-  box-shadow: 0 10px 20px rgba(20, 157, 221, 0.15);
+  box-shadow: 0 10px 20px color-mix(in srgb, var(--accent-color), transparent 85%);
+}
+
+.certificate-issuer-mark {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent-contrast);
+  background: var(--accent-color);
+}
+
+.certificate-body {
+  min-width: 0;
+  flex: 1;
 }
 
 .certificates .certificate-item h4 {
-  font-size: 18px;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  line-height: 1.35;
+  color: var(--heading-color);
 }
 
 .certificates .certificate-item p {
-  font-size: 13px;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
-  margin-bottom: 5px;
+  font-size: 12px;
+  color: var(--muted-color);
+  margin-bottom: 8px;
 }
 
 .certificates .certificate-item p em {
@@ -40,38 +70,39 @@
 .certificates .certificate-skills {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 15px 0;
+  gap: 6px;
+  margin: 0 0 10px;
 }
 
 .certificates .skill-tag {
-  background: rgba(20, 157, 221, 0.15);
+  background: color-mix(in srgb, var(--accent-color), transparent 85%);
   color: var(--accent-color);
-  font-size: 11px;
-  padding: 4px 10px;
+  font-size: 10px;
+  padding: 3px 8px;
   border-radius: 20px;
   font-weight: 500;
 }
 
 .certificates .btn-certificate {
   display: inline-block;
-  margin-top: 10px;
-  padding: 6px 18px;
-  font-size: 13px;
+  padding: 4px 0;
+  font-size: 12px;
   color: var(--accent-color);
-  background: rgba(20, 157, 221, 0.1);
-  border-radius: 25px;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .certificates .btn-certificate:hover {
-  background: var(--accent-color);
-  color: #fff;
+  text-decoration: underline;
 }
 
 .certificates .btn-certificate i {
-  font-size: 11px;
-  margin-left: 5px;
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+@media (max-width: 480px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
 }

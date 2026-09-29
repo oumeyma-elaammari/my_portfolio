@@ -2,6 +2,8 @@ import React from 'react';
 import certificatesData from '../data/certificatesData';
 import '../styles/Certificates.css';
 
+const issuerInitial = (issuer) => issuer.trim().charAt(0).toUpperCase();
+
 const Certificates = () => {
   return (
     <section id="certificates" className="certificates section">
@@ -11,22 +13,25 @@ const Certificates = () => {
       </div>
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
-        <div className="row gy-4">
+        <div className="certificates-grid">
           {certificatesData.map((cert) => (
-            <div key={cert.id} className="col-lg-4 col-md-6">
-              <div className="certificate-item">
+            <article key={cert.id} className="certificate-item">
+              <div className="certificate-issuer-mark" aria-hidden="true">
+                {issuerInitial(cert.issuer)}
+              </div>
+              <div className="certificate-body">
                 <h4>{cert.title}</h4>
                 <p><em>{cert.issuer}</em></p>
                 <div className="certificate-skills">
-                  {cert.skills.map((skill, idx) => (
-                    <span key={idx} className="skill-tag">{skill}</span>
+                  {cert.skills.map((skill) => (
+                    <span key={skill} className="skill-tag">{skill}</span>
                   ))}
                 </div>
                 <a href={cert.link} className="btn-certificate" target="_blank" rel="noopener noreferrer">
                   View Certificate <i className="bi bi-box-arrow-up-right"></i>
                 </a>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
