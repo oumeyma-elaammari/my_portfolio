@@ -4,8 +4,7 @@ import '../styles/HomeBackground.css';
 
 const ZONE_PADDING = 16;
 const ZONE_RADIUS = 14;
-const ZONE_FEATHER = 12;
-const LINE_FADE_BAND = 18;
+const LINE_FADE_BAND = 14;
 
 const CONTENT_SELECTORS = [
   '.greeting',
@@ -46,21 +45,6 @@ const distanceToRect = (x, y, rect) => {
   const nearestX = Math.max(rect.x, Math.min(x, rect.x + rect.w));
   const nearestY = Math.max(rect.y, Math.min(y, rect.y + rect.h));
   return Math.hypot(x - nearestX, y - nearestY);
-};
-
-const traceRoundedRect = (context, x, y, w, h, radius) => {
-  const r = Math.min(radius, w / 2, h / 2);
-  context.beginPath();
-  context.moveTo(x + r, y);
-  context.lineTo(x + w - r, y);
-  context.quadraticCurveTo(x + w, y, x + w, y + r);
-  context.lineTo(x + w, y + h - r);
-  context.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-  context.lineTo(x + r, y + h);
-  context.quadraticCurveTo(x, y + h, x, y + h - r);
-  context.lineTo(x, y + r);
-  context.quadraticCurveTo(x, y, x + r, y);
-  context.closePath();
 };
 
 const themePalette = (theme) => {
@@ -204,14 +188,6 @@ const HomeBackground = () => {
     const lineZoneOpacity = (x1, y1, x2, y2) => {
       if (!clearZones.length) return 1;
 
-      const endPad = ZONE_FEATHER + 4;
-      if (
-        minDistanceToZones(x1, y1) <= endPad ||
-        minDistanceToZones(x2, y2) <= endPad
-      ) {
-        return 0;
-      }
-
       let minDist = Infinity;
       const samples = 16;
 
@@ -220,12 +196,12 @@ const HomeBackground = () => {
         const x = x1 + (x2 - x1) * t;
         const y = y1 + (y2 - y1) * t;
         const dist = minDistanceToZones(x, y);
-        if (dist <= endPad) return 0;
+        if (dist <= 0) return 0;
         minDist = Math.min(minDist, dist);
       }
 
-      if (minDist >= endPad + LINE_FADE_BAND) return 1;
-      return (minDist - endPad) / LINE_FADE_BAND;
+      if (minDist >= LINE_FADE_BAND) return 1;
+      return minDist / LINE_FADE_BAND;
     };
 
     const createNodes = (count) => {
@@ -256,21 +232,6 @@ const HomeBackground = () => {
       }
 
       return created;
-    };
-
-    const eraseSoftRoundedRect = (zone) => {
-      ctx.save();
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.shadowColor = 'rgba(0, 0, 0, 1)';
-      ctx.shadowBlur = ZONE_FEATHER;
-      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-      traceRoundedRect(ctx, zone.x, zone.y, zone.w, zone.h, zone.radius);
-      ctx.fill();
-      ctx.restore();
-    };
-
-    const punchOutClearZones = () => {
-      clearZones.forEach((zone) => eraseSoftRoundedRect(zone));
     };
 
     const resize = () => {
@@ -390,7 +351,7 @@ const HomeBackground = () => {
       drawBackground();
       drawLinks();
       drawNodes();
-      punchOutClearZones();
+      // Soft clear via opacity only — no destination-out punch (avoids truncated line fans).
     };
 
     const loop = (now) => {
