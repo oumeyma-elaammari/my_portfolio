@@ -1,7 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-scroll';
 import '../styles/Portfolio.css';
 
 const projectsData = [
+  {
+    id: 6,
+    title: 'SmarTest',
+    category: ['web', 'desktop'],
+    techStack: '.NET • React.js • Spring Boot • MySQL • Groq API',
+    description: 'Secure, intelligent quiz and exam management platform with real-time communication, JWT authentication, and AI-powered question generation via the Groq API.',
+    image: 'SmarTest-AppIcon.webp',
+    imgWidth: 512,
+    imgHeight: 512,
+    github: 'https://github.com/oumeyma-elaammari/smarTest',
+    demo: null,
+    demoType: null
+  },
+  {
+    id: 5,
+    title: 'My-Store',
+    category: ['web'],
+    techStack: 'React.js • Laravel • MySQL',
+    description: 'Full-stack e-commerce platform with admin dashboard and role-based authentication — Cleverix internship.',
+    image: 'my_store_logo.webp',
+    imgWidth: 886,
+    imgHeight: 435,
+    github: 'https://github.com/oumeyma-elaammari/my-store',
+    demo: '/videos/mystore.mp4',
+    demoType: 'video',
+    experienceRef: true
+  },
   {
     id: 1,
     title: 'RoadmapDev',
@@ -20,7 +48,7 @@ const projectsData = [
     title: 'RhVerse',
     category: ['mobile'],
     techStack: 'Java • Firebase • Android',
-    description: 'HR management app for attendance, leave requests, meetings and certificates.',
+    description: 'Team project – role: Full-Stack Developer. HR management app for attendance, leave requests, meetings and certificates.',
     image: 'RhVerse_Logo.webp',
     imgWidth: 420,
     imgHeight: 231,
@@ -53,32 +81,6 @@ const projectsData = [
     github: 'https://github.com/oumeyma-elaammari/memoPharma',
     demo: '/videos/MemoPharmaApp.mp4',
     demoType: 'video'
-  },
-  {
-    id: 5,
-    title: 'My-Store',
-    category: ['web'],
-    techStack: 'React.js • Laravel • MySQL',
-    description: 'Full-stack e-commerce platform with admin dashboard and role-based authentication.',
-    image: 'my_store_logo.webp',
-    imgWidth: 886,
-    imgHeight: 435,
-    github: 'https://github.com/oumeyma-elaammari/my-store',
-    demo: '/videos/mystore.mp4',
-    demoType: 'video'
-  },
-  {
-    id: 6,
-    title: 'SmarTest',
-    category: ['web', 'desktop'],
-    techStack: '.NET • React.js • Spring Boot • MySQL • Groq API',
-    description: 'Secure, intelligent quiz and exam management platform with real-time communication, JWT authentication, and AI-powered question generation via the Groq API.',
-    image: 'SmarTest-AppIcon.webp',
-    imgWidth: 512,
-    imgHeight: 512,
-    github: 'https://github.com/oumeyma-elaammari/smarTest',
-    demo: null,
-    demoType: null
   },
   {
     id: 7,
@@ -157,18 +159,31 @@ const Portfolio = () => {
               {filteredProjects.map((project) => (
                 <div key={project.id} className="col-lg-4 col-md-6 portfolio-item">
                   <div className="portfolio-content">
-                    <img
-                      src={require(`../assets/img/${project.image}`)}
-                      className="img-fluid"
-                      alt={project.title}
-                      width={project.imgWidth}
-                      height={project.imgHeight}
-                      loading="lazy"
-                    />
+                    <div className="portfolio-media">
+                      <img
+                        src={require(`../assets/img/${project.image}`)}
+                        className="img-fluid"
+                        alt={project.title}
+                        width={project.imgWidth}
+                        height={project.imgHeight}
+                        loading="lazy"
+                      />
+                    </div>
                     <div className="portfolio-info">
                       <h4>{project.title}</h4>
                       <p className="tech-stack">{project.techStack}</p>
                       <p className="description">{project.description}</p>
+                      {project.experienceRef && (
+                        <Link
+                          to="experience"
+                          smooth={true}
+                          duration={500}
+                          offset={-70}
+                          className="experience-link"
+                        >
+                          See Cleverix internship
+                        </Link>
+                      )}
                       <div className="portfolio-links">
                         <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code on GitHub`}>
                           <i className="bi bi-github"></i>
@@ -197,7 +212,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Video Modal */}
       {selectedVideo && (
         <div className="video-modal" onClick={closeVideoModal}>
           <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
