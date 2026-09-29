@@ -61,8 +61,8 @@ const HomeBackground = () => {
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const section = canvas.parentElement;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const section = canvas.closest('.hero') || canvas.parentElement;
     let animationId = 0;
     let nodes = [];
     let visible = true;
@@ -92,13 +92,7 @@ const HomeBackground = () => {
     };
 
     const drawBackground = () => {
-      const palette = themePalette(theme);
-      const gradient = ctx.createLinearGradient(0, 0, 0, height);
-      gradient.addColorStop(0, palette.bgTop);
-      gradient.addColorStop(0.55, palette.bgMid);
-      gradient.addColorStop(1, palette.bgBottom);
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
     };
 
     const drawLinks = () => {
@@ -269,11 +263,13 @@ const HomeBackground = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="home-background"
-      aria-hidden="true"
-    />
+    <div className="home-background-wrap">
+      <canvas
+        ref={canvasRef}
+        className="home-background"
+        aria-hidden="true"
+      />
+    </div>
   );
 };
 

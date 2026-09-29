@@ -42,12 +42,12 @@
 
 .skills-carousel::before {
   left: 0;
-  background: linear-gradient(to right, var(--background-color), transparent);
+  background: linear-gradient(to right, var(--page-bg-mid), transparent);
 }
 
 .skills-carousel::after {
   right: 0;
-  background: linear-gradient(to left, var(--background-color), transparent);
+  background: linear-gradient(to left, var(--page-bg-mid), transparent);
 }
 
 .skills-track {

@@ -7,7 +7,7 @@
   position: relative;
   z-index: 3;
   width: 100%;
-  padding: 0 0 8px;
+  padding: 48px 0 56px;
   background: transparent;
 }
 
@@ -36,13 +36,13 @@
 }
 
 html[data-theme="dark"] .stat-item {
-  background: rgba(10, 25, 47, 0.35);
-  border-color: rgba(20, 157, 221, 0.28);
+  background: rgba(10, 25, 47, 0.58);
+  border-color: rgba(20, 157, 221, 0.32);
 }
 
 html[data-theme="light"] .stat-item {
-  background: rgba(255, 255, 255, 0.55);
-  border-color: rgba(11, 123, 184, 0.28);
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(11, 123, 184, 0.32);
 }
 
 a.stat-item {
@@ -82,7 +82,7 @@ a.stat-item:hover,
 
 @media (max-width: 768px) {
   .stats-embedded {
-    padding: 0 12px 4px;
+    padding: 36px 12px 44px;
   }
 
   .stats-grid {

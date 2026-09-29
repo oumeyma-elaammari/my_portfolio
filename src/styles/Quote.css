@@ -3,7 +3,7 @@
 --------------------------------------------------------------*/
 .quote-section {
   padding: 30px 0;
-  background: var(--section-b);
+  background: transparent;
   text-align: center;
 }
 

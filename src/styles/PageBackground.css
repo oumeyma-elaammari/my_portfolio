@@ -1,0 +1,12 @@
+.page-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    var(--page-bg-top) 0%,
+    var(--page-bg-mid) 55%,
+    var(--page-bg-bottom) 100%
+  );
+}

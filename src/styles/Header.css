@@ -170,7 +170,7 @@
   height: 100vh;
   width: 60%;
   max-width: 300px;
-  background: var(--section-b);
+  background: color-mix(in srgb, var(--page-bg-bottom), transparent 4%);
   padding: 50px 10px;
   z-index: 1050;
   border-left: 1px solid color-mix(in srgb, var(--accent-color), transparent 65%);

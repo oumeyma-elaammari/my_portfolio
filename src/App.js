@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'devicon/devicon.min.css';
 import './App.css';
+import PageBackground from './components/PageBackground';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <div className="App">
+      <PageBackground />
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

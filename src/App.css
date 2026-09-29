@@ -2,9 +2,12 @@
 html[data-theme="dark"] {
   --default-font: "Roboto", system-ui, sans-serif;
   --heading-font: "Raleway", sans-serif;
-  --background-color: #0e0e0e;
-  --section-a: #0e0e0e;
-  --section-b: #121a24;
+  --page-bg-top: #070b14;
+  --page-bg-mid: #0e1626;
+  --page-bg-bottom: #0a192f;
+  --background-color: var(--page-bg-bottom);
+  --section-a: transparent;
+  --section-b: transparent;
   --default-color: #f1f1f1;
   --heading-color: #f1f1f1;
   --muted-color: #94a3b8;
@@ -15,8 +18,8 @@ html[data-theme="dark"] {
   --header-bg: rgba(10, 25, 47, 0.4);
   --header-bg-scrolled: rgba(10, 25, 47, 0.92);
   --footer-bg: rgba(10, 25, 47, 0.55);
-  --card-bg: rgba(20, 157, 221, 0.08);
-  --card-border: rgba(20, 157, 221, 0.18);
+  --card-bg: rgba(10, 25, 47, 0.52);
+  --card-border: rgba(20, 157, 221, 0.24);
   --card-shadow: none;
   --input-bg: rgba(58, 58, 58, 0.5);
   --input-border: rgba(255, 255, 255, 0.1);
@@ -31,9 +34,12 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
-  --background-color: #f8fafc;
-  --section-a: #f8fafc;
-  --section-b: #eef2f7;
+  --page-bg-top: #e8f2fb;
+  --page-bg-mid: #f3f7fc;
+  --page-bg-bottom: #f8fafc;
+  --background-color: var(--page-bg-bottom);
+  --section-a: transparent;
+  --section-b: transparent;
   --default-color: #1e293b;
   --heading-color: #1e293b;
   --muted-color: #475569;
@@ -124,10 +130,15 @@ html[data-theme="light"] {
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--page-bg-bottom);
   color: var(--default-color);
   font-family: var(--default-font);
   position: relative;
+}
+
+.App {
+  position: relative;
+  isolation: isolate;
 }
 
 a {
@@ -147,21 +158,18 @@ h1, h2, h3, h4, h5, h6 {
 
 section, .section {
   color: var(--default-color);
-  background-color: var(--section-a);
-  padding: 10px 0 40px 0;
+  background-color: transparent;
+  padding: 72px 0;
   overflow: clip;
 }
 
-main > section.section:nth-of-type(even) {
-  background-color: var(--section-b);
-}
-
-main > section.section:nth-of-type(odd) {
-  background-color: var(--section-a);
+main > section.section:not(#hero) {
+  border-top: 1px solid color-mix(in srgb, var(--accent-color), transparent 88%);
 }
 
 #hero.section {
-  background-color: transparent;
+  border-top: none;
+  padding-top: 0;
 }
 
 .section-title {
