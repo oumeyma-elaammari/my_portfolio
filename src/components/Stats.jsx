@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-scroll';
-import skillsData from '../data/skillsData';
+import certificatesData from '../data/certificatesData';
 import { internshipCount } from '../data/experienceData';
 import '../styles/Stats.css';
 
@@ -8,17 +8,20 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const useCountUp = (target, active, duration = 800) => {
+const useCountUp = (target, active, duration = 1000) => {
   const [value, setValue] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (!active) return undefined;
 
     if (prefersReducedMotion() || target === 0) {
       setValue(target);
+      setDone(true);
       return undefined;
     }
 
+    setDone(false);
     let frameId;
     const start = performance.now();
 
@@ -27,6 +30,8 @@ const useCountUp = (target, active, duration = 800) => {
       setValue(Math.round(target * progress));
       if (progress < 1) {
         frameId = requestAnimationFrame(tick);
+      } else {
+        setDone(true);
       }
     };
 
@@ -34,18 +39,18 @@ const useCountUp = (target, active, duration = 800) => {
     return () => cancelAnimationFrame(frameId);
   }, [active, target, duration]);
 
-  return value;
+  return { value, done };
 };
 
 const StatItem = ({ value, label, suffix = '', href, scrollTo, active }) => {
-  const display = useCountUp(typeof value === 'number' ? value : 0, active && typeof value === 'number');
-  const content = typeof value === 'number' ? `${display}${suffix}` : value;
+  const { value: display, done } = useCountUp(value, active);
+  const content = `${display}${done && suffix ? suffix : ''}`;
 
   const inner = (
-    <>
+    <span className="stat-inline">
       <span className="stat-value">{content}</span>
       <span className="stat-label">{label}</span>
-    </>
+    </span>
   );
 
   if (href) {
@@ -118,12 +123,18 @@ const Stats = () => {
             active={active}
           />
           <StatItem
-            value={skillsData.length}
-            label="Technologies"
+            value={20}
+            suffix="+"
+            label="Skills"
             scrollTo="skills"
             active={active}
           />
-          <StatItem value="Jan 2027" label="Available" active={active} />
+          <StatItem
+            value={certificatesData.length}
+            label="Certificates"
+            scrollTo="certificates"
+            active={active}
+          />
         </div>
       </div>
     </section>

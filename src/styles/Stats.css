@@ -10,11 +10,9 @@
 
 .stat-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 22px 12px;
+  padding: 22px 16px;
   text-align: center;
   text-decoration: none;
   color: inherit;
@@ -37,16 +35,24 @@ a.stat-item:hover,
   color: inherit;
 }
 
+.stat-inline {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  line-height: 1.2;
+}
+
 .stat-value {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent-color);
-  line-height: 1.2;
   font-family: var(--heading-font);
 }
 
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--default-color);
   letter-spacing: 0.3px;
@@ -59,14 +65,14 @@ a.stat-item:hover,
   }
 
   .stat-item {
-    padding: 18px 10px;
+    padding: 16px 12px;
   }
 
   .stat-value {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
   }
 
   .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
