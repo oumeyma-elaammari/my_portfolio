@@ -2,8 +2,6 @@ import React from 'react';
 import certificatesData from '../data/certificatesData';
 import '../styles/Certificates.css';
 
-const issuerInitial = (issuer) => issuer.trim().charAt(0).toUpperCase();
-
 const Certificates = () => {
   return (
     <section id="certificates" className="certificates section">
@@ -16,9 +14,6 @@ const Certificates = () => {
         <div className="certificates-grid">
           {certificatesData.map((cert) => (
             <article key={cert.id} className="certificate-item">
-              <div className="certificate-issuer-mark" aria-hidden="true">
-                {issuerInitial(cert.issuer)}
-              </div>
               <div className="certificate-body">
                 <h4>{cert.title}</h4>
                 <p><em>{cert.issuer}</em></p>
