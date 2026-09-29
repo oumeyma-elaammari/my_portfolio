@@ -7,7 +7,7 @@ import 'devicon/devicon.min.css';
 import './App.css';
 import PageBackground from './components/PageBackground';
 import Header from './components/Header';
-import Hero from './components/Hero';
+import HomeStage from './components/HomeStage';
 import About from './components/About';
 import Experience from './components/Experience';
 import Portfolio from './components/Portfolio';
@@ -52,7 +52,7 @@ function App() {
       </a>
       <Header />
       <main id="main-content" className="main" tabIndex={-1}>
-        <Hero />
+        <HomeStage />
         <About />
         <Experience />
         <Portfolio />

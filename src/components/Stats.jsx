@@ -8,7 +8,9 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const useCountUp = (target, active, duration = 1000) => {
+const easeOutCubic = (t) => 1 - (1 - t) ** 3;
+
+const useCountUp = (target, active, duration = 2000) => {
   const [value, setValue] = useState(0);
   const [done, setDone] = useState(false);
 
@@ -26,11 +28,13 @@ const useCountUp = (target, active, duration = 1000) => {
     const start = performance.now();
 
     const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      setValue(Math.round(target * progress));
-      if (progress < 1) {
+      const linear = Math.min((now - start) / duration, 1);
+      const eased = easeOutCubic(linear);
+      setValue(Math.round(target * eased));
+      if (linear < 1) {
         frameId = requestAnimationFrame(tick);
       } else {
+        setValue(target);
         setDone(true);
       }
     };
@@ -83,7 +87,7 @@ const StatItem = ({ value, label, suffix = '', href, scrollTo, active }) => {
   return <div className="stat-item">{inner}</div>;
 };
 
-const Stats = ({ embedded = false }) => {
+const Stats = () => {
   const sectionRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -106,9 +110,9 @@ const Stats = ({ embedded = false }) => {
   }, []);
 
   return (
-    <div
+    <section
       id="stats"
-      className={`stats ${embedded ? 'stats-embedded' : 'section'}`}
+      className="stats section"
       ref={sectionRef}
       aria-label="Key figures"
     >
@@ -142,7 +146,7 @@ const Stats = ({ embedded = false }) => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

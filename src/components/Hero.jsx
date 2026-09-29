@@ -3,8 +3,6 @@ import Typed from 'typed.js';
 import { Link } from 'react-scroll';
 import cv from '../assets/cv/cv_oumeyma_elaammari.pdf';
 import { HERO_TYPED_STRINGS } from '../data/heroTypedStrings';
-import HomeBackground from './HomeBackground';
-import Stats from './Stats';
 import '../styles/Hero.css';
 
 const Hero = () => {
@@ -68,7 +66,6 @@ const Hero = () => {
 
   return (
     <section id="hero" className="hero section">
-      <HomeBackground />
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
           <p className="greeting">
@@ -104,8 +101,6 @@ const Hero = () => {
             </a>
           </div>
         </div>
-
-        <Stats embedded />
       </div>
     </section>
   );

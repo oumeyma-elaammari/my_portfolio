@@ -3,15 +3,15 @@
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: calc(100vh - var(--header-height, 60px));
+  min-height: calc(100svh - var(--header-height, 60px));
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 110px 0 90px;
+  padding: 24px 0;
   box-sizing: border-box;
   overflow: hidden;
   background: transparent;
@@ -25,7 +25,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7rem;
   margin: auto 0;
 }
 
@@ -266,14 +265,14 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 100px 0 80px;
+    padding: 16px 0;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
 
   .hero-stack {
-    gap: 4rem;
+    gap: 0;
   }
   
   .hero .container,
@@ -327,11 +326,11 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 92px 0 72px;
+    padding: 12px 0;
   }
 
   .hero-stack {
-    gap: 4rem;
+    gap: 0;
   }
   
   .hero .greeting {

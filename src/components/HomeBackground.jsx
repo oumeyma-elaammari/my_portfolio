@@ -70,9 +70,9 @@ const HomeBackground = () => {
     if (!canvas) return undefined;
 
     const ctx = canvas.getContext('2d', { alpha: true });
-    const section = canvas.closest('.hero') || canvas.parentElement;
-    const contentEl = section?.querySelector('.hero-content') || null;
-    const statsGridEl = section?.querySelector('.stats-grid') || null;
+    const stage = canvas.closest('.home-stage') || canvas.parentElement;
+    const contentEl = stage?.querySelector('.hero-content') || null;
+    const statsGridEl = stage?.querySelector('.stats-grid') || null;
 
     let animationId = 0;
     let nodes = [];
@@ -89,9 +89,9 @@ const HomeBackground = () => {
     let mouse = { x: null, y: null, active: false };
     let lastFrame = 0;
 
-    const toLocalRect = (rect, sectionRect) => ({
-      x: rect.left - sectionRect.left,
-      y: rect.top - sectionRect.top,
+    const toLocalRect = (rect, stageRect) => ({
+      x: rect.left - stageRect.left,
+      y: rect.top - stageRect.top,
       w: rect.width,
       h: rect.height
     });
@@ -141,12 +141,12 @@ const HomeBackground = () => {
     });
 
     const updateClearZones = () => {
-      if (!section) {
+      if (!stage) {
         clearZones = [];
         return;
       }
 
-      const sectionRect = section.getBoundingClientRect();
+      const stageRect = stage.getBoundingClientRect();
       const zones = [];
 
       if (contentEl) {
@@ -154,7 +154,7 @@ const HomeBackground = () => {
           const el = contentEl.querySelector(selector);
           if (!el) return;
 
-          const local = toLocalRect(el.getBoundingClientRect(), sectionRect);
+          const local = toLocalRect(el.getBoundingClientRect(), stageRect);
 
           if (selector === '.tagline') {
             const maxWidth = measureMaxTypedWidth(el);
@@ -169,7 +169,7 @@ const HomeBackground = () => {
 
       if (statsGridEl) {
         statsGridEl.querySelectorAll('.stat-item').forEach((card) => {
-          zones.push(buildClearZone(toLocalRect(card.getBoundingClientRect(), sectionRect)));
+          zones.push(buildClearZone(toLocalRect(card.getBoundingClientRect(), stageRect)));
         });
       }
 
@@ -237,7 +237,7 @@ const HomeBackground = () => {
     };
 
     const resize = () => {
-      const rect = section.getBoundingClientRect();
+      const rect = stage.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = Math.max(1, Math.floor(rect.width));
       height = Math.max(1, Math.floor(rect.height));
@@ -415,7 +415,7 @@ const HomeBackground = () => {
     };
 
     const observer = new IntersectionObserver(onVisibility, { threshold: 0.05 });
-    observer.observe(section);
+    observer.observe(stage);
 
     const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
     const pointerMedia = window.matchMedia('(pointer: coarse)');
@@ -455,8 +455,8 @@ const HomeBackground = () => {
 
     window.addEventListener('resize', resize);
     window.addEventListener('scroll', onLayoutChange, { passive: true });
-    section.addEventListener('mousemove', onMouseMove);
-    section.addEventListener('mouseleave', onMouseLeave);
+    stage.addEventListener('mousemove', onMouseMove);
+    stage.addEventListener('mouseleave', onMouseLeave);
 
     resize();
     animationId = requestAnimationFrame(loop);
@@ -471,8 +471,8 @@ const HomeBackground = () => {
       pointerMedia.removeEventListener('change', onPointerChange);
       window.removeEventListener('resize', resize);
       window.removeEventListener('scroll', onLayoutChange);
-      section.removeEventListener('mousemove', onMouseMove);
-      section.removeEventListener('mouseleave', onMouseLeave);
+      stage.removeEventListener('mousemove', onMouseMove);
+      stage.removeEventListener('mouseleave', onMouseLeave);
       measureNode?.remove();
       measureNode = null;
     };

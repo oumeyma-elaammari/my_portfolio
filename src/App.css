@@ -2,6 +2,7 @@
 html[data-theme="dark"] {
   --default-font: "Roboto", system-ui, sans-serif;
   --heading-font: "Raleway", sans-serif;
+  --header-height: 60px;
   --page-bg-top: #070b14;
   --page-bg-mid: #0e1626;
   --page-bg-bottom: #0a192f;
@@ -163,13 +164,27 @@ section, .section {
   overflow: clip;
 }
 
-main > section.section:not(#hero) {
+main > section.section {
   border-top: 1px solid color-mix(in srgb, var(--accent-color), transparent 88%);
 }
 
-#hero.section {
+#hero.section,
+#stats.section {
   border-top: none;
-  padding-top: 0;
+}
+
+#hero.section {
+  padding: 24px 0;
+}
+
+#stats.section {
+  padding: 5rem 0;
+}
+
+@media (max-width: 768px) {
+  #stats.section {
+    padding: 3rem 0;
+  }
 }
 
 .section-title {

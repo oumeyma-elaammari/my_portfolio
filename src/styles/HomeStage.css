@@ -1,0 +1,12 @@
+.home-stage {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  background: transparent;
+}
+
+.home-stage > .hero,
+.home-stage > .stats {
+  position: relative;
+  z-index: 1;
+}

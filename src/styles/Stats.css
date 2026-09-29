@@ -1,16 +1,13 @@
 .stats {
-  padding: 0;
+  position: relative;
+  z-index: 1;
   background: transparent;
+  padding: 5rem 0;
+  overflow: visible;
 }
 
-.stats-embedded {
-  position: relative;
-  z-index: 3;
-  width: 100%;
+.stats .container {
   max-width: 920px;
-  margin: 0 auto;
-  padding: 0 24px;
-  background: transparent;
 }
 
 .stats-grid {
@@ -35,20 +32,12 @@
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 
-.stats-embedded .stat-item {
-  background: color-mix(in srgb, var(--card-bg), transparent 18%);
-  border: 1px solid color-mix(in srgb, var(--card-border), transparent 20%);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-html[data-theme="dark"] .stats-embedded .stat-item {
+html[data-theme="dark"] .stats .stat-item {
   background: rgba(10, 25, 47, 0.42);
   border-color: rgba(20, 157, 221, 0.26);
 }
 
-html[data-theme="light"] .stats-embedded .stat-item {
+html[data-theme="light"] .stats .stat-item {
   background: rgba(255, 255, 255, 0.72);
   border-color: rgba(11, 123, 184, 0.22);
 }
@@ -63,13 +52,6 @@ a.stat-item:hover,
   background: color-mix(in srgb, var(--accent-color), transparent 88%);
   transform: translateY(-3px);
   color: inherit;
-}
-
-.stats-embedded a.stat-item:hover,
-.stats-embedded .stats-grid .stat-item:hover {
-  border-color: var(--accent-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 90%);
-  transform: translateY(-2px);
 }
 
 .stat-inline {
@@ -96,8 +78,8 @@ a.stat-item:hover,
 }
 
 @media (max-width: 768px) {
-  .stats-embedded {
-    padding: 0 12px;
+  .stats {
+    padding: 3rem 0;
   }
 
   .stats-grid {
