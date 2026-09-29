@@ -16,8 +16,9 @@
   text-align: center;
   text-decoration: none;
   color: inherit;
-  background: rgba(20, 157, 221, 0.05);
-  border: 1px solid rgba(20, 157, 221, 0.15);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   border-radius: 15px;
   cursor: default;
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;

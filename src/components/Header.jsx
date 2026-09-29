@@ -3,6 +3,7 @@ import { Link } from 'react-scroll';
 import { HiMenu, HiX } from 'react-icons/hi';
 import logo from '../assets/img/logo_oumeyma.webp';
 import SocialLinks from './SocialLinks';
+import ThemeToggle from './ThemeToggle';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -81,6 +82,7 @@ const Header = () => {
 
           <div className="header-social">
             <SocialLinks />
+            <ThemeToggle />
             <button
               className="mobile-nav-toggle"
               onClick={toggleMobileMenu}
@@ -105,6 +107,7 @@ const Header = () => {
           <button className="mobile-nav-close" onClick={closeMobileMenu} aria-label="Close menu">
             <HiX />
           </button>
+          <ThemeToggle className="theme-toggle-mobile" showLabel />
           <ul>
             {navItems.map((item) => (
               <li key={item.to}>

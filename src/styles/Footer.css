@@ -3,11 +3,12 @@
 --------------------------------------------------------------*/
 .footer {
   position: relative;
-  background: rgba(10, 25, 47, 0.4);
+  background: var(--footer-bg);
   backdrop-filter: blur(16px);
   font-size: 14px;
   padding: 15px 20px;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  color: var(--default-color);
 }
 
 

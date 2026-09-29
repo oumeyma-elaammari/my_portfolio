@@ -113,7 +113,7 @@
 
 .btn-primary {
   background: var(--accent-color);
-  color: #0a192f;
+  color: var(--accent-contrast);
   box-shadow: 0 4px 15px rgba(20, 157, 221, 0.1);
 }
 
@@ -121,7 +121,7 @@
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(20, 157, 221, 0.2);
   background: color-mix(in srgb, var(--accent-color), #ffffff 8%);
-  color: #0a192f;
+  color: var(--accent-contrast);
 }
 
 .btn-primary:active {
@@ -129,14 +129,14 @@
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--outline-btn-bg);
+  color: var(--outline-btn-color);
+  border: 1px solid var(--outline-btn-border);
   backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-  background: rgba(20, 157, 221, 0.2);
+  background: color-mix(in srgb, var(--accent-color), transparent 80%);
   border-color: var(--accent-color);
   color: var(--accent-color);
   transform: translateY(-4px);

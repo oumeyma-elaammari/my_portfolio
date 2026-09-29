@@ -82,11 +82,12 @@
   flex-shrink: 0;
   width: 130px;
   padding: 22px 12px;
-  background: rgba(20, 157, 221, 0.05);
+  background: var(--card-bg);
   border-radius: 20px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  border: 1px solid rgba(20, 157, 221, 0.15);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   backdrop-filter: blur(10px);
   cursor: pointer;
 }

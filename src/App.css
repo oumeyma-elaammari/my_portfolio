@@ -1,18 +1,101 @@
-:root {
+:root,
+html[data-theme="dark"] {
   --default-font: "Roboto", system-ui, sans-serif;
   --heading-font: "Raleway", sans-serif;
   --background-color: #0e0e0e;
+  --section-a: #0e0e0e;
+  --section-b: #121a24;
   --default-color: #f1f1f1;
   --heading-color: #f1f1f1;
+  --muted-color: #94a3b8;
   --accent-color: #149ddd;
+  --accent-contrast: #0a192f;
   --surface-color: #ffffff;
   --contrast-color: #ffffff;
+  --header-bg: rgba(10, 25, 47, 0.4);
+  --header-bg-scrolled: rgba(10, 25, 47, 0.92);
+  --footer-bg: rgba(10, 25, 47, 0.55);
+  --card-bg: rgba(20, 157, 221, 0.08);
+  --card-border: rgba(20, 157, 221, 0.18);
+  --card-shadow: none;
+  --input-bg: rgba(58, 58, 58, 0.5);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --outline-btn-bg: rgba(255, 255, 255, 0.08);
+  --outline-btn-border: rgba(255, 255, 255, 0.3);
+  --outline-btn-color: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.95);
+  --quote-bg: rgba(251, 250, 250, 0.12);
+  --quote-color: rgba(255, 255, 255, 0.85);
+  --name-gradient-from: #f1f5f9;
+  --name-gradient-to: #cbd5e1;
+}
+
+html[data-theme="light"] {
+  --background-color: #f8fafc;
+  --section-a: #f8fafc;
+  --section-b: #eef2f7;
+  --default-color: #1e293b;
+  --heading-color: #1e293b;
+  --muted-color: #475569;
+  --accent-color: #0b7bb8;
+  --accent-contrast: #ffffff;
+  --surface-color: #ffffff;
+  --contrast-color: #0f172a;
+  --header-bg: rgba(248, 250, 252, 0.82);
+  --header-bg-scrolled: rgba(248, 250, 252, 0.96);
+  --footer-bg: #e8eef5;
+  --card-bg: #ffffff;
+  --card-border: #dbe3ee;
+  --card-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --outline-btn-bg: rgba(11, 123, 184, 0.06);
+  --outline-btn-border: rgba(11, 123, 184, 0.35);
+  --outline-btn-color: #0b7bb8;
+  --modal-overlay: rgba(15, 23, 42, 0.72);
+  --quote-bg: rgba(11, 123, 184, 0.08);
+  --quote-color: #1e293b;
+  --name-gradient-from: #0f172a;
+  --name-gradient-to: #334155;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html,
+  body,
+  .header,
+  .footer,
+  .section,
+  .stat-item,
+  .skill-card,
+  .certificate-item,
+  .experience-item,
+  .activity-item,
+  .portfolio-content,
+  .contact .info-wrap,
+  .contact .contact-form,
+  .quote-content p,
+  .btn,
+  .theme-toggle {
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+  }
 }
 
 .skip-link {
@@ -22,7 +105,7 @@
   z-index: 100000;
   padding: 10px 16px;
   background: var(--accent-color);
-  color: #0a192f;
+  color: var(--accent-contrast);
   font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
@@ -31,7 +114,7 @@
 
 .skip-link:focus {
   top: 16px;
-  outline: 2px solid #fff;
+  outline: 2px solid var(--contrast-color);
   outline-offset: 2px;
 }
 
@@ -54,7 +137,7 @@ a {
 }
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  color: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -64,9 +147,17 @@ h1, h2, h3, h4, h5, h6 {
 
 section, .section {
   color: var(--default-color);
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: var(--section-a);
   padding: 10px 0 40px 0;
   overflow: clip;
+}
+
+main > section.section:nth-of-type(even) {
+  background-color: var(--section-b);
+}
+
+main > section.section:nth-of-type(odd) {
+  background-color: var(--section-a);
 }
 
 #hero.section {
@@ -99,6 +190,7 @@ section, .section {
 
 .section-title p {
   margin-bottom: 0;
+  max-width: 70ch;
 }
 
 .btn {
@@ -116,32 +208,69 @@ section, .section {
 }
 
 .btn-primary {
-  background: #149ddd;
-  color: #0a192f;
-  box-shadow: 0 2px 8px rgba(78, 205, 196, 0.1);
+  background: var(--accent-color);
+  color: var(--accent-contrast);
+  box-shadow: 0 2px 8px rgba(20, 157, 221, 0.15);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2);
-  color: #0a192f;
+  box-shadow: 0 6px 20px rgba(20, 157, 221, 0.22);
+  color: var(--accent-contrast);
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.08);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--outline-btn-bg);
+  color: var(--outline-btn-color);
+  border: 1px solid var(--outline-btn-border);
   backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-  background: rgba(78, 205, 196, 0.2);
-  border-color: #149ddd;
-  color: #149ddd;
+  background: color-mix(in srgb, var(--accent-color), transparent 85%);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
   transform: translateY(-2px);
 }
 
-/* Scroll Top Button */
+.theme-toggle {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--default-color);
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+}
+
+.theme-toggle-mobile {
+  margin: 8px 16px 18px;
+  width: auto;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 10px 14px;
+  justify-content: flex-start;
+  font-size: 0.95rem;
+  color: var(--default-color);
+}
+
+.theme-toggle-mobile::after {
+  content: attr(data-label);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .scroll-top {
   position: fixed;
   visibility: hidden;
@@ -163,7 +292,7 @@ section, .section {
 
 .scroll-top i {
   font-size: 24px;
-  color: white;
+  color: var(--accent-contrast);
 }
 
 .scroll-top.active {
@@ -179,6 +308,7 @@ section, .section {
   overflow: hidden;
   background: var(--background-color);
   transition: all 0.6s ease-out;
+  animation: fadeOut 0.5s ease-out 0.5s forwards;
 }
 
 #preloader:before {
@@ -199,11 +329,6 @@ section, .section {
   100% { transform: rotate(360deg); }
 }
 
-/* Hide preloader after page load */
-#preloader {
-  animation: fadeOut 0.5s ease-out 0.5s forwards;
-}
-
 @keyframes fadeOut {
   to {
     opacity: 0;
@@ -211,7 +336,6 @@ section, .section {
   }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   section, .section {
     padding: 60px 0;

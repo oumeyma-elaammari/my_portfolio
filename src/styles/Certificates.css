@@ -3,13 +3,14 @@
 }
 
 .certificates .certificate-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 15px;
   padding: 25px 20px;
   text-align: center;
   transition: all 0.3s ease;
   height: 100%;
-  border: 1px solid rgba(20, 157, 221, 0.1);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 .certificates .certificate-item:hover {

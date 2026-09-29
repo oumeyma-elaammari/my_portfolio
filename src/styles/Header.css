@@ -7,17 +7,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(10, 25, 47, 0.4);
+  background: var(--header-bg);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
 .header.scrolled {
   height: 65px;
-  background: rgba(10, 25, 47, 0.92);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: var(--header-bg-scrolled);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .header-container {
@@ -51,7 +51,7 @@
 .header-name {
   font-size:  0.9rem;
   font-weight: 600;
-  background: linear-gradient(160deg, #f1f5f9, #cbd5e1);
+  background: linear-gradient(160deg, var(--name-gradient-from), var(--name-gradient-to));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -59,7 +59,7 @@
 
 .header-tag {
   font-size: 0.6rem;
-  color: #94a3b8;
+  color: var(--muted-color);
 }
 /*--------------------------------------------------------------
 # DESKTOP NAVIGATION
@@ -77,7 +77,7 @@
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #cbd5e1;
+  color: var(--muted-color);
   cursor: pointer;
   transition: all 0.25s ease;
   text-decoration: none;
@@ -86,20 +86,20 @@
 
 /* Hover effect */
 .navmenu li a:hover {
-  color: #149ddd;
+  color: var(--accent-color);
   transform: translateY(-2px);
-  background: rgba(20, 157, 221, 0.1);
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
 /* Active state (when link is clicked) */
 .navmenu li a:active {
-  color: #149ddd;
+  color: var(--accent-color);
   transform: translateY(0);
 }
 
 /* Active class (when section is in view) */
 .navmenu li a.active {
-  color: #149ddd;
+  color: var(--accent-color);
   font-weight: 600;
 }
 
@@ -126,12 +126,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: #cbd5e1;
+  color: var(--muted-color);
   transition: all 0.25s ease;
 }
 
 .header-social a:hover {
-  color: #149ddd;
+  color: var(--accent-color);
   transform: translateY(-2px);
 }
 
@@ -140,7 +140,7 @@
   font-size: 1.5rem;
   background: none;
   border: none;
-  color: #149ddd;
+  color: var(--accent-color);
   cursor: pointer;
   padding: 0.5rem;
   margin-left: 10px;
@@ -170,11 +170,12 @@
   height: 100vh;
   width: 60%;
   max-width: 300px;
-  background: #0a192f;
+  background: var(--section-b);
   padding: 50px 10px;
   z-index: 1050;
-  border-left: 1px solid rgba(20, 157, 221, 0.35);
-  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.45);
+  border-left: 1px solid color-mix(in srgb, var(--accent-color), transparent 65%);
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.25);
+  color: var(--default-color);
 }
 
 .mobile-nav.active {
@@ -219,7 +220,7 @@
   font-size: 1rem;
   padding: 12px 16px;
   display: block;
-  color: #cbd5e1;
+  color: var(--default-color);
   text-align: left;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -228,8 +229,12 @@
 
 .mobile-nav li a:hover,
 .mobile-nav li a.active {
-  color: #149ddd;
-  background: rgba(20, 157, 221, 0.1);
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+}
+
+.theme-toggle-label {
+  margin-left: 8px;
 }
 
 /*--------------------------------------------------------------

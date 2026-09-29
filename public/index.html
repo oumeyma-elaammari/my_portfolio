@@ -5,6 +5,25 @@
     <link rel="icon" href="%PUBLIC_URL%/logo_oumeyma.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e0e0e" />
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('theme');
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) {
+            meta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#0e0e0e');
+          }
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
     <meta
       name="description"
       content="Portfolio of Oumeyma ELAAMMARI, Software Engineering student at ENSAO specializing in full-stack development and artificial intelligence. Available for a PFE internship from January 2027."
