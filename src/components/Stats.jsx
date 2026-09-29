@@ -43,8 +43,8 @@ const useCountUp = (target, active, duration = 1000) => {
 };
 
 const StatItem = ({ value, label, suffix = '', href, scrollTo, active }) => {
-  const { value: display, done } = useCountUp(value, active);
-  const content = `${display}${done && suffix ? suffix : ''}`;
+  const { value: display } = useCountUp(value, active);
+  const content = `${display}${suffix}`;
 
   const inner = (
     <span className="stat-inline">

@@ -4,12 +4,15 @@
 .hero {
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 72px 0;
+  padding: 110px 0 90px;
+  box-sizing: border-box;
   overflow: hidden;
   background: transparent;
 }
@@ -22,7 +25,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.25rem;
+  gap: 7rem;
+  margin: auto 0;
 }
 
 .hero .hero-content,
@@ -81,6 +85,9 @@
   text-align: center;
   width: fit-content;
   max-width: 100%;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
   animation: fadeInUp 0.8s ease 0.4s both;
 }
 
@@ -96,8 +103,20 @@
   animation: fadeInUp 0.8s ease 0.5s both;
 }
 
-.hero .tagline span {
+.hero .tagline-prefix {
+  flex-shrink: 0;
+}
+
+.hero .typed-slot {
+  display: inline-block;
+  min-width: var(--typed-max-width, 18ch);
   margin-left: 8px;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.hero .tagline .typed-text {
+  margin-left: 0;
   padding-bottom: 4px;
   font-weight: 500;
   color: var(--default-color);
@@ -247,14 +266,14 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 72px 0;
+    padding: 100px 0 80px;
     align-items: center;
     justify-content: center;
     text-align: center;
   }
 
   .hero-stack {
-    gap: 1.75rem;
+    gap: 4rem;
   }
   
   .hero .container,
@@ -308,11 +327,11 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 68px 0;
+    padding: 92px 0 72px;
   }
 
   .hero-stack {
-    gap: 1.5rem;
+    gap: 4rem;
   }
   
   .hero .greeting {

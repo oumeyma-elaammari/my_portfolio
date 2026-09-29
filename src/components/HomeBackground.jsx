@@ -168,7 +168,9 @@ const HomeBackground = () => {
       }
 
       if (statsGridEl) {
-        zones.push(buildClearZone(toLocalRect(statsGridEl.getBoundingClientRect(), sectionRect)));
+        statsGridEl.querySelectorAll('.stat-item').forEach((card) => {
+          zones.push(buildClearZone(toLocalRect(card.getBoundingClientRect(), sectionRect)));
+        });
       }
 
       clearZones = zones.filter((zone) => zone.w > 0 && zone.h > 0);
@@ -434,7 +436,12 @@ const HomeBackground = () => {
         if (el) layoutObserver.observe(el);
       });
     }
-    if (statsGridEl) layoutObserver.observe(statsGridEl);
+    if (statsGridEl) {
+      layoutObserver.observe(statsGridEl);
+      statsGridEl.querySelectorAll('.stat-item').forEach((card) => {
+        layoutObserver.observe(card);
+      });
+    }
 
     const typedEl = contentEl?.querySelector('.typed-text');
     const typedObserver = typedEl

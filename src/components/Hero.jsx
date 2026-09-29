@@ -9,8 +9,44 @@ import '../styles/Hero.css';
 
 const Hero = () => {
   const typedRef = useRef(null);
+  const typedSlotRef = useRef(null);
+  const taglineRef = useRef(null);
 
   useEffect(() => {
+    const slot = typedSlotRef.current;
+    const tagline = taglineRef.current;
+    if (!slot || !tagline) return undefined;
+
+    const measure = document.createElement('span');
+    measure.style.position = 'absolute';
+    measure.style.visibility = 'hidden';
+    measure.style.pointerEvents = 'none';
+    measure.style.whiteSpace = 'nowrap';
+    document.body.appendChild(measure);
+
+    const applyTypedWidth = () => {
+      const typedEl = typedRef.current;
+      const source = typedEl || tagline;
+      const style = window.getComputedStyle(source);
+      measure.style.font = style.font;
+      measure.style.fontSize = style.fontSize;
+      measure.style.fontWeight = style.fontWeight;
+      measure.style.letterSpacing = style.letterSpacing;
+
+      let maxWidth = 0;
+      HERO_TYPED_STRINGS.forEach((value) => {
+        measure.textContent = value;
+        maxWidth = Math.max(maxWidth, measure.offsetWidth);
+      });
+      measure.textContent = '|';
+      maxWidth = Math.max(maxWidth, measure.offsetWidth);
+
+      slot.style.setProperty('--typed-max-width', `${Math.ceil(maxWidth + 4)}px`);
+    };
+
+    applyTypedWidth();
+    window.addEventListener('resize', applyTypedWidth);
+
     const typed = new Typed(typedRef.current, {
       strings: HERO_TYPED_STRINGS,
       typeSpeed: 90,
@@ -23,7 +59,11 @@ const Hero = () => {
       showCursor: true
     });
 
-    return () => typed.destroy();
+    return () => {
+      typed.destroy();
+      window.removeEventListener('resize', applyTypedWidth);
+      measure.remove();
+    };
   }, []);
 
   return (
@@ -32,17 +72,19 @@ const Hero = () => {
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
           <p className="greeting">
-            Welcome to my portfolio<span className="greeting-end"> !</span>
+            Welcome to my portfolio<span className="greeting-end">!</span>
           </p>
 
           <h1>
-            Hello<span className="greeting-end"> !</span> My name is{' '}
+            Hello<span className="greeting-end">!</span> My name is{' '}
             <span className="highlight">OUMEYMA ELAAMMARI</span>
           </h1>
 
-          <p className="tagline">
-            I'm
-            <span ref={typedRef} className="typed-text"></span>
+          <p className="tagline" ref={taglineRef}>
+            <span className="tagline-prefix">I'm</span>
+            <span className="typed-slot" ref={typedSlotRef}>
+              <span ref={typedRef} className="typed-text"></span>
+            </span>
           </p>
 
           <p className="availability">Available for a PFE internship from January 2027</p>

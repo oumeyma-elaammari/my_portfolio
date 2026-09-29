@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 920px;
   margin: 0 auto;
-  padding: 28px 24px 8px;
+  padding: 0 24px;
   background: transparent;
 }
 
@@ -97,7 +97,7 @@ a.stat-item:hover,
 
 @media (max-width: 768px) {
   .stats-embedded {
-    padding: 24px 12px 4px;
+    padding: 0 12px;
   }
 
   .stats-grid {
