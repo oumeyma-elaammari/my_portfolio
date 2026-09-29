@@ -6,15 +6,27 @@
   min-height: 100vh;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   text-align: center;
-  padding: 120px 0 80px;
+  padding: 100px 0 48px;
   overflow: hidden;
   background: transparent;
 }
 
-.hero .container {
+.hero-stack {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3.5rem;
+  min-height: calc(100vh - 148px);
+}
+
+.hero .hero-content,
+.hero .container.hero-content {
   position: relative;
   z-index: 3;
   width: 100%;
@@ -182,7 +194,8 @@
 
 /* Responsive */
 @media (max-width: 992px) {
-  .hero .container {
+  .hero .container,
+  .hero .hero-content {
     padding: 0 30px;
   }
   
@@ -210,7 +223,8 @@
     text-align: center;
   }
   
-  .hero .container {
+  .hero .container,
+  .hero .hero-content {
     padding: 0 20px;
     text-align: center;
   }

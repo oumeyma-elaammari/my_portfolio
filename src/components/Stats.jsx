@@ -83,7 +83,7 @@ const StatItem = ({ value, label, suffix = '', href, scrollTo, active }) => {
   return <div className="stat-item">{inner}</div>;
 };
 
-const Stats = () => {
+const Stats = ({ embedded = false }) => {
   const sectionRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -98,7 +98,7 @@ const Stats = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.35 }
     );
 
     observer.observe(node);
@@ -106,7 +106,12 @@ const Stats = () => {
   }, []);
 
   return (
-    <section id="stats" className="stats section" ref={sectionRef} aria-label="Key figures">
+    <div
+      id="stats"
+      className={`stats ${embedded ? 'stats-embedded' : 'section'}`}
+      ref={sectionRef}
+      aria-label="Key figures"
+    >
       <div className="container">
         <div className="stats-grid">
           <StatItem
@@ -137,7 +142,7 @@ const Stats = () => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

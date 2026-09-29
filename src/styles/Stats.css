@@ -1,5 +1,14 @@
 .stats {
-  padding: 60px 0 80px;
+  padding: 0;
+  background: transparent;
+}
+
+.stats-embedded {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 0 0 8px;
+  background: transparent;
 }
 
 .stats-grid {
@@ -12,16 +21,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px 16px;
+  padding: 18px 14px;
   text-align: center;
   text-decoration: none;
   color: inherit;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: color-mix(in srgb, var(--card-bg), transparent 15%);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
   box-shadow: var(--card-shadow);
   border-radius: 15px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   cursor: default;
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+html[data-theme="dark"] .stat-item {
+  background: rgba(10, 25, 47, 0.35);
+  border-color: rgba(20, 157, 221, 0.28);
+}
+
+html[data-theme="light"] .stat-item {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(11, 123, 184, 0.28);
 }
 
 a.stat-item {
@@ -31,7 +52,7 @@ a.stat-item {
 a.stat-item:hover,
 .stats-grid .stat-item:hover {
   border-color: var(--accent-color);
-  background: rgba(20, 157, 221, 0.12);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
   transform: translateY(-3px);
   color: inherit;
 }
@@ -60,13 +81,17 @@ a.stat-item:hover,
 }
 
 @media (max-width: 768px) {
+  .stats-embedded {
+    padding: 0 12px 4px;
+  }
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
   .stat-item {
-    padding: 16px 12px;
+    padding: 14px 10px;
   }
 
   .stat-value {
