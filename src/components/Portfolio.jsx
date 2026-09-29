@@ -57,6 +57,19 @@ const projectsData = [
     demoType: 'link'
   },
   {
+    id: 7,
+    title: 'CBIR - Image Retrieval System',
+    category: ['desktop'],
+    techStack: 'Python • Tkinter • OpenCV',
+    description: 'Content-based image retrieval system indexing the Corel-1000 dataset via color histograms (RGB, HSV, LAB), with configurable bins and similarity metrics (intersection, Euclidean, Chi², correlation).',
+    image: 'CBIR.webp',
+    imgWidth: 1359,
+    imgHeight: 720,
+    github: 'https://github.com/oumeyma-elaammari/CBIR',
+    demo: null,
+    demoType: null
+  },
+  {
     id: 3,
     title: 'ArchvoxLib',
     category: ['desktop'],
@@ -81,19 +94,6 @@ const projectsData = [
     github: 'https://github.com/oumeyma-elaammari/memoPharma',
     demo: '/videos/MemoPharmaApp.mp4',
     demoType: 'video'
-  },
-  {
-    id: 7,
-    title: 'CBIR - Image Retrieval System',
-    category: ['desktop'],
-    techStack: 'Python • Tkinter • OpenCV',
-    description: 'Content-based image retrieval system indexing the Corel-1000 dataset via color histograms (RGB, HSV, LAB), with configurable bins and similarity metrics (intersection, Euclidean, Chi², correlation).',
-    image: 'CBIR.webp',
-    imgWidth: 1359,
-    imgHeight: 720,
-    github: 'https://github.com/oumeyma-elaammari/CBIR',
-    demo: null,
-    demoType: null
   }
 ];
 
