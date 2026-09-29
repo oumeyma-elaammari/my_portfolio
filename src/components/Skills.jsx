@@ -84,28 +84,30 @@ const Skills = () => {
         </div>
       </div>
 
-      {showCarousel ? (
-        <div className="container-fluid" data-aos="fade-up" data-aos-delay="100">
-          <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
-            <div className="skills-track">
-              {[...filteredSkills, ...filteredSkills].map((skill, index) => (
-                <SkillCard
-                  key={`${index < filteredSkills.length ? 'a' : 'b'}-${skill.name}`}
-                  skill={skill}
-                />
+      <div className="skills-panel" data-aos="fade-up" data-aos-delay="100">
+        {showCarousel ? (
+          <div className="container-fluid">
+            <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
+              <div className="skills-track">
+                {[...filteredSkills, ...filteredSkills].map((skill, index) => (
+                  <SkillCard
+                    key={`${index < filteredSkills.length ? 'a' : 'b'}-${skill.name}`}
+                    skill={skill}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="container">
+            <div className={`skills-grid ${isAnimating ? 'animating' : ''}`}>
+              {filteredSkills.map((skill) => (
+                <SkillCard key={skill.name} skill={skill} />
               ))}
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="container" data-aos="fade-up" data-aos-delay="100">
-          <div className={`skills-grid ${isAnimating ? 'animating' : ''}`}>
-            {filteredSkills.map((skill) => (
-              <SkillCard key={skill.name} skill={skill} />
-            ))}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };
