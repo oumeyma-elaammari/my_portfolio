@@ -61,6 +61,18 @@
   animation-play-state: paused;
 }
 
+.skill-card:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+  border-color: var(--accent-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-track {
+    animation: none;
+  }
+}
+
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

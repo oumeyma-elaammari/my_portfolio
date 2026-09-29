@@ -46,8 +46,11 @@ function App() {
 
   return (
     <div className="App">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Header />
-      <main className="main">
+      <main id="main-content" className="main" tabIndex={-1}>
         <Hero />
         <Stats />
         <About />
@@ -68,7 +71,7 @@ function App() {
         <i className="bi bi-arrow-up-short"></i>
       </button>
 
-      <div id="preloader"></div>
+      <div id="preloader" aria-hidden="true"></div>
     </div>
   );
 }

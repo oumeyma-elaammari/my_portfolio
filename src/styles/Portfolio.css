@@ -9,29 +9,38 @@
   text-align: center;
 }
 
-.portfolio-filters li {
+.portfolio-filters button {
   cursor: pointer;
   display: inline-block;
   padding: 8px 20px;
   font-size: 14px;
   font-weight: 500;
-  margin: 0 5px;
+  margin: 0 5px 8px;
   line-height: 1;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
   border-radius: 30px;
   background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  color: inherit;
+  font-family: inherit;
 }
 
-.portfolio-filters li:hover {
+.portfolio-filters button:hover {
   color: var(--accent-color);
   background: rgba(20, 157, 221, 0.1);
   transform: translateY(-2px);
 }
 
-.portfolio-filters li.filter-active {
+.portfolio-filters button.filter-active {
   color: var(--accent-color);
   background: rgba(20, 157, 221, 0.15);
+  border-color: rgba(20, 157, 221, 0.35);
+}
+
+.portfolio-filters button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
 }
 
 .portfolio-grid {
@@ -215,10 +224,10 @@
 
 .video-modal-close {
   position: absolute;
-  top: -40px;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
@@ -232,10 +241,13 @@
   border-radius: 50%;
 }
 
-.video-modal-close:hover {
+.video-modal-close:hover,
+.video-modal-close:focus-visible {
   color: var(--accent-color);
   transform: rotate(90deg);
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }
 
 .video-player {
@@ -245,10 +257,10 @@
 }
 
 @media (max-width: 768px) {
-  .portfolio-filters li {
+  .portfolio-filters button {
     padding: 6px 16px;
     font-size: 12px;
-    margin: 0 3px;
+    margin: 0 3px 6px;
   }
 
   .portfolio .portfolio-content img {
@@ -283,9 +295,10 @@
   }
 
   .video-modal-close {
-    top: -35px;
-    width: 35px;
-    height: 35px;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
     font-size: 1.2rem;
   }
 }

@@ -16,6 +16,31 @@
   box-sizing: border-box;
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100000;
+  padding: 10px 16px;
+  background: var(--accent-color);
+  color: #0a192f;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
 body {
   background-image: url('./assets/img/hero-dark.webp');
   background-size: cover;
@@ -93,13 +118,14 @@ section, .section {
 
 .btn-primary {
   background: #149ddd;
-  color: #1a1a2e;
+  color: #0a192f;
   box-shadow: 0 2px 8px rgba(78, 205, 196, 0.1);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(78, 205, 196, 0.2);
+  color: #0a192f;
 }
 
 .btn-outline {
@@ -188,11 +214,26 @@ section, .section {
 
 /* Responsive */
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
   section, .section {
     padding: 60px 0;
   }
 
   .section-title h2 {
     font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

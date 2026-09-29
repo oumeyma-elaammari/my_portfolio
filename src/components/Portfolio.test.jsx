@@ -17,7 +17,7 @@ test('renders all projects by default', () => {
 test('filters projects by category when a filter is selected', async () => {
   render(<Portfolio />);
 
-  userEvent.click(screen.getByText('Mobile Apps'));
+  userEvent.click(screen.getByRole('button', { name: 'Mobile Apps' }));
 
   await waitFor(() => {
     expect(screen.queryByText('RoadmapDev')).not.toBeInTheDocument();

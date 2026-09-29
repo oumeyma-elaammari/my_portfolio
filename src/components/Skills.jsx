@@ -13,9 +13,9 @@ const filters = [
 ];
 
 const SkillCard = ({ skill }) => (
-  <div className="skill-card">
+  <div className="skill-card" tabIndex={0}>
     <div className="skill-icon">
-      <i className={`bi ${skill.icon}`}></i>
+      <i className={`bi ${skill.icon}`} aria-hidden="true"></i>
     </div>
     <h4>{skill.name}</h4>
   </div>
@@ -25,6 +25,15 @@ const Skills = () => {
   const [filter, setFilter] = useState('all');
   const [filteredSkills, setFilteredSkills] = useState(skillsData);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduceMotion(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     setIsAnimating(true);
@@ -40,6 +49,7 @@ const Skills = () => {
   }, [filter]);
 
   const isAllSelected = filter === 'all';
+  const showCarousel = isAllSelected && !reduceMotion;
 
   return (
     <section id="skills" className="skills section">
@@ -49,25 +59,33 @@ const Skills = () => {
       </div>
 
       <div className="container">
-        <ul className="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+        <div
+          className="portfolio-filters"
+          role="group"
+          aria-label="Filter skills"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           {filters.map((f) => (
-            <li
+            <button
               key={f.key}
+              type="button"
               className={filter === f.key ? 'filter-active' : ''}
+              aria-pressed={filter === f.key}
               onClick={() => setFilter(f.key)}
             >
               {f.label}
-            </li>
+            </button>
           ))}
-        </ul>
+        </div>
       </div>
 
-      {isAllSelected ? (
+      {showCarousel ? (
         <div className="container-fluid" data-aos="fade-up" data-aos-delay="100">
           <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
             <div className="skills-track">
               {[...filteredSkills, ...filteredSkills].map((skill, index) => (
-                <SkillCard key={index} skill={skill} />
+                <SkillCard key={`${skill.name}-${index}`} skill={skill} />
               ))}
             </div>
           </div>

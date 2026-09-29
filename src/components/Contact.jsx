@@ -151,9 +151,11 @@ const Contact = () => {
                 </div>
 
                 <div className="col-md-12 text-center">
-                  {isLoading && <div className="loading">Sending...</div>}
-                  {status.type === 'error' && <div className="error-message">{status.message}</div>}
-                  {status.type === 'success' && <div className="sent-message">{status.message}</div>}
+                  <div className="form-status" aria-live="polite" aria-atomic="true">
+                    {isLoading && <div className="loading">Sending...</div>}
+                    {status.type === 'error' && <div className="error-message" role="alert">{status.message}</div>}
+                    {status.type === 'success' && <div className="sent-message">{status.message}</div>}
+                  </div>
 
                   <button type="submit" className="btn btn-primary send" disabled={isLoading}>
                     Send Message

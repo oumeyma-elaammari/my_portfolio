@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-scroll';
 import '../styles/Portfolio.css';
 
@@ -102,6 +102,9 @@ const Portfolio = () => {
   const [filteredProjects, setFilteredProjects] = useState(projectsData);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const modalRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const lastFocusedRef = useRef(null);
 
   useEffect(() => {
     setIsAnimating(true);
@@ -118,13 +121,62 @@ const Portfolio = () => {
     return () => clearTimeout(timer);
   }, [filter]);
 
-  const openVideoModal = (videoUrl) => {
+  const openVideoModal = (videoUrl, event) => {
+    lastFocusedRef.current = event?.currentTarget || document.activeElement;
     setSelectedVideo(videoUrl);
   };
 
-  const closeVideoModal = () => {
+  const closeVideoModal = useCallback(() => {
     setSelectedVideo(null);
-  };
+    if (lastFocusedRef.current && typeof lastFocusedRef.current.focus === 'function') {
+      lastFocusedRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!selectedVideo) return undefined;
+
+    const previouslyFocused = lastFocusedRef.current;
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeVideoModal();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !modalRef.current) return;
+
+      const focusable = modalRef.current.querySelectorAll(
+        'button, [href], video, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocused && !selectedVideo) {
+        // focus restored in closeVideoModal
+      }
+    };
+  }, [selectedVideo, closeVideoModal]);
 
   const filters = [
     { key: 'all', label: 'All Projects' },
@@ -142,17 +194,25 @@ const Portfolio = () => {
         </div>
 
         <div className="container">
-          <ul className="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+          <div
+            className="portfolio-filters"
+            role="group"
+            aria-label="Filter projects"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             {filters.map((f) => (
-              <li
+              <button
                 key={f.key}
+                type="button"
                 className={filter === f.key ? 'filter-active' : ''}
+                aria-pressed={filter === f.key}
                 onClick={() => setFilter(f.key)}
               >
                 {f.label}
-              </li>
+              </button>
             ))}
-          </ul>
+          </div>
 
           <div className={`portfolio-grid ${isAnimating ? 'animating' : ''}`}>
             <div className="row gy-4 isotope-container">
@@ -191,7 +251,7 @@ const Portfolio = () => {
                         {project.demoType === 'video' && (
                           <button
                             className="demo-video-btn"
-                            onClick={() => openVideoModal(project.demo)}
+                            onClick={(event) => openVideoModal(project.demo, event)}
                             aria-label={`Play ${project.title} demo video`}
                           >
                             <i className="bi bi-play-circle-fill"></i>
@@ -213,9 +273,25 @@ const Portfolio = () => {
       </section>
 
       {selectedVideo && (
-        <div className="video-modal" onClick={closeVideoModal}>
-          <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="video-modal-close" onClick={closeVideoModal} aria-label="Close video">
+        <div
+          className="video-modal"
+          onClick={closeVideoModal}
+          role="presentation"
+        >
+          <div
+            className="video-modal-content"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Project demo video"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              ref={closeButtonRef}
+              className="video-modal-close"
+              onClick={closeVideoModal}
+              aria-label="Close video"
+            >
               <i className="bi bi-x-lg"></i>
             </button>
             <video controls autoPlay className="video-player">

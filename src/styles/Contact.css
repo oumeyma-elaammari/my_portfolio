@@ -70,8 +70,20 @@
 
 .contact .php-email-form .form-control:focus {
   border-color: var(--accent-color);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(20, 157, 221, 0.2);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(20, 157, 221, 0.25);
+}
+
+.contact .php-email-form .form-control:focus-visible {
+  border-color: var(--accent-color);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.contact .php-email-form button[type="submit"]:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 .contact .php-email-form .form-control::placeholder {

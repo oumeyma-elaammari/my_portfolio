@@ -17,6 +17,19 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -39,7 +52,6 @@ const Header = () => {
     <>
       <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
         <div className="header-container">
-          {/* Profile Section */}
           <div className="header-profile">
             <img src={logo} alt="Oumeyma" className="header-profile-img" width="45" height="45" />
             <div className="header-info">
@@ -48,8 +60,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="navmenu">
+          <nav className="navmenu" aria-label="Primary">
             <ul>
               {navItems.map((item) => (
                 <li key={item.to}>
@@ -68,7 +79,6 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* Social Links + Mobile Toggle */}
           <div className="header-social">
             <SocialLinks />
             <button
@@ -76,6 +86,7 @@ const Header = () => {
               onClick={toggleMobileMenu}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileMenuOpen ? <HiX /> : <HiMenu />}
             </button>
@@ -83,30 +94,36 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Navigation Menu (separate) */}
-      <div className={`mobile-nav ${isMobileMenuOpen ? 'active' : ''}`}>
-        {/* Close button inside mobile menu */}
-        <button className="mobile-nav-close" onClick={toggleMobileMenu} aria-label="Close menu">
-          <HiX />
-        </button>
-        <ul>
-          {navItems.map((item) => (
-            <li key={item.to}>
-              <Link
-                to={item.to}
-                spy={true}
-                smooth={true}
-                offset={-70}
-                duration={500}
-                onClick={closeMobileMenu}
-                activeClass="active"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-navigation"
+          className="mobile-nav active"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
+        >
+          <button className="mobile-nav-close" onClick={closeMobileMenu} aria-label="Close menu">
+            <HiX />
+          </button>
+          <ul>
+            {navItems.map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                  onClick={closeMobileMenu}
+                  activeClass="active"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
 };

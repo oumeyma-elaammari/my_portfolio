@@ -112,14 +112,15 @@
 
 .btn-primary {
   background: var(--accent-color);
-  color: #fff;
+  color: #0a192f;
   box-shadow: 0 4px 15px rgba(20, 157, 221, 0.1);
 }
 
 .btn-primary:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(20, 157, 221, 0.2);
-  background: color-mix(in srgb, var(--accent-color), transparent 3%);
+  background: color-mix(in srgb, var(--accent-color), #ffffff 8%);
+  color: #0a192f;
 }
 
 .btn-primary:active {
@@ -140,8 +141,9 @@
   transform: translateY(-4px);
 }
 
-.btn-outline:active {
-  transform: translateY(-2px);
+.hero .btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 .btn i {
