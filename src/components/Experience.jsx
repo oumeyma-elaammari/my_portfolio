@@ -37,17 +37,32 @@ const Experience = () => {
 
         <div className="activities-block" data-aos="fade-up" data-aos-delay="150">
           <h3 className="activities-title">Leadership &amp; Activities</h3>
-          <div className="row gy-4">
+          <div className="row gy-4 activities-row">
             {activitiesData.map((activity) => (
-              <div key={activity.id} className="col-lg-4 col-md-6">
-                <div className="activity-item">
-                  <h4>{activity.title}</h4>
-                  <ul>
+              <div key={activity.id} className="col-lg-4 col-md-6 d-flex">
+                <article className="activity-item">
+                  <div className="activity-header">
+                    <span className="activity-icon" aria-hidden="true">
+                      <i className={`bi ${activity.icon}`} />
+                    </span>
+                    <div className="activity-heading">
+                      <h4>{activity.title}</h4>
+                      {activity.subtitle ? (
+                        <p className="activity-subtitle">{activity.subtitle}</p>
+                      ) : null}
+                    </div>
+                  </div>
+                  <ul className="activity-list">
                     {activity.details.map((detail) => (
-                      <li key={detail}>{detail}</li>
+                      <li key={detail.role} className="activity-row">
+                        <span className="activity-role">{detail.role}</span>
+                        {detail.date ? (
+                          <span className="activity-date">{detail.date}</span>
+                        ) : null}
+                      </li>
                     ))}
                   </ul>
-                </div>
+                </article>
               </div>
             ))}
           </div>

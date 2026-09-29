@@ -98,29 +98,114 @@
   margin-bottom: 24px;
 }
 
+.activities-row {
+  align-items: stretch;
+}
+
 .activity-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   height: 100%;
   padding: 20px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
+  border-top: 3px solid var(--accent-color);
   box-shadow: var(--card-shadow);
   border-radius: 15px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.activity-item h4 {
+@media (prefers-reduced-motion: no-preference) {
+  .activity-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.activity-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.activity-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  color: var(--accent-color);
+  font-size: 1.05rem;
+}
+
+.activity-heading {
+  min-width: 0;
+}
+
+.activity-heading h4 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.activity-item ul {
-  padding-left: 18px;
   margin: 0;
+  color: var(--heading-color);
+  line-height: 1.35;
 }
 
-.activity-item ul li {
+.activity-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.activity-row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding-left: 16px;
   font-size: 0.9rem;
-  padding-bottom: 6px;
+  line-height: 1.45;
+}
+
+.activity-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+
+.activity-role {
+  flex: 1;
+  min-width: 0;
+  color: var(--default-color);
+}
+
+.activity-date {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
 }
 
 @media (max-width: 768px) {
@@ -130,5 +215,11 @@
 
   .experience-meta h3 {
     font-size: 0.95rem;
+  }
+
+  .activity-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
   }
 }

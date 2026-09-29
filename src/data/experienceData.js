@@ -30,26 +30,37 @@ export const experienceData = [
 export const activitiesData = [
   {
     id: 1,
-    title: 'Club Altruisme · ENSAO',
+    title: 'Club Altruisme',
+    subtitle: 'ENSAO',
+    icon: 'bi-heart',
     details: [
-      'Head of Al-Masjid Cell (2024 - 2025)',
-      'Vice President (2023 - 2024)',
-      'Active Member - Design & Editing Cell'
+      { role: 'Head of Al-Masjid Cell', date: '2024 - 2025' },
+      { role: 'Vice President', date: '2023 - 2024' },
+      { role: 'Active Member - Design & Editing Cell' }
     ]
   },
   {
     id: 2,
-    title: 'Club Génie Informatique · ENSAO',
+    title: 'Club Génie Informatique',
+    subtitle: 'ENSAO',
+    icon: 'bi-code-slash',
     details: [
-      'Active Member - Design Cell',
-      'Participation in the organization of Computer Science Day (4th edition, 2024 - 2025)'
+      { role: 'Active Member - Design Cell' },
+      {
+        role: 'Participation in the organization of Computer Science Day (4th edition)',
+        date: '2024 - 2025'
+      }
     ]
   },
   {
     id: 3,
     title: "Maison des Sciences de l'Oriental",
+    icon: 'bi-lightbulb',
     details: [
-      'Participation in the Science Festival (12th edition, 2024 - 2025)'
+      {
+        role: 'Participation in the Science Festival (12th edition)',
+        date: '2024 - 2025'
+      }
     ]
   }
 ];
