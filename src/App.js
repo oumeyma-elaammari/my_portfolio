@@ -7,16 +7,15 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Stats from './components/Stats';
 import About from './components/About';
-import Resume from './components/Resume';
+import Experience from './components/Experience';
+import Portfolio from './components/Portfolio';
 import Skills from './components/Skills';
 import Certificates from './components/Certificates';
-import Portfolio from './components/Portfolio';
-import Services from './components/Services';
 import Contact from './components/Contact';
 import Quote from './components/Quote';
 import Footer from './components/Footer';
-
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -50,17 +49,17 @@ function App() {
       <Header />
       <main className="main">
         <Hero />
+        <Stats />
         <About />
-        <Resume />
+        <Experience />
+        <Portfolio />
         <Skills />
         <Certificates />
-        <Portfolio />
-        <Services />
         <Contact />
         <Quote />
       </main>
       <Footer />
-      
+
       <button
         className={`scroll-top ${showScrollTop ? 'active' : ''}`}
         onClick={scrollToTop}
@@ -68,7 +67,7 @@ function App() {
       >
         <i className="bi bi-arrow-up-short"></i>
       </button>
-      
+
       <div id="preloader"></div>
     </div>
   );

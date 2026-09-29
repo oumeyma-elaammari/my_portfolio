@@ -28,9 +28,10 @@ const Header = () => {
   const navItems = [
     { to: 'hero', label: 'Home' },
     { to: 'about', label: 'About' },
-    { to: 'resume', label: 'Resume' },
+    { to: 'experience', label: 'Experience' },
     { to: 'portfolio', label: 'Projects' },
-    { to: 'services', label: 'Services' },
+    { to: 'skills', label: 'Skills' },
+    { to: 'certificates', label: 'Certificates' },
     { to: 'contact', label: 'Contact' }
   ];
 
