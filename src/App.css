@@ -22,8 +22,10 @@ html[data-theme="dark"] {
   --card-bg: rgba(10, 25, 47, 0.52);
   --card-border: rgba(20, 157, 221, 0.24);
   --card-shadow: none;
-  --input-bg: rgba(58, 58, 58, 0.5);
-  --input-border: rgba(255, 255, 255, 0.1);
+  --input-bg: #0f1b2e;
+  --input-border: rgba(148, 163, 184, 0.2);
+  --input-color: #e2e8f0;
+  --input-placeholder: #64748b;
   --outline-btn-bg: rgba(255, 255, 255, 0.08);
   --outline-btn-border: rgba(255, 255, 255, 0.3);
   --outline-btn-color: #ffffff;
@@ -56,6 +58,8 @@ html[data-theme="light"] {
   --card-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
+  --input-color: #1e293b;
+  --input-placeholder: #64748b;
   --outline-btn-bg: rgba(11, 123, 184, 0.06);
   --outline-btn-border: rgba(11, 123, 184, 0.35);
   --outline-btn-color: #0b7bb8;

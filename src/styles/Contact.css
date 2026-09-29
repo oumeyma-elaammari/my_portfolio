@@ -74,10 +74,10 @@
   font-size: 14px;
   padding: 8px 10px;
   border-radius: 10px;
-  color: var(--default-color);
+  color: var(--input-color, var(--default-color));
   background-color: var(--input-bg);
   border: 1px solid var(--input-border);
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact .contact-form .form-control:focus {
@@ -85,6 +85,14 @@
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
   box-shadow: 0 0 0 2px rgba(20, 157, 221, 0.25);
+}
+
+html[data-theme="dark"] .contact .contact-form .form-control:focus,
+html[data-theme="dark"] .contact .contact-form .form-control:focus-visible {
+  border-color: var(--accent-color);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(20, 157, 221, 0.25);
 }
 
 .contact .contact-form .form-control:focus-visible {
@@ -99,7 +107,14 @@
 }
 
 .contact .contact-form .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--input-placeholder, rgba(255, 255, 255, 0.5));
+}
+
+html[data-theme="dark"] .contact .contact-form .form-control:-webkit-autofill {
+  -webkit-text-fill-color: var(--input-color);
+  caret-color: var(--input-color);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+  transition: background-color 9999s ease-out;
 }
 
 .contact .contact-form .loading,
@@ -128,6 +143,7 @@
 
 .contact .contact-form button[type="submit"] {
   background: var(--accent-color);
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   transition: 0.4s;
@@ -138,6 +154,15 @@
 .contact .contact-form button[type="submit"]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 10%);
   transform: translateY(-2px);
+}
+
+html[data-theme="dark"] .contact .contact-form button[type="submit"] {
+  background: #0e6f96;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .contact .contact-form button[type="submit"]:hover {
+  background: #0c6284;
 }
 
 @media (max-width: 768px) {

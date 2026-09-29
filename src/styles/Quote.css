@@ -17,22 +17,30 @@
 .quote-content i {
   font-size: 28px;
   color: var(--accent-color);
-  opacity: 0.7;
   margin-bottom: 15px;
   display: inline-block;
 }
 
 .quote-content p {
-  font-size: 0.85rem;
+  font-family: "Noto Naskh Arabic", "Amiri", serif;
+  font-size: 1.05rem;
+  font-style: normal;
+  font-weight: 500;
   color: var(--quote-color);
-  font-style: italic;
   background: var(--quote-bg);
   max-width: 700px;
   margin: 0 auto;
   padding: 15px 25px;
   text-align: center;
   border-radius: 12px;
-  line-height: 1.8;
+  line-height: 1.9;
+}
+
+html[data-theme="dark"] .quote-content p {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-inline-start: 3px solid var(--accent-color);
+  box-shadow: var(--card-shadow);
 }
 
 /* Responsive */
@@ -47,9 +55,9 @@
   }
   
   .quote-content p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 12px 20px;
-    line-height: 1.6;
+    line-height: 1.9;
   }
 }
 
@@ -64,8 +72,8 @@
   }
   
   .quote-content p {
-    font-size: 0.7rem;
+    font-size: 0.95rem;
     padding: 10px 15px;
-    line-height: 1.5;
+    line-height: 1.9;
   }
 }
