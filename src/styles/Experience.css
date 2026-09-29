@@ -110,17 +110,7 @@
 .activity-item h4 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.activity-period {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 3px 10px;
   margin-bottom: 12px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .activity-item ul {

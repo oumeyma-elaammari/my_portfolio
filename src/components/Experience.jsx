@@ -42,10 +42,9 @@ const Experience = () => {
               <div key={activity.id} className="col-lg-4 col-md-6">
                 <div className="activity-item">
                   <h4>{activity.title}</h4>
-                  <span className="activity-period">{activity.period}</span>
                   <ul>
                     {activity.details.map((detail) => (
-                      <li key={detail}><em>{detail}</em></li>
+                      <li key={detail}>{detail}</li>
                     ))}
                   </ul>
                 </div>
