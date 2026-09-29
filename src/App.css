@@ -193,6 +193,18 @@ main > section.section:nth-of-type(odd) {
   max-width: 70ch;
 }
 
+p {
+  max-width: 70ch;
+}
+
+.stats p,
+.stat-label,
+.skill-card h4,
+.certificate-item p,
+.footer p {
+  max-width: none;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -298,7 +310,13 @@ main > section.section:nth-of-type(odd) {
 .scroll-top.active {
   visibility: visible;
   opacity: 1;
-  bottom: 15px;
+  bottom: 72px;
+}
+
+@media (max-width: 768px) {
+  .scroll-top.active {
+    bottom: 84px;
+  }
 }
 
 #preloader {

@@ -4,6 +4,14 @@
   box-shadow: var(--card-shadow);
   border-radius: 15px;
   padding: 30px;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.contact .info-item p,
+.contact .info-item a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .contact .info-item {
