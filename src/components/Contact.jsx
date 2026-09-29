@@ -65,7 +65,7 @@ const Contact = () => {
                 <i className="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Location</h3>
-                  <p>Oujda / Marrakech, Morocco</p>
+                  <p>Based in Oujda / Marrakech – open to relocation anywhere in Morocco</p>
                 </div>
               </div>
 

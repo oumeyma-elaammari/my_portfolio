@@ -58,6 +58,15 @@
   animation: fadeInLeft 0.8s ease 0.4s both;
 }
 
+.hero .availability {
+  font-size: 1rem;
+  margin: 18px 0 0;
+  color: var(--accent-color);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  animation: fadeInLeft 0.8s ease 0.5s both;
+}
+
 
 .hero .tagline span {
   margin-left: 8px;

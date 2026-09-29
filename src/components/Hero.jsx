@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import { Link } from 'react-scroll';
-import cv from '../assets/cv/cv_oumaima_elaammari.pdf';
+import cv from '../assets/cv/cv_oumeyma_elaammari.pdf';
 import '../styles/Hero.css';
 
 const Hero = () => {
@@ -42,6 +42,8 @@ const Hero = () => {
           I'm 
           <span ref={typedRef} className="typed-text"></span>
         </p>
+
+        <p className="availability">Available for a PFE internship from January 2027</p>
         
         <div className="hero-buttons">
           <Link 

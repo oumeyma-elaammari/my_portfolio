@@ -36,7 +36,7 @@ const About = () => {
                   </li>
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
-                    <strong>Location:</strong> <span>Morocco</span>
+                    <strong>Location:</strong> <span>Based in Oujda / Marrakech – open to relocation anywhere in Morocco</span>
                   </li>
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
@@ -48,7 +48,7 @@ const About = () => {
                 <ul className="list-unstyled">
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
-                    <strong>Degree:</strong> <span>Software Engineering Student</span>
+                    <strong>Degree:</strong> <span>Engineering Degree – Software Engineering & AI, ENSAO (2027)</span>
                   </li>
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
@@ -56,7 +56,7 @@ const About = () => {
                   </li>
                   <li className="mb-2">
                     <i className="bi bi-chevron-right text-primary me-2"></i> 
-                    <strong>Availability:</strong> <span>Open to PFE Internship Opportunities</span>
+                    <strong>Availability:</strong> <span>Available for a PFE internship from January 2027</span>
                   </li>
                 </ul>
               </div>
