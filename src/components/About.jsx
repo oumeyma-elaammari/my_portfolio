@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/img/logo_oumeyma.webp';
 import '../styles/About.css';
 
 const educationData = [
@@ -34,14 +33,17 @@ const About = () => {
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row gy-4 justify-content-center align-items-center">
           <div className="col-lg-4 text-center">
-            <img
-              src={logo}
-              className="img-fluid shadow-lg about-img"
-              alt="Oumeyma ELAAMMARI"
-              width="800"
-              height="800"
-              loading="lazy"
-            />
+            <div className="about-photo-frame">
+              {/* Replace with a real portrait image when available. */}
+              <div
+                className="about-photo-placeholder"
+                role="img"
+                aria-label="Profile photo placeholder for Oumeyma ELAAMMARI"
+              >
+                <span>Photo</span>
+                <small>Coming soon</small>
+              </div>
+            </div>
           </div>
           <div className="col-lg-8 content">
             <h3>Software Engineering Student &amp; AI Enthusiast</h3>

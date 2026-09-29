@@ -4,6 +4,42 @@
   border: 3px solid var(--accent-color);
 }
 
+.about-photo-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-photo-placeholder {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent-color), transparent 70%), transparent 55%),
+    var(--card-bg);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--muted-color);
+}
+
+.about-photo-placeholder span {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--heading-color);
+}
+
+.about-photo-placeholder small {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .about .content h3 {
   font-weight: 700;
   font-size: 23px;
@@ -12,6 +48,11 @@
 .about .content ul li i {
   font-size: 15px;
   color: var(--accent-color);
+}
+
+.about .content p,
+.about .section-title p {
+  max-width: 70ch;
 }
 
 .about-details {
