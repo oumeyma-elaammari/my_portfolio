@@ -92,14 +92,16 @@
 
 .portfolio .portfolio-media {
   overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
 }
 
 .portfolio .portfolio-content img {
   transition: 0.5s ease;
   width: 100%;
-  height: 210px;
+  height: 100%;
   object-fit: cover;
-  opacity: 0.9;
+  opacity: 0.95;
   display: block;
 }
 
@@ -266,7 +268,7 @@
   }
 
   .portfolio .portfolio-content img {
-    height: 180px;
+    height: 100%;
   }
 
   .portfolio .portfolio-info {
