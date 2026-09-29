@@ -104,6 +104,11 @@
   border-bottom: 2px solid var(--accent-color);
 }
 
+.hero .greeting-end {
+  letter-spacing: 0;
+  margin-left: -0.12em;
+}
+
 .typed-cursor {
   font-size: 1.5rem;
   color: var(--accent-color);
