@@ -57,7 +57,7 @@ const Header = () => {
             <img src={logo} alt="Oumeyma" className="header-profile-img" width="45" height="45" />
             <div className="header-info">
               <div className="header-name">OUMEYMA ELAAMMARI</div>
-              <div className="header-tag">Software Engineering student • AI Enthusiast</div>
+              <div className="header-tag">Full-Stack &amp; AI Engineering Student</div>
             </div>
           </div>
 

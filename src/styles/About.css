@@ -1,43 +1,17 @@
-.about-img {
-  border-radius: 50%;
-  max-width: 220px;
-  border: 3px solid var(--accent-color);
-}
-
-.about-photo-frame {
+.about-monogram-frame {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.about-photo-placeholder {
+.about-monogram {
   width: 220px;
   height: 220px;
   border-radius: 50%;
   border: 3px solid var(--accent-color);
-  background:
-    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent-color), transparent 70%), transparent 55%),
-    var(--card-bg);
+  object-fit: cover;
   box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  color: var(--muted-color);
-}
-
-.about-photo-placeholder span {
-  font-family: var(--heading-font);
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--heading-color);
-}
-
-.about-photo-placeholder small {
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  background: var(--card-bg);
 }
 
 .about .content h3 {
@@ -50,9 +24,14 @@
   color: var(--accent-color);
 }
 
-.about .content p,
-.about .section-title p {
+.about-bio,
+.about .content p {
   max-width: 70ch;
+  font-style: normal;
+}
+
+.about-facts {
+  margin-top: 8px;
 }
 
 .about-details {
@@ -63,6 +42,10 @@
   font-size: 1.35rem;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.about-education {
+  max-width: 900px;
 }
 
 .about-timeline-item {
@@ -83,7 +66,7 @@
   border-radius: 50%;
   left: -7px;
   top: 4px;
-  background: var(--background-color);
+  background: var(--page-bg-bottom, var(--background-color));
   border: 2px solid var(--accent-color);
 }
 
@@ -108,9 +91,29 @@
 .about-timeline-item p {
   margin-bottom: 4px;
   font-size: 0.95rem;
+  max-width: 70ch;
 }
 
-.about-languages li {
-  margin-bottom: 10px;
+.about-timeline-compact {
+  padding-top: 2px;
+}
+
+.about-compact-line {
+  margin: 0;
   font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .about-monogram {
+    width: 160px;
+    height: 160px;
+  }
+
+  .about-bio,
+  .about .content p {
+    max-width: none;
+  }
 }
