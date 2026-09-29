@@ -85,7 +85,10 @@ const Skills = () => {
           <div className={`skills-carousel ${isAnimating ? 'animating' : ''}`}>
             <div className="skills-track">
               {[...filteredSkills, ...filteredSkills].map((skill, index) => (
-                <SkillCard key={`${skill.name}-${index}`} skill={skill} />
+                <SkillCard
+                  key={`${index < filteredSkills.length ? 'a' : 'b'}-${skill.name}`}
+                  skill={skill}
+                />
               ))}
             </div>
           </div>

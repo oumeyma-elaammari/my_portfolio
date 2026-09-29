@@ -24,7 +24,6 @@ const Contact = () => {
     setStatus({ type: '', message: '' });
 
     try {
-      // Remplacer par ton endpoint
       const response = await fetch('https://formspree.io/f/mdapneeo', {
         method: 'POST',
         headers: {
@@ -96,7 +95,7 @@ const Contact = () => {
           </div>
 
           <div className="col-lg-7">
-            <form onSubmit={handleSubmit} className="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form onSubmit={handleSubmit} className="contact-form" data-aos="fade-up" data-aos-delay="200">
               <div className="row gy-4">
                 <div className="col-md-6">
                   <label htmlFor="name-field" className="pb-2">Your Name</label>

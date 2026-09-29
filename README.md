@@ -1,27 +1,27 @@
 # Oumeyma ELAAMMARI - Portfolio
 
-Personal portfolio of Oumeyma ELAAMMARI, a Software Engineering student at ENSA Oujda specializing in full-stack development and artificial intelligence. The site presents her background, skills, certifications, academic projects and a contact form, and is built as a single-page React application.
+Personal portfolio of Oumeyma ELAAMMARI, a Software Engineering student at ENSA Oujda specializing in full-stack development and artificial intelligence. The site presents her background, experience, skills, certifications, projects and a contact form. Live site: [https://my-portfolio-eo.vercel.app/](https://my-portfolio-eo.vercel.app/).
 
 ## Stack
 
 - **React 19** with **Create React App** (`react-scripts`)
-- **Bootstrap 5** / **react-bootstrap** for layout utilities
-- **Bootstrap Icons** for iconography
+- **Bootstrap 5** CSS utilities for layout
+- **Bootstrap Icons** and **react-icons** for iconography
 - **AOS** (Animate On Scroll) for scroll animations
 - **Typed.js** for the animated hero tagline
 - **react-scroll** for smooth in-page navigation
-- **react-icons** for social icons
 - **Formspree** as the contact form backend
 - **@testing-library/react** + **Jest** for unit tests
 
 ## Project structure
 
 ```
-public/            Static assets served as-is (index.html, manifest, videos, robots/sitemap)
+public/            Static assets (index.html, manifest, videos, robots.txt, sitemap.xml)
 src/
   assets/          Images (WebP) and the downloadable CV (PDF)
-  components/      One component per section (Header, Hero, About, Resume, Skills,
-                    Certificates, Portfolio, Services, Contact, Quote, Footer)
+  components/      One component per section (Header, Hero, Stats, About, Experience,
+                    Portfolio, Skills, Certificates, Contact, Quote, Footer)
+  data/            Shared data (skills, experience, certificates)
   styles/          One CSS file per component
 ```
 
@@ -43,7 +43,7 @@ npm install
 npm start
 ```
 
-Runs the app in development mode at [http://localhost:3000](http://localhost:3000). The page reloads on changes.
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
 
 ### Running tests
 
@@ -51,7 +51,7 @@ Runs the app in development mode at [http://localhost:3000](http://localhost:300
 npm test
 ```
 
-Launches Jest in interactive watch mode. Unit tests currently cover the Contact form (submission, success/error states) and the Portfolio project filter.
+Unit tests cover the Contact form and the Portfolio project filter.
 
 ### Production build
 
@@ -59,18 +59,17 @@ Launches Jest in interactive watch mode. Unit tests currently cover the Contact 
 npm run build
 ```
 
-Builds an optimized, minified production bundle into the `build/` folder, ready to be deployed to any static host.
+Builds an optimized production bundle into the `build/` folder.
 
 ## Deployment
 
-The app is a static bundle (output of `npm run build`) and can be deployed to any static hosting provider, for example:
+Static hosting (Vercel / Netlify / similar):
 
-- **Netlify**: drag-and-drop the `build/` folder in the Netlify dashboard, or connect the repository and set the build command to `npm run build` with publish directory `build`.
-- **Vercel**: import the repository and Vercel will auto-detect the Create React App preset (build command `npm run build`, output directory `build`).
-- **GitHub Pages**: add a `homepage` field to `package.json`, install `gh-pages`, and run `npm run build` followed by `npx gh-pages -d build`.
+- Build command: `npm run build`
+- Output directory: `build`
 
-After the first deployment, update the placeholder URL in `public/sitemap.xml` with the real domain.
+Current production URL: `https://my-portfolio-eo.vercel.app/`
 
 ## Contact form
 
-The contact form (`src/components/Contact.jsx`) submits to a [Formspree](https://formspree.io/) endpoint. To point it at a different Formspree form (or another backend), update the `fetch` URL in that component.
+The contact form (`src/components/Contact.jsx`) submits to a [Formspree](https://formspree.io/) endpoint. Update the `fetch` URL in that component to point to another form if needed.
