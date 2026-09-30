@@ -33,6 +33,7 @@ const Header = () => {
   useEffect(() => {
     if (!isMobileMenuOpen) return undefined;
 
+    const menuButton = menuButtonRef.current;
     const { body, documentElement } = document;
     const previousBodyOverflow = body.style.overflow;
     const previousHtmlOverflow = documentElement.style.overflow;
@@ -42,6 +43,8 @@ const Header = () => {
 
     const firstLink = menuRef.current?.querySelector('a');
     firstLink?.focus();
+    window.dispatchEvent(new Event('scroll'));
+    document.dispatchEvent(new Event('scroll'));
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -55,7 +58,7 @@ const Header = () => {
       documentElement.style.overflow = previousHtmlOverflow;
       body.classList.remove('mobile-nav-open');
       document.removeEventListener('keydown', handleKeyDown);
-      menuButtonRef.current?.focus();
+      menuButton?.focus();
     };
   }, [isMobileMenuOpen]);
 
