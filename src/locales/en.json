@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Oumeyma ELAAMMARI | Software Engineering Portfolio",
-    "description": "Portfolio of Oumeyma ELAAMMARI, Software Engineering student at ENSAO specializing in full-stack development and artificial intelligence. Available for a PFE internship from January 2027."
+    "description": "Portfolio of Oumeyma ELAAMMARI, Computer Engineering (Software Engineering & AI) student at ENSAO specializing in full-stack development and artificial intelligence. Available for a PFE internship from January 2027."
   },
   "lang": {
     "label": "Language",
@@ -43,7 +43,7 @@
     "contact": "Contact Me",
     "resume": "My Resume",
     "typed": [
-      "Software Engineering Student",
+      "Computer Engineering Student",
       "Full-Stack Developer",
       "AI Enthusiast"
     ]
@@ -60,7 +60,7 @@
     "intro": "A quick look at who I am, my background and what I'm looking for.",
     "subtitle": "Full-Stack & AI Engineering Student",
     "monogramAlt": "EO monogram",
-    "bio": "I'm a final-year engineering student at ENSAO, specializing in Software Engineering and Artificial Intelligence. I'm curious by nature and enjoy understanding how things work, then building software that is clean, useful and easy to use. Beyond code, my years in student clubs taught me to organize, lead and work well in a team. I'm now looking for a PFE internship where I can grow alongside experienced engineers.",
+    "bio": "I'm a final-year Computer Engineering student at ENSAO, specializing in Software Engineering and Artificial Intelligence. I'm curious by nature and enjoy understanding how things work, then building software that is clean, useful and easy to use. Beyond code, my years in student clubs taught me to organize, lead and work well in a team. I'm now looking for a PFE internship where I can grow alongside experienced engineers.",
     "educationTitle": "Education",
     "locationTitle": "Location",
     "emailTitle": "Email",
@@ -69,8 +69,8 @@
     "location": "Oujda / Marrakech – open to relocation anywhere in Morocco",
     "languages": "Arabic (native), French & English (fluent)",
     "education": {
-      "engineering": "Engineering Cycle - Software Engineering and Artificial Intelligence",
-      "preparatory": "Preparatory Cycle - Engineering Sciences",
+      "engineering": "Engineering Cycle – Computer Engineering, AI & Software Engineering",
+      "preparatory": "Preparatory Cycle – Science and Technology for Engineering",
       "bac": "Baccalaureate in Physical Sciences",
       "honors": "High Honors (Mention Très Bien)"
     },
