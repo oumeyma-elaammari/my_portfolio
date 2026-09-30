@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6 text-center text-md-start mb-3 mb-md-0">
             <div className="footer-logo">
               <h3 className="footer-name">OUMEYMA <span>ELAAMMARI</span></h3>
-              <p className="footer-tagline">Software Engineering Student</p>
+              <p className="footer-tagline">Full-Stack &amp; AI Engineering Student</p>
             </div>
           </div>
 

@@ -3,12 +3,15 @@
 --------------------------------------------------------------*/
 .footer {
   position: relative;
-  background: var(--footer-bg);
-  backdrop-filter: blur(16px);
+  margin: 0;
+  background: var(--page-bg-bottom);
   font-size: 14px;
   padding: 15px 20px;
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   color: var(--default-color);
+}
+
+html[data-theme="light"] .footer {
+  background: var(--footer-bg);
 }
 
 
@@ -44,12 +47,17 @@
   font-size: 0.8rem;
   font-weight: 600;
   margin-bottom: 2px;
-  color: #fff;
-  background: linear-gradient(120deg, #fff, var(--accent-color));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #f1f5f9;
+  background: none;
   white-space: nowrap;
+}
+
+.footer-name span {
+  color: var(--accent-color);
+}
+
+html[data-theme="light"] .footer-name {
+  color: #1e293b;
 }
 
 .footer-tagline {
@@ -73,16 +81,28 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  color: #94a3b8;
-  transition: all 0.3s ease;
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   font-size: 1.1rem;
-  background: rgba(20, 157, 221, 0.08);
 }
 
-.footer-social a:hover {
-  color: var(--accent-color);
-  background: rgba(20, 157, 221, 0.2);
-  transform: translateY(-3px);
+@media (prefers-reduced-motion: no-preference) {
+  .footer-social a:hover,
+  .footer-social a:focus-visible {
+    color: #ffffff;
+    background: var(--accent-color);
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-social a:hover,
+  .footer-social a:focus-visible {
+    color: #ffffff;
+    background: var(--accent-color);
+    transform: none;
+  }
 }
 
 /* Copyright */
@@ -90,17 +110,22 @@
   text-align: right;
 }
 
-.footer-copyright p {
+.footer-copyright p,
+.footer-copyright p:first-child {
   margin: 0;
   font-size: 0.6rem;
-  color: #94a3b8;
+  font-weight: 500;
+  color: #cbd5e1;
   white-space: nowrap;
 }
 
 .footer-copyright p:first-child {
   margin-bottom: 2px;
-  font-weight: 500;
-  color: #cbd5e1;
+}
+
+html[data-theme="light"] .footer-copyright p,
+html[data-theme="light"] .footer-copyright p:first-child {
+  color: #475569;
 }
 
 .footer-heart {
@@ -109,8 +134,17 @@
 
 .footer-heart i {
   color: #ff4d6e;
-  animation: heartbeat 1.5s ease infinite;
   margin: 0 2px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .footer-heart i {
+    animation: heartbeat 1.5s ease infinite;
+  }
+}
+
+.scroll-top.active {
+  bottom: var(--scroll-top-bottom, 72px);
 }
 
 @keyframes heartbeat {

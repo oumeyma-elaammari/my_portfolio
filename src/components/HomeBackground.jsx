@@ -99,7 +99,9 @@ const HomeBackground = () => {
     const measureMaxTypedWidth = (taglineEl) => {
       if (!measureNode) {
         measureNode = document.createElement('span');
-        measureNode.style.position = 'absolute';
+        measureNode.style.position = 'fixed';
+        measureNode.style.top = '0';
+        measureNode.style.left = '0';
         measureNode.style.visibility = 'hidden';
         measureNode.style.pointerEvents = 'none';
         measureNode.style.whiteSpace = 'nowrap';

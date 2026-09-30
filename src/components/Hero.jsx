@@ -16,7 +16,9 @@ const Hero = () => {
     if (!slot || !tagline) return undefined;
 
     const measure = document.createElement('span');
-    measure.style.position = 'absolute';
+    measure.style.position = 'fixed';
+    measure.style.top = '0';
+    measure.style.left = '0';
     measure.style.visibility = 'hidden';
     measure.style.pointerEvents = 'none';
     measure.style.whiteSpace = 'nowrap';
@@ -69,11 +71,11 @@ const Hero = () => {
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
           <p className="greeting">
-            Welcome to my portfolio<span className="greeting-end">!</span>
+            Welcome to my portfolio<span className="greeting-end"> !</span>
           </p>
 
           <h1>
-            Hello<span className="greeting-end">!</span> My name is{' '}
+            Hello<span className="greeting-end"> !</span> My name is{' '}
             <span className="highlight">OUMEYMA ELAAMMARI</span>
           </h1>
 

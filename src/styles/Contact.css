@@ -22,6 +22,7 @@
 }
 
 .contact .info-item i {
+  flex-shrink: 0;
   font-size: 20px;
   color: var(--accent-color);
   width: 44px;
@@ -29,13 +30,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
-  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
-.contact .info-item:hover i {
-  color: #fff;
-  transform: translateY(-2px);
+@media (prefers-reduced-motion: no-preference) {
+  .contact .info-item:hover i,
+  .contact .info-item:focus-within i {
+    color: #ffffff;
+    background: var(--accent-color);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact .info-item:hover i,
+  .contact .info-item:focus-within i {
+    color: #ffffff;
+    background: var(--accent-color);
+    transform: none;
+  }
 }
 
 .contact .info-item h3 {

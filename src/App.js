@@ -19,6 +19,7 @@ import Footer from './components/Footer';
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollTopBottom, setScrollTopBottom] = useState(72);
 
   useEffect(() => {
     AOS.init({
@@ -29,12 +30,25 @@ function App() {
       offset: 100
     });
 
-    const handleScroll = () => {
+    const updateScrollTop = () => {
       setShowScrollTop(window.scrollY > 300);
+      const footer = document.querySelector('.footer');
+      const base = window.innerWidth <= 768 ? 84 : 72;
+      if (!footer) {
+        setScrollTopBottom(base);
+        return;
+      }
+      const overlap = window.innerHeight - footer.getBoundingClientRect().top;
+      setScrollTopBottom(overlap > 0 ? Math.ceil(overlap + 24) : base);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    updateScrollTop();
+    window.addEventListener('scroll', updateScrollTop, { passive: true });
+    window.addEventListener('resize', updateScrollTop);
+    return () => {
+      window.removeEventListener('scroll', updateScrollTop);
+      window.removeEventListener('resize', updateScrollTop);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -67,6 +81,7 @@ function App() {
         className={`scroll-top ${showScrollTop ? 'active' : ''}`}
         onClick={scrollToTop}
         aria-label="Scroll to top"
+        style={{ '--scroll-top-bottom': `${scrollTopBottom}px` }}
       >
         <i className="bi bi-arrow-up-short"></i>
       </button>
