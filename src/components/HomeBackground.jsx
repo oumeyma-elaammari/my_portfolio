@@ -29,7 +29,7 @@ const nodeCountForSize = (width, height) => {
   const area = width * height;
   if (width <= 480) {
     const base = Math.max(28, Math.min(40, Math.floor(area / 14000)));
-    return base * 2;
+    return Math.round(base * 2 * 0.95);
   }
   if (width < 900) return Math.max(48, Math.min(72, Math.floor(area / 16000)));
   return Math.max(72, Math.min(108, Math.floor(area / 18000)));
