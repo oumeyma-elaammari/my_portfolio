@@ -27,7 +27,11 @@ export const resolveInitialTheme = () => {
 
 export const applyTheme = (theme) => {
   const next = theme === 'light' ? 'light' : 'dark';
+  const scheme = next === 'light' ? 'only light' : 'only dark';
   document.documentElement.setAttribute('data-theme', next);
+  document.documentElement.style.colorScheme = scheme;
+  const meta = document.querySelector('meta[name="color-scheme"]');
+  if (meta) meta.setAttribute('content', scheme);
   try {
     localStorage.setItem('theme', next);
   } catch {

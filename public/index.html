@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/logo_oumeyma.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="only dark" />
     <meta name="theme-color" content="#0e0e0e" />
     <script>
       (function () {
@@ -31,12 +31,20 @@
               : 'dark';
           }
           document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme === 'light' ? 'only light' : 'only dark';
+          var scheme = document.querySelector('meta[name="color-scheme"]');
+          if (scheme) {
+            scheme.setAttribute('content', theme === 'light' ? 'only light' : 'only dark');
+          }
           var meta = document.querySelector('meta[name="theme-color"]');
           if (meta) {
             meta.setAttribute('content', theme === 'light' ? '#f8fafc' : '#0e0e0e');
           }
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.colorScheme = 'only dark';
+          var fallback = document.querySelector('meta[name="color-scheme"]');
+          if (fallback) fallback.setAttribute('content', 'only dark');
         }
       })();
     </script>
