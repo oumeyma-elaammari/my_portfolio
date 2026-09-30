@@ -19,6 +19,7 @@
     padding-bottom: 8px;
     gap: 0;
     scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   }
 
   .skills .portfolio-filters button {

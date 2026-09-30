@@ -34,6 +34,8 @@ html[data-theme="dark"] {
   --quote-color: rgba(255, 255, 255, 0.85);
   --name-gradient-from: #f1f5f9;
   --name-gradient-to: #cbd5e1;
+  --scrollbar-thumb: #475569;
+  --scrollbar-track: #0a192f;
 }
 
 html[data-theme="light"] {
@@ -68,6 +70,8 @@ html[data-theme="light"] {
   --quote-color: #1e293b;
   --name-gradient-from: #0f172a;
   --name-gradient-to: #334155;
+  --scrollbar-thumb: #94a3b8;
+  --scrollbar-track: #e8eef5;
 }
 
 * {
@@ -76,12 +80,9 @@ html[data-theme="light"] {
   box-sizing: border-box;
 }
 
-html {
-  color-scheme: dark;
-}
-
-html[data-theme="light"] {
-  color-scheme: light;
+:root {
+  color-scheme: light dark;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -309,6 +310,7 @@ p {
   bottom: -15px;
   z-index: 99999;
   background-color: var(--accent-color);
+  color: var(--accent-contrast);
   border: none;
   width: 44px;
   height: 44px;

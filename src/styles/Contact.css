@@ -90,6 +90,7 @@
   padding: 8px 10px;
   border-radius: 10px;
   color: var(--input-color, var(--default-color));
+  caret-color: var(--input-color, var(--default-color));
   background-color: var(--input-bg);
   border: 1px solid var(--input-border);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -125,7 +126,7 @@ html[data-theme="dark"] .contact .contact-form .form-control:focus-visible {
   color: var(--input-placeholder, rgba(255, 255, 255, 0.5));
 }
 
-html[data-theme="dark"] .contact .contact-form .form-control:-webkit-autofill {
+.contact .contact-form .form-control:-webkit-autofill {
   -webkit-text-fill-color: var(--input-color);
   caret-color: var(--input-color);
   box-shadow: 0 0 0 1000px var(--input-bg) inset;
