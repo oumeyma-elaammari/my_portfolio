@@ -14,6 +14,10 @@ const Hero = () => {
     .toLowerCase()
     .startsWith('fr');
   const exclamationGap = french ? '\u00A0' : ' ';
+  const availability = t('hero.availability');
+  const availabilitySplit = availability.search(/PFE\b/);
+  const availabilityLead = availabilitySplit > 0 ? availability.slice(0, availabilitySplit) : availability;
+  const availabilityKeep = availabilitySplit > 0 ? availability.slice(availabilitySplit) : '';
 
   useEffect(() => {
     const typedStrings = i18n.t('hero.typed', { returnObjects: true });
@@ -56,6 +60,7 @@ const Hero = () => {
 
       if (!narrow) {
         tagline.style.fontSize = '';
+        tagline.style.minHeight = '';
         syncMeasureFont(source);
         let maxWidth = 0;
         typedStrings.forEach((value) => {
@@ -69,6 +74,7 @@ const Hero = () => {
       }
 
       tagline.style.fontSize = '';
+      slot.style.removeProperty('--typed-max-width');
       const available = tagline.parentElement ? tagline.parentElement.clientWidth : window.innerWidth;
       let size = parseFloat(window.getComputedStyle(tagline).fontSize);
       const minSize = 13;
@@ -81,7 +87,10 @@ const Hero = () => {
         if (size === minSize) break;
       }
 
-      slot.style.setProperty('--typed-max-width', `${Math.ceil(maxWidth)}px`);
+      const typedStyle = window.getComputedStyle(tagline);
+      const fontSize = parseFloat(typedStyle.fontSize);
+      const lineHeight = typedStyle.lineHeight === 'normal' ? fontSize * 1.45 : parseFloat(typedStyle.lineHeight);
+      tagline.style.minHeight = `${Math.ceil(lineHeight)}px`;
     };
 
     applyTypedWidth();
@@ -116,7 +125,7 @@ const Hero = () => {
 
           <p className="hero-intro">{t('hero.greeting')}</p>
 
-          <h1>OUMEYMA EL AAMMARI</h1>
+          <h1>OUMEYMA ELAAMMARI</h1>
 
           <p className="tagline" ref={taglineRef}>
             <span className="typed-slot" ref={typedSlotRef}>
@@ -126,7 +135,10 @@ const Hero = () => {
 
           <p className="availability">
             <span className="availability-dot" aria-hidden="true" />
-            <span className="availability-text">{t('hero.availability')}</span>
+            <span className="availability-text">
+              {availabilityLead}
+              {availabilityKeep ? <span className="availability-keep">{availabilityKeep}</span> : null}
+            </span>
           </p>
 
           <div className="hero-buttons">

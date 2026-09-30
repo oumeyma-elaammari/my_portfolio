@@ -27,15 +27,18 @@ const isCoarsePointer = () =>
 
 const nodeCountForSize = (width, height) => {
   const area = width * height;
-  if (width < 480) return Math.max(28, Math.min(40, Math.floor(area / 14000)));
+  if (width <= 480) {
+    const base = Math.max(28, Math.min(40, Math.floor(area / 14000)));
+    return base * 2;
+  }
   if (width < 900) return Math.max(48, Math.min(72, Math.floor(area / 16000)));
   return Math.max(72, Math.min(108, Math.floor(area / 18000)));
 };
 
-const connectionDistance = (width) => {
-  if (width < 480) return 90;
-  if (width < 900) return 110;
-  return 130;
+const connectionDistance = (width, height, count) => {
+  if (width > 480) return width < 900 ? 110 : 130;
+  const spacing = Math.sqrt((width * Math.max(height, 1)) / Math.max(count, 1));
+  return Math.round(Math.max(64, spacing * 1.45));
 };
 
 const pointInRect = (x, y, rect) =>
@@ -155,7 +158,7 @@ const HomeBackground = () => {
 
           const local = toLocalRect(el.getBoundingClientRect(), stageRect);
 
-          if (selector === '.tagline') {
+          if (selector === '.tagline' && window.innerWidth > 480) {
             const maxWidth = measureMaxTypedWidth(el);
             const centerX = local.x + local.w / 2;
             local.w = Math.max(local.w, maxWidth);
@@ -245,9 +248,10 @@ const HomeBackground = () => {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      linkDist = connectionDistance(width);
+      const count = nodeCountForSize(width, height);
+      linkDist = connectionDistance(width, height, count);
       updateClearZones();
-      nodes = createNodes(nodeCountForSize(width, height));
+      nodes = createNodes(count);
       drawFrame();
     };
 

@@ -365,6 +365,28 @@ html[lang="en"] .hero .greeting-gap {
   
   .hero .tagline {
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 100%;
+    max-width: 100%;
+    min-height: 1.45em;
+  }
+
+  .hero .typed-slot {
+    display: inline;
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .hero .tagline .typed-text {
+    display: inline-block;
+    width: auto;
+    vertical-align: baseline;
   }
   
   .typed-cursor {
@@ -375,18 +397,32 @@ html[lang="en"] .hero .greeting-gap {
     font-size: 1em;
   }
 
-  .hero .availability-text {
+  .hero .availability {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.92rem;
+    text-align: center;
     text-wrap: balance;
   }
 
-  .hero .tagline {
-    max-width: 100%;
-    flex-wrap: nowrap;
-    justify-content: center;
+  .hero .availability-dot {
+    display: inline-block;
+    vertical-align: 0.12em;
+    margin: 0 0.35em 0 0;
   }
 
-  .hero .typed-slot {
-    flex: 0 0 auto;
+  .hero .availability-text {
+    display: inline;
+    text-wrap: balance;
+  }
+
+  .hero .availability-keep {
+    white-space: nowrap;
+  }
+
+  .hero-buttons {
+    margin-top: 2rem;
   }
   
   .btn {
