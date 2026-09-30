@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 import { useTranslation } from 'react-i18next';
 import { HiMenu, HiX } from 'react-icons/hi';
@@ -11,6 +11,8 @@ const Header = () => {
   const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +23,25 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 991) setIsMobileMenuOpen(false);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     if (!isMobileMenuOpen) return undefined;
+
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+    body.style.overflow = 'hidden';
+    documentElement.style.overflow = 'hidden';
+    body.classList.add('mobile-nav-open');
+
+    const firstLink = menuRef.current?.querySelector('a');
+    firstLink?.focus();
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -30,7 +50,13 @@ const Header = () => {
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+      body.classList.remove('mobile-nav-open');
+      document.removeEventListener('keydown', handleKeyDown);
+      menuButtonRef.current?.focus();
+    };
   }, [isMobileMenuOpen]);
 
   const toggleMobileMenu = () => {
@@ -86,6 +112,8 @@ const Header = () => {
             <LanguageToggle />
             <ThemeToggle />
             <button
+              ref={menuButtonRef}
+              type="button"
               className="mobile-nav-toggle"
               onClick={toggleMobileMenu}
               aria-label={isMobileMenuOpen ? t('header.menuClose') : t('header.menuOpen')}
@@ -99,23 +127,22 @@ const Header = () => {
       </header>
 
       {isMobileMenuOpen && (
+        <>
+        <div className="mobile-nav-overlay" onClick={closeMobileMenu} />
         <div
           id="mobile-navigation"
           className="mobile-nav active"
           role="dialog"
           aria-modal="true"
           aria-label={t('header.mobile')}
+          ref={menuRef}
         >
-          <button className="mobile-nav-close" onClick={closeMobileMenu} aria-label={t('header.menuClose')}>
-            <HiX />
-          </button>
-          <LanguageToggle className="lang-switch-mobile" />
-          <ThemeToggle className="theme-toggle-mobile" showLabel />
           <ul>
             {navItems.map((item) => (
               <li key={item.to}>
                 <Link
                   to={item.to}
+                  href={`#${item.to}`}
                   spy={true}
                   smooth={true}
                   offset={-70}
@@ -129,6 +156,7 @@ const Header = () => {
             ))}
           </ul>
         </div>
+        </>
       )}
     </>
   );

@@ -74,19 +74,27 @@ test('moves through the language menu with the keyboard and closes it', () => {
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
-test('shows the language switch in the mobile menu', () => {
+test('opens the mobile menu from the header and returns focus on close', () => {
   render(<Header />);
 
-  userEvent.click(screen.getByRole('button', { name: /open menu/i }));
+  const menuButton = screen.getByRole('button', { name: /open menu/i });
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  userEvent.click(menuButton);
 
   const dialog = screen.getByRole('dialog', { name: /mobile navigation/i });
-  const trigger = within(dialog).getByRole('button', { name: /change language/i });
-  expect(trigger.querySelector('.bi-globe2')).toBeTruthy();
-  expect(trigger).toHaveTextContent('EN');
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+  expect(within(dialog).queryByRole('button', { name: /change language/i })).not.toBeInTheDocument();
+  expect(within(dialog).queryByRole('button', { name: /theme/i })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /change language/i })).toBeInTheDocument();
+  expect(within(dialog).getByRole('link', { name: 'Home' })).toHaveFocus();
+  expect(document.body).toHaveClass('mobile-nav-open');
+  expect(document.body.style.overflow).toBe('hidden');
 
-  userEvent.click(trigger);
-  expect(within(dialog).getByRole('menuitemradio', { name: 'English' })).toBeInTheDocument();
-  expect(within(dialog).getByRole('menuitemradio', { name: 'Français' })).toBeInTheDocument();
+  fireEvent.keyDown(document, { key: 'Escape' });
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(menuButton).toHaveFocus();
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  expect(document.body).not.toHaveClass('mobile-nav-open');
 });
 
 test('shows the same activity dates in French and English', async () => {

@@ -294,23 +294,6 @@ p {
   background: color-mix(in srgb, var(--accent-color), transparent 88%);
 }
 
-.theme-toggle-mobile {
-  margin: 8px 16px 18px;
-  width: auto;
-  gap: 8px;
-  border-radius: 12px;
-  padding: 10px 14px;
-  justify-content: flex-start;
-  font-size: 0.95rem;
-  color: var(--default-color);
-}
-
-.theme-toggle-mobile::after {
-  content: attr(data-label);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
 .scroll-top {
   position: fixed;
   visibility: hidden;
