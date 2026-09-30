@@ -41,13 +41,27 @@ test('ignores localStorage failures when saving the language', () => {
   Storage.prototype.setItem = setItem;
 });
 
-test('falls back to English for the bio and experience descriptions', async () => {
+test('uses the validated French bio, internship descriptions, and wording', async () => {
   await i18n.changeLanguage('fr');
 
-  expect(i18n.t('about.bio')).toMatch(/final-year engineering student at ENSAO/);
+  expect(i18n.t('about.bio')).toMatch(/^Je suis élève-ingénieure en dernière année à l'ENSAO/);
+  expect(i18n.t('about.bio')).toMatch(/un stage PFE/);
   expect(i18n.t('experience.items.1.bullets.0')).toMatch(/Power Automate/);
-  expect(i18n.t('experience.items.2.bullets.2')).toMatch(/role-based access control/);
-  expect(i18n.t('nav.home')).toBe('Accueil');
-  expect(i18n.t('hero.typed', { returnObjects: true })[0]).toBe('Étudiante en génie logiciel');
+  expect(i18n.t('experience.items.2.bullets.0')).toBe(
+    "Développement d'une application e-commerce Full-Stack avec React et Laravel."
+  );
+  expect(i18n.t('header.tagline')).toBe('Élève-ingénieure Full-Stack & IA');
+  expect(i18n.t('about.subtitle')).toBe('Élève-ingénieure Full-Stack & IA');
+  expect(i18n.t('footer.tagline')).toBe('Élève-ingénieure Full-Stack & IA');
+  expect(i18n.t('about.softTitle')).toBe('Savoir-être');
+  expect(i18n.t('meta.title')).toBe('Oumeyma ELAAMMARI | Portfolio Full-Stack & IA');
+  expect(i18n.t('meta.description')).toMatch(/élève-ingénieure à l'ENSAO/);
+  expect(i18n.t('meta.description')).toMatch(/un stage PFE à partir de janvier 2027/);
+  expect(i18n.t('hero.availability')).toBe('Disponible pour un stage PFE à partir de janvier 2027');
+  expect(i18n.t('hero.typed', { returnObjects: true })[0]).toBe('Élève-ingénieure en génie logiciel');
+  expect(i18n.t('hero.typed', { returnObjects: true })[3]).toBe('Candidate pour un stage PFE');
+  expect(i18n.t('about.education.engineering')).toContain('–');
+  expect(i18n.t('experience.activities.1.roles.2')).toBe('Membre active – cellule Design & Editing');
+  expect(i18n.t('projects.items.7.description')).toMatch(/jeu de données Corel-1000/);
   expect(document.documentElement.lang).toBe('fr');
 });

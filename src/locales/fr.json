@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Oumeyma ELAAMMARI | Portfolio en génie logiciel",
-    "description": "Portfolio d'Oumeyma ELAAMMARI, étudiante en génie logiciel à l'ENSAO, spécialisée en développement Full-Stack et en intelligence artificielle. Disponible pour un stage de PFE à partir de janvier 2027."
+    "title": "Oumeyma ELAAMMARI | Portfolio Full-Stack & IA",
+    "description": "Portfolio d'Oumeyma ELAAMMARI, élève-ingénieure à l'ENSAO, spécialisée en développement Full-Stack et en intelligence artificielle. Disponible pour un stage PFE à partir de janvier 2027."
   },
   "lang": {
     "label": "Langue",
@@ -24,7 +24,7 @@
     "contact": "Contact"
   },
   "header": {
-    "tagline": "Étudiante en ingénierie Full-Stack & IA",
+    "tagline": "Élève-ingénieure Full-Stack & IA",
     "menuOpen": "Ouvrir le menu",
     "menuClose": "Fermer le menu",
     "primary": "Navigation principale",
@@ -40,14 +40,14 @@
     "hello": "Bonjour",
     "nameLead": "Je m'appelle",
     "prefix": "Je suis",
-    "availability": "Disponible pour un stage de PFE à partir de janvier 2027",
+    "availability": "Disponible pour un stage PFE à partir de janvier 2027",
     "contact": "Me contacter",
     "resume": "Mon CV",
     "typed": [
-      "Étudiante en génie logiciel",
+      "Élève-ingénieure en génie logiciel",
       "Développeuse Full-Stack",
       "Passionnée d'IA",
-      "Candidate au stage PFE"
+      "Candidate pour un stage PFE"
     ]
   },
   "stats": {
@@ -60,18 +60,19 @@
   "about": {
     "title": "À propos",
     "intro": "Un aperçu de qui je suis, de mon parcours et de ce que je recherche.",
-    "subtitle": "Étudiante en ingénierie Full-Stack & IA",
+    "subtitle": "Élève-ingénieure Full-Stack & IA",
+    "bio": "Je suis élève-ingénieure en dernière année à l'ENSAO, spécialisée en génie logiciel et intelligence artificielle. Curieuse de nature, j'aime comprendre comment les choses fonctionnent, puis concevoir des logiciels clairs, utiles et agréables à utiliser. Au-delà du code, mes années en clubs étudiants m'ont appris à organiser, à encadrer et à travailler en équipe. Je recherche aujourd'hui un stage PFE pour progresser aux côtés d'ingénieurs expérimentés.",
     "monogramAlt": "Monogramme EO",
     "educationTitle": "Formation",
     "locationTitle": "Localisation",
     "emailTitle": "E-mail",
     "languagesTitle": "Langues",
-    "softTitle": "Compétences humaines",
+    "softTitle": "Savoir-être",
     "location": "Oujda / Marrakech – ouverte à une mobilité partout au Maroc",
     "languages": "Arabe (langue maternelle), français et anglais (courant)",
     "education": {
-      "engineering": "Cycle d'ingénieur - Génie logiciel et intelligence artificielle",
-      "preparatory": "Cycle préparatoire - Sciences de l'ingénieur",
+      "engineering": "Cycle d'ingénieur – Génie logiciel et intelligence artificielle",
+      "preparatory": "Cycle préparatoire – Sciences de l'ingénieur",
       "bac": "Baccalauréat en sciences physiques",
       "honors": "Mention Très Bien"
     },
@@ -85,16 +86,26 @@
   },
   "experience": {
     "title": "Expérience",
-    "intro": "Stages où j'ai livré des fonctionnalités Full-Stack et automatisé des processus métier au sein d'équipes.",
+    "intro": "Stages au cours desquels j'ai développé des fonctionnalités Full-Stack et automatisé des processus métier en équipe.",
     "activitiesTitle": "Leadership et activités",
     "items": {
       "1": {
         "title": "Stagiaire en automatisation des processus métier (PFA)",
-        "period": "Juillet – août 2026"
+        "period": "Juillet – août 2026",
+        "bullets": [
+          "Conception et développement d'une solution générique d'automatisation de processus métier avec Power Automate, SharePoint, Outlook et Excel — validation des demandes, notifications et suivi des statuts, avec une approche par rôles pensée pour la réutilisation.",
+          "Conception d'architectures de listes SharePoint, avec des définitions de champs détaillées, pour plusieurs workflows métier.",
+          "Rédaction d'une documentation technique complète en LaTeX, avec des diagrammes personnalisés."
+        ]
       },
       "2": {
         "title": "Stagiaire en développement Full-Stack",
-        "period": "Juillet 2025"
+        "period": "Juillet 2025",
+        "bullets": [
+          "Développement d'une application e-commerce Full-Stack avec React et Laravel.",
+          "Conception et réalisation d'un tableau de bord d'administration pour la gestion des utilisateurs, des produits et des commandes.",
+          "Mise en place d'une authentification sécurisée et d'un contrôle d'accès par rôles."
+        ]
       }
     },
     "activities": {
@@ -102,12 +113,12 @@
         "roles": [
           "Responsable de la cellule Al-Masjid",
           "Vice-présidente",
-          "Membre active - cellule Design & Editing"
+          "Membre active – cellule Design & Editing"
         ]
       },
       "2": {
         "roles": [
-          "Membre active - cellule Design",
+          "Membre active – cellule Design",
           "Participation à l'organisation de la Journée de l'informatique (4e édition)"
         ]
       },
@@ -154,7 +165,7 @@
       },
       "7": {
         "title": "CBIR - Système de recherche d'images",
-        "description": "Système de recherche d'images par le contenu, qui indexe le jeu Corel-1000 avec des histogrammes de couleur (RGB, HSV, LAB), des bins configurables et des mesures de similarité (intersection, distance euclidienne, Chi², corrélation)."
+        "description": "Système de recherche d'images par le contenu, qui indexe le jeu de données Corel-1000 avec des histogrammes de couleur (RGB, HSV, LAB), des bins configurables et des mesures de similarité (intersection, distance euclidienne, Chi², corrélation)."
       },
       "3": {
         "title": "ArchvoxLib",
@@ -213,7 +224,7 @@
     "network": "Erreur réseau. Veuillez réessayer."
   },
   "footer": {
-    "tagline": "Étudiante en ingénierie Full-Stack & IA",
+    "tagline": "Élève-ingénieure Full-Stack & IA",
     "rights": "Tous droits réservés",
     "made": "Fait avec",
     "by": "par Oumeyma"
