@@ -69,12 +69,35 @@ function App() {
         setScrollTopBottom(bottom);
         return;
       }
-      if (!footer) {
-        setScrollTopBottom(base);
-        return;
+      const quoteCard = document.querySelector('.quote-content');
+      const quoteIcon = document.querySelector('.quote-content i');
+      let bottom = base;
+      if (footer) {
+        const overlap = window.innerHeight - footer.getBoundingClientRect().top;
+        if (overlap > 0) bottom = Math.ceil(overlap + 24);
       }
-      const overlap = window.innerHeight - footer.getBoundingClientRect().top;
-      setScrollTopBottom(overlap > 0 ? Math.ceil(overlap + 24) : base);
+      const gap = 12;
+      const buttonSize = 44;
+      const obstacles = [quoteCard, quoteIcon].filter(Boolean);
+      for (let pass = 0; pass < obstacles.length + 1; pass += 1) {
+        const buttonTop = window.innerHeight - bottom - buttonSize;
+        const buttonBottomEdge = window.innerHeight - bottom;
+        let raised = false;
+        for (let i = 0; i < obstacles.length; i += 1) {
+          const rect = obstacles[i].getBoundingClientRect();
+          const coversVertically = rect.bottom > buttonTop && rect.top < buttonBottomEdge;
+          const coversHorizontally = rect.right > window.innerWidth - 15 - buttonSize && rect.left < window.innerWidth - 15;
+          if (coversVertically && coversHorizontally) {
+            const needed = Math.ceil(window.innerHeight - rect.top + gap);
+            if (needed > bottom) {
+              bottom = needed;
+              raised = true;
+            }
+          }
+        }
+        if (!raised) break;
+      }
+      setScrollTopBottom(bottom);
     };
 
     updateScrollTop();
