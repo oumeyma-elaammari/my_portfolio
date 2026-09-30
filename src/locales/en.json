@@ -5,6 +5,7 @@
   },
   "lang": {
     "label": "Language",
+    "change": "Change language",
     "en": "English",
     "fr": "Français"
   },

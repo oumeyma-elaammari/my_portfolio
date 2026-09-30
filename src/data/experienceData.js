@@ -32,7 +32,6 @@ export const activitiesData = [
     id: 1,
     title: 'Club Altruisme',
     subtitle: 'ENSAO',
-    icon: 'bi-heart',
     details: [
       { roleKey: 'experience.activities.1.roles.0', date: '2024 - 2025' },
       { roleKey: 'experience.activities.1.roles.1', date: '2023 - 2024' },
@@ -43,7 +42,6 @@ export const activitiesData = [
     id: 2,
     title: 'Club Génie Informatique',
     subtitle: 'ENSAO',
-    icon: 'bi-code-slash',
     details: [
       { roleKey: 'experience.activities.2.roles.0' },
       {
@@ -55,7 +53,6 @@ export const activitiesData = [
   {
     id: 3,
     title: "Maison des Sciences de l'Oriental",
-    icon: 'bi-lightbulb',
     details: [
       {
         roleKey: 'experience.activities.3.roles.0',

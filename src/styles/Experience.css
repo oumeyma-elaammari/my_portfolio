@@ -124,30 +124,10 @@
 }
 
 .activity-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
   margin-bottom: 16px;
 }
 
-.activity-icon {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent-color), transparent 88%);
-  color: var(--accent-color);
-  font-size: 1.05rem;
-}
-
-.activity-heading {
-  min-width: 0;
-}
-
-.activity-heading h4 {
+.activity-header h4 {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;

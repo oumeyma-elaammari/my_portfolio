@@ -43,17 +43,10 @@ const Experience = () => {
               <div key={activity.id} className="col-lg-4 col-md-6 d-flex">
                 <article className="activity-item">
                   <div className="activity-header">
-                    {activity.icon ? (
-                      <span className="activity-icon" aria-hidden="true">
-                        <i className={`bi ${activity.icon}`} />
-                      </span>
+                    <h4>{activity.title}</h4>
+                    {activity.subtitle ? (
+                      <p className="activity-subtitle">{activity.subtitle}</p>
                     ) : null}
-                    <div className="activity-heading">
-                      <h4>{activity.title}</h4>
-                      {activity.subtitle ? (
-                        <p className="activity-subtitle">{activity.subtitle}</p>
-                      ) : null}
-                    </div>
                   </div>
                   <ul className="activity-list">
                     {activity.details.map((detail) => (

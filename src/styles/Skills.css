@@ -128,6 +128,18 @@
   line-height: 1;
 }
 
+.skill-brand-icon {
+  width: 34px;
+  height: 34px;
+  color: #d24939;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-brand-icon {
+  color: #d24939;
+  transform: scale(1.08);
+}
+
 html[data-theme="light"] .skill-icon i.devicon-github-original,
 html[data-theme="light"] .skill-icon i.devicon-symfony-original {
   color: #24292f;

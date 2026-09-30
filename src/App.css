@@ -168,17 +168,8 @@ section, .section {
   overflow: clip;
 }
 
-main > section.section {
-  border-top: 1px solid color-mix(in srgb, var(--accent-color), transparent 88%);
-}
-
-#hero.section,
-#stats.section {
-  border-top: none;
-}
-
 #hero.section {
-  padding: 24px 0;
+  padding: var(--header-height, 60px) 0 0;
 }
 
 #stats.section {
@@ -217,7 +208,7 @@ main > section.section {
 
 .section-title p {
   margin-bottom: 0;
-  max-width: 70ch;
+  max-width: 100ch;
 }
 
 p {
@@ -388,6 +379,12 @@ p {
 
   .section-title h2 {
     font-size: 28px;
+  }
+
+  .section-title p,
+  .about .section-title p,
+  p {
+    max-width: none;
   }
 }
 

@@ -1,25 +1,77 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from './Header';
 import Quote from './Quote';
 import Experience from './Experience';
 import i18n from '../i18n';
 
+const openLanguageMenu = () => {
+  const trigger = screen.getByRole('button', { name: /change language/i });
+  userEvent.click(trigger);
+  return trigger;
+};
+
 test('switches to French from the header and remembers the choice', async () => {
   render(<Header />);
 
-  const french = screen.getByRole('button', { name: 'Français' });
-  french.focus();
-  expect(french).toHaveFocus();
+  const trigger = openLanguageMenu();
+  expect(trigger).toHaveAttribute('aria-haspopup', 'menu');
+  expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  expect(trigger.querySelector('.bi-globe2')).toBeTruthy();
+  expect(trigger).toHaveTextContent('EN');
+
+  const english = screen.getByRole('menuitemradio', { name: 'English' });
+  const french = screen.getByRole('menuitemradio', { name: 'Français' });
+  expect(english).toHaveFocus();
+  expect(english).toHaveAttribute('aria-checked', 'true');
+  expect(french).toHaveAttribute('aria-checked', 'false');
 
   userEvent.click(french);
 
   expect(await screen.findByText('Accueil')).toBeInTheDocument();
   expect(document.documentElement.lang).toBe('fr');
   expect(localStorage.getItem('language')).toBe('fr');
-  expect(screen.getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'false');
-  expect(screen.getByRole('button', { name: 'Français' })).toHaveAttribute('aria-pressed', 'true');
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+
+  const frenchTrigger = screen.getByRole('button', { name: /changer de langue/i });
+  expect(frenchTrigger).toHaveTextContent('FR');
+  userEvent.click(frenchTrigger);
+  expect(screen.getByRole('menuitemradio', { name: 'Français' })).toHaveAttribute('aria-checked', 'true');
+  expect(screen.getByRole('menuitemradio', { name: 'English' })).toHaveAttribute('aria-checked', 'false');
+});
+
+test('moves through the language menu with the keyboard and closes it', () => {
+  render(<Header />);
+
+  const trigger = openLanguageMenu();
+  const english = screen.getByRole('menuitemradio', { name: 'English' });
+  const french = screen.getByRole('menuitemradio', { name: 'Français' });
+
+  fireEvent.keyDown(english, { key: 'ArrowDown' });
+  expect(french).toHaveFocus();
+  fireEvent.keyDown(french, { key: 'ArrowUp' });
+  expect(english).toHaveFocus();
+  fireEvent.keyDown(english, { key: 'End' });
+  expect(french).toHaveFocus();
+  fireEvent.keyDown(french, { key: 'Home' });
+  expect(english).toHaveFocus();
+
+  fireEvent.keyDown(english, { key: 'Escape' });
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  expect(trigger).toHaveFocus();
+  expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+  userEvent.click(trigger);
+  expect(screen.getByRole('menu', { name: /language/i })).toBeInTheDocument();
+  fireEvent.pointerDown(document.body);
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+
+  userEvent.click(trigger);
+  fireEvent.keyDown(screen.getByRole('menuitemradio', { name: 'English' }), { key: 'ArrowDown' });
+  userEvent.keyboard('{Enter}');
+  expect(document.documentElement.lang).toBe('fr');
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
 });
 
 test('shows the language switch in the mobile menu', () => {
@@ -28,8 +80,13 @@ test('shows the language switch in the mobile menu', () => {
   userEvent.click(screen.getByRole('button', { name: /open menu/i }));
 
   const dialog = screen.getByRole('dialog', { name: /mobile navigation/i });
-  expect(within(dialog).getByRole('group', { name: /language/i })).toBeInTheDocument();
-  expect(within(dialog).getByRole('button', { name: 'Français' })).toBeInTheDocument();
+  const trigger = within(dialog).getByRole('button', { name: /change language/i });
+  expect(trigger.querySelector('.bi-globe2')).toBeTruthy();
+  expect(trigger).toHaveTextContent('EN');
+
+  userEvent.click(trigger);
+  expect(within(dialog).getByRole('menuitemradio', { name: 'English' })).toBeInTheDocument();
+  expect(within(dialog).getByRole('menuitemradio', { name: 'Français' })).toBeInTheDocument();
 });
 
 test('shows the same activity dates in French and English', async () => {

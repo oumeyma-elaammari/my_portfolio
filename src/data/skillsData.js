@@ -1,3 +1,5 @@
+import { SiJenkins } from 'react-icons/si';
+
 const skillsData = [
   // Languages
   { name: 'HTML', icon: 'devicon-html5-plain colored', iconType: 'devicon', category: 'languages' },
@@ -33,7 +35,7 @@ const skillsData = [
   { name: 'Git', icon: 'devicon-git-plain colored', iconType: 'devicon', category: 'devops' },
   { name: 'GitHub', icon: 'devicon-github-original', iconType: 'devicon', category: 'devops' },
   { name: 'Docker', icon: 'devicon-docker-plain colored', iconType: 'devicon', category: 'devops' },
-  { name: 'Jenkins', icon: 'devicon-jenkins-original colored', iconType: 'devicon', category: 'devops' },
+  { name: 'Jenkins', Icon: SiJenkins, iconType: 'component', category: 'devops' },
   { name: 'Maven', icon: 'devicon-apache-plain colored', iconType: 'devicon', category: 'devops' },
   { name: 'Linux', icon: 'devicon-linux-plain colored', iconType: 'devicon', category: 'devops' },
   { name: 'SonarQube', icon: 'devicon-sonarqube-original colored', iconType: 'devicon', category: 'devops' },
