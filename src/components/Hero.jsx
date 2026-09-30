@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import { Link } from 'react-scroll';
 import { useTranslation } from 'react-i18next';
-import cv from '../assets/cv/cv_oumeyma_elaammari.pdf';
+import cvEn from '../assets/cv/cv_oumeyma_elaammari_en.pdf';
+import cvFr from '../assets/cv/cv_oumeyma_elaammari_fr.pdf';
 import '../styles/Hero.css';
 
 const Hero = () => {
@@ -151,7 +152,13 @@ const Hero = () => {
             >
               {t('hero.contact')}
             </Link>
-            <a href={cv} className="btn btn-outline">
+            <a
+              href={french ? cvFr : cvEn}
+              className="btn btn-outline"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('hero.resumeAria')}
+            >
               {t('hero.resume')}
             </a>
           </div>
