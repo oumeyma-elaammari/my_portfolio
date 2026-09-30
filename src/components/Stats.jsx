@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 import certificatesData from '../data/certificatesData';
 import { internshipCount } from '../data/experienceData';
 import '../styles/Stats.css';
@@ -88,6 +89,7 @@ const StatItem = ({ value, label, suffix = '', href, scrollTo, active }) => {
 };
 
 const Stats = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -114,33 +116,33 @@ const Stats = () => {
       id="stats"
       className="stats section"
       ref={sectionRef}
-      aria-label="Key figures"
+      aria-label={t('stats.aria')}
     >
       <div className="container">
         <div className="stats-grid">
           <StatItem
             value={internshipCount}
-            label="Internships"
+            label={t('stats.internships')}
             scrollTo="experience"
             active={active}
           />
           <StatItem
             value={10}
             suffix="+"
-            label="Projects"
+            label={t('stats.projects')}
             href="https://github.com/oumeyma-elaammari?tab=repositories"
             active={active}
           />
           <StatItem
             value={20}
             suffix="+"
-            label="Skills"
+            label={t('stats.skills')}
             scrollTo="skills"
             active={active}
           />
           <StatItem
             value={certificatesData.length}
-            label="Certificates"
+            label={t('stats.certificates')}
             scrollTo="certificates"
             active={active}
           />

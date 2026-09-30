@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 import '../styles/Portfolio.css';
 
 const projectsData = [
@@ -98,6 +99,7 @@ const projectsData = [
 ];
 
 const Portfolio = () => {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState(projectsData);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -179,25 +181,25 @@ const Portfolio = () => {
   }, [selectedVideo, closeVideoModal]);
 
   const filters = [
-    { key: 'all', label: 'All Projects' },
-    { key: 'web', label: 'Web Development' },
-    { key: 'mobile', label: 'Mobile Apps' },
-    { key: 'desktop', label: 'Desktop Apps' }
+    { key: 'all', label: t('projects.filters.all') },
+    { key: 'web', label: t('projects.filters.web') },
+    { key: 'mobile', label: t('projects.filters.mobile') },
+    { key: 'desktop', label: t('projects.filters.desktop') }
   ];
 
   return (
     <>
       <section id="portfolio" className="portfolio section light-background">
         <div className="container section-title" data-aos="fade-up">
-          <h2>Projects</h2>
-          <p>Here are some of my academic and internship projects — spanning web, mobile, and desktop development — showcasing my approach to building practical, well-structured software.</p>
+          <h2>{t('projects.title')}</h2>
+          <p>{t('projects.intro')}</p>
         </div>
 
         <div className="container">
           <div
             className="portfolio-filters"
             role="group"
-            aria-label="Filter projects"
+            aria-label={t('projects.filterLabel')}
             data-aos="fade-up"
             data-aos-delay="100"
           >
@@ -216,23 +218,25 @@ const Portfolio = () => {
 
           <div className={`portfolio-grid ${isAnimating ? 'animating' : ''}`}>
             <div className="row gy-4 isotope-container">
-              {filteredProjects.map((project) => (
+              {filteredProjects.map((project) => {
+                const title = t(`projects.items.${project.id}.title`);
+                return (
                 <div key={project.id} className="col-lg-4 col-md-6 portfolio-item">
                   <div className="portfolio-content">
                     <div className="portfolio-media">
                       <img
                         src={require(`../assets/img/${project.image}`)}
                         className="img-fluid"
-                        alt={project.title}
+                        alt={title}
                         width={project.imgWidth}
                         height={project.imgHeight}
                         loading="lazy"
                       />
                     </div>
                     <div className="portfolio-info">
-                      <h4>{project.title}</h4>
+                      <h4>{title}</h4>
                       <p className="tech-stack">{project.techStack}</p>
-                      <p className="description">{project.description}</p>
+                      <p className="description">{t(`projects.items.${project.id}.description`)}</p>
                       {project.experienceRef && (
                         <Link
                           to="experience"
@@ -241,24 +245,24 @@ const Portfolio = () => {
                           offset={-70}
                           className="experience-link"
                         >
-                          See Cleverix internship
+                          {t('projects.internshipLink')}
                         </Link>
                       )}
                       <div className="portfolio-links">
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code on GitHub`}>
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={t('projects.github', { title })}>
                           <i className="bi bi-github"></i>
                         </a>
                         {project.demoType === 'video' && (
                           <button
                             className="demo-video-btn"
                             onClick={(event) => openVideoModal(project.demo, event)}
-                            aria-label={`Play ${project.title} demo video`}
+                            aria-label={t('projects.playDemo', { title })}
                           >
                             <i className="bi bi-play-circle-fill"></i>
                           </button>
                         )}
                         {project.demoType === 'link' && (
-                          <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} demo`}>
+                          <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={t('projects.openDemo', { title })}>
                             <i className="bi bi-box-arrow-up-right"></i>
                           </a>
                         )}
@@ -266,7 +270,8 @@ const Portfolio = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -283,20 +288,20 @@ const Portfolio = () => {
             ref={modalRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Project demo video"
+            aria-label={t('projects.videoLabel')}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               ref={closeButtonRef}
               className="video-modal-close"
               onClick={closeVideoModal}
-              aria-label="Close video"
+              aria-label={t('projects.closeVideo')}
             >
               <i className="bi bi-x-lg"></i>
             </button>
             <video controls autoPlay className="video-player">
               <source src={selectedVideo} type="video/mp4" />
-              Your browser does not support the video tag.
+              {t('projects.videoFallback')}
             </video>
           </div>
         </div>

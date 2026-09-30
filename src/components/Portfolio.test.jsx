@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Portfolio from './Portfolio';
+import i18n from '../i18n';
 
 test('renders all projects by default', () => {
   render(<Portfolio />);
@@ -27,4 +28,18 @@ test('filters projects by category when a filter is selected', async () => {
   expect(screen.queryByText('ArchvoxLib')).not.toBeInTheDocument();
   expect(screen.queryByText('My-Store')).not.toBeInTheDocument();
   expect(screen.queryByText('SmarTest')).not.toBeInTheDocument();
+});
+
+test('filters projects with the French category label', async () => {
+  await i18n.changeLanguage('fr');
+  render(<Portfolio />);
+
+  userEvent.click(screen.getByRole('button', { name: 'Applications mobiles' }));
+
+  await waitFor(() => {
+    expect(screen.queryByText('RoadmapDev')).not.toBeInTheDocument();
+  });
+
+  expect(screen.getByText('RhVerse')).toBeInTheDocument();
+  expect(screen.getByText(/développeuse Full-Stack/i)).toBeInTheDocument();
 });

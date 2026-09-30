@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "title": "Oumeyma ELAAMMARI | Software Engineering Portfolio",
+    "description": "Portfolio of Oumeyma ELAAMMARI, Software Engineering student at ENSAO specializing in full-stack development and artificial intelligence. Available for a PFE internship from January 2027."
+  },
+  "lang": {
+    "label": "Language",
+    "en": "English",
+    "fr": "Français"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "certificates": "Certificates",
+    "contact": "Contact"
+  },
+  "header": {
+    "tagline": "Full-Stack & AI Engineering Student",
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "primary": "Primary",
+    "mobile": "Mobile navigation"
+  },
+  "social": {
+    "github": "GitHub profile",
+    "linkedin": "LinkedIn profile",
+    "email": "Send email"
+  },
+  "hero": {
+    "welcome": "Welcome to my portfolio",
+    "hello": "Hello",
+    "nameLead": "My name is",
+    "prefix": "I'm",
+    "availability": "Available for a PFE internship from January 2027",
+    "contact": "Contact Me",
+    "resume": "My Resume",
+    "typed": [
+      "Software Engineering Student",
+      "Full-Stack Developer",
+      "AI Enthusiast",
+      "PFE Intern Candidate"
+    ]
+  },
+  "stats": {
+    "aria": "Key figures",
+    "internships": "Internships",
+    "projects": "Projects",
+    "skills": "Skills",
+    "certificates": "Certificates"
+  },
+  "about": {
+    "title": "About Me",
+    "intro": "A quick look at who I am, my background and what I'm looking for.",
+    "subtitle": "Full-Stack & AI Engineering Student",
+    "monogramAlt": "EO monogram",
+    "bio": "I'm a final-year engineering student at ENSAO, specializing in Software Engineering and Artificial Intelligence. I'm curious by nature and enjoy understanding how things work, then building software that is clean, useful and easy to use. Beyond code, my years in student clubs taught me to organize, lead and work well in a team. I'm now looking for a PFE internship where I can grow alongside experienced engineers.",
+    "educationTitle": "Education",
+    "locationTitle": "Location",
+    "emailTitle": "Email",
+    "languagesTitle": "Languages",
+    "softTitle": "Soft Skills",
+    "location": "Oujda / Marrakech – open to relocation anywhere in Morocco",
+    "languages": "Arabic (native), French & English (fluent)",
+    "education": {
+      "engineering": "Engineering Cycle - Software Engineering and Artificial Intelligence",
+      "preparatory": "Preparatory Cycle - Engineering Sciences",
+      "bac": "Baccalaureate in Physical Sciences",
+      "honors": "High Honors (Mention Très Bien)"
+    },
+    "soft": [
+      "Autonomy & responsibility",
+      "Teamwork",
+      "Adaptability",
+      "Motivation & commitment",
+      "Rigor & organization"
+    ]
+  },
+  "experience": {
+    "title": "Experience",
+    "intro": "Internships where I delivered full-stack features and business-process automation in real teams.",
+    "activitiesTitle": "Leadership & Activities",
+    "items": {
+      "1": {
+        "title": "Business Process Automation Intern (PFA)",
+        "period": "July – August 2026",
+        "bullets": [
+          "Designed and developed a generic business-process automation solution using Power Automate, SharePoint, Outlook, and Excel — covering request validation, notifications, and status tracking with a role-based approach for reusability",
+          "Designed SharePoint list architectures with detailed field definitions to support multiple business workflows",
+          "Produced comprehensive technical documentation in LaTeX with custom diagrams"
+        ]
+      },
+      "2": {
+        "title": "Full-Stack Development Intern",
+        "period": "July 2025",
+        "bullets": [
+          "Developed a full-stack e-commerce application using React and Laravel",
+          "Designed and implemented an admin dashboard for user, product, and order management",
+          "Implemented secure authentication and role-based access control"
+        ]
+      }
+    },
+    "activities": {
+      "1": {
+        "roles": [
+          "Head of Al-Masjid Cell",
+          "Vice President",
+          "Active Member - Design & Editing Cell"
+        ]
+      },
+      "2": {
+        "roles": [
+          "Active Member - Design Cell",
+          "Participation in the organization of Computer Science Day (4th edition)"
+        ]
+      },
+      "3": {
+        "roles": [
+          "Participation in the Science Festival (12th edition)"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Here are some of my academic and internship projects — spanning web, mobile, and desktop development — showcasing my approach to building practical, well-structured software.",
+    "filterLabel": "Filter projects",
+    "internshipLink": "See Cleverix internship",
+    "github": "View {{title}} source code on GitHub",
+    "playDemo": "Play {{title}} demo video",
+    "openDemo": "Open {{title}} demo",
+    "videoLabel": "Project demo video",
+    "closeVideo": "Close video",
+    "videoFallback": "Your browser does not support the video tag.",
+    "filters": {
+      "all": "All Projects",
+      "web": "Web Development",
+      "mobile": "Mobile Apps",
+      "desktop": "Desktop Apps"
+    },
+    "items": {
+      "6": {
+        "title": "SmarTest",
+        "description": "Secure, intelligent quiz and exam management platform with real-time communication, JWT authentication, and AI-powered question generation via the Groq API."
+      },
+      "5": {
+        "title": "My-Store",
+        "description": "Full-stack e-commerce platform with admin dashboard and role-based authentication — Cleverix internship."
+      },
+      "1": {
+        "title": "RoadmapDev",
+        "description": "E-learning platform for progressive learning modules with student progress tracking."
+      },
+      "2": {
+        "title": "RhVerse",
+        "description": "Team project – role: Full-Stack Developer. HR management app for attendance, leave requests, meetings and certificates."
+      },
+      "7": {
+        "title": "CBIR - Image Retrieval System",
+        "description": "Content-based image retrieval system indexing the Corel-1000 dataset via color histograms (RGB, HSV, LAB), with configurable bins and similarity metrics (intersection, Euclidean, Chi², correlation)."
+      },
+      "3": {
+        "title": "ArchvoxLib",
+        "description": "Library management system for books, members and borrowing with statistics."
+      },
+      "4": {
+        "title": "MemoPharma",
+        "description": "Medical follow-up system for patient management and appointment tracking."
+      }
+    }
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "intro": "My technical expertise across programming languages, frameworks, and development tools",
+    "filterLabel": "Filter skills",
+    "filters": {
+      "all": "All",
+      "languages": "Languages",
+      "frameworks": "Frameworks & Libraries",
+      "databases": "Databases",
+      "design-modeling": "Design & Modeling",
+      "devops": "Project Management & DevOps",
+      "ml-data": "Machine Learning & Data"
+    }
+  },
+  "certificates": {
+    "title": "Certificates",
+    "intro": "Professional certifications and training courses I've completed to enhance my technical skills",
+    "view": "View Certificate",
+    "skillLabels": {
+      "Data Science": "Data Science",
+      "Testing": "Testing",
+      "OOP": "OOP",
+      "Programming Fundamentals": "Programming Fundamentals"
+    }
+  },
+  "contact": {
+    "title": "Contact Me",
+    "intro1": "Have a project in mind or looking for a PFE intern?",
+    "intro2": "Feel free to reach out! I'm always open to discussing new opportunities, collaborations, or just tech conversations ^_^",
+    "locationTitle": "Location",
+    "location": "Based in Oujda / Marrakech – open to relocation anywhere in Morocco",
+    "emailTitle": "Email",
+    "githubTitle": "GitHub",
+    "githubLink": "My GitHub Profile",
+    "linkedinTitle": "LinkedIn",
+    "linkedinLink": "My LinkedIn Profile",
+    "name": "Your Name",
+    "email": "Your Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Your message has been sent. Thank you!",
+    "error": "Something went wrong. Please try again.",
+    "network": "Network error. Please try again."
+  },
+  "footer": {
+    "tagline": "Full-Stack & AI Engineering Student",
+    "rights": "All Rights Reserved",
+    "made": "Made with",
+    "by": "by Oumeyma"
+  },
+  "app": {
+    "skip": "Skip to content",
+    "scrollTop": "Scroll to top"
+  }
+}

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { HiMoon, HiSun } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 import { toggleTheme, getActiveTheme } from '../utils/theme';
 
 const ThemeToggle = ({ className = '', showLabel = false }) => {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState(() => getActiveTheme());
 
   useEffect(() => {
@@ -30,13 +32,13 @@ const ThemeToggle = ({ className = '', showLabel = false }) => {
       type="button"
       className={`theme-toggle ${className}`.trim()}
       onClick={handleToggle}
-      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      aria-label={isDark ? t('theme.toLight') : t('theme.toDark')}
       aria-pressed={!isDark}
     >
       {isDark ? <HiSun aria-hidden="true" /> : <HiMoon aria-hidden="true" />}
       {showLabel && (
         <span className="theme-toggle-label">
-          {isDark ? 'Light mode' : 'Dark mode'}
+          {isDark ? t('theme.light') : t('theme.dark')}
         </span>
       )}
     </button>

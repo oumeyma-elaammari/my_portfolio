@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +19,7 @@ import Quote from './components/Quote';
 import Footer from './components/Footer';
 
 function App() {
+  const { t } = useTranslation();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [scrollTopBottom, setScrollTopBottom] = useState(72);
 
@@ -62,7 +64,7 @@ function App() {
     <div className="App">
       <PageBackground />
       <a href="#main-content" className="skip-link">
-        Skip to content
+        {t('app.skip')}
       </a>
       <Header />
       <main id="main-content" className="main" tabIndex={-1}>
@@ -80,7 +82,7 @@ function App() {
       <button
         className={`scroll-top ${showScrollTop ? 'active' : ''}`}
         onClick={scrollToTop}
-        aria-label="Scroll to top"
+        aria-label={t('app.scrollTop')}
         style={{ '--scroll-top-bottom': `${scrollTopBottom}px` }}
       >
         <i className="bi bi-arrow-up-short"></i>

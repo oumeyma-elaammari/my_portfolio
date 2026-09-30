@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { HERO_TYPED_STRINGS } from '../data/heroTypedStrings';
+import { useTranslation } from 'react-i18next';
 import '../styles/HomeBackground.css';
 
 const ZONE_PADDING = 16;
@@ -64,8 +64,11 @@ const themePalette = (theme) => {
 
 const HomeBackground = () => {
   const canvasRef = useRef(null);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
+    const typedStrings = i18n.t('hero.typed', { returnObjects: true });
+    const typedPrefix = `${i18n.t('hero.prefix')} `;
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
@@ -116,7 +119,7 @@ const HomeBackground = () => {
       measureNode.style.letterSpacing = typedStyle.letterSpacing;
 
       let maxWidth = 0;
-      HERO_TYPED_STRINGS.forEach((value) => {
+      (Array.isArray(typedStrings) ? typedStrings : []).forEach((value) => {
         measureNode.textContent = value;
         maxWidth = Math.max(maxWidth, measureNode.offsetWidth);
       });
@@ -128,7 +131,7 @@ const HomeBackground = () => {
       measureNode.style.font = taglineStyle.font;
       measureNode.style.fontSize = taglineStyle.fontSize;
       measureNode.style.fontWeight = taglineStyle.fontWeight;
-      measureNode.textContent = "I'm ";
+      measureNode.textContent = typedPrefix;
       const prefixWidth = measureNode.offsetWidth;
 
       return prefixWidth + maxWidth + 10;
@@ -478,7 +481,7 @@ const HomeBackground = () => {
       measureNode?.remove();
       measureNode = null;
     };
-  }, []);
+  }, [i18n]);
 
   return (
     <div className="home-background-wrap">

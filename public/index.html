@@ -8,6 +8,21 @@
     <script>
       (function () {
         try {
+          var stored = localStorage.getItem('language');
+          var lang = 'en';
+          if (stored === 'fr' || stored === 'en') {
+            lang = stored;
+          } else {
+            var nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            if (nav.indexOf('fr') === 0) lang = 'fr';
+          }
+          document.documentElement.lang = lang;
+        } catch (e) {}
+      })();
+    </script>
+    <script>
+      (function () {
+        try {
           var theme = localStorage.getItem('theme');
           if (theme !== 'light' && theme !== 'dark') {
             theme = window.matchMedia('(prefers-color-scheme: light)').matches

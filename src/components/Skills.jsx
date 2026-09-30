@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import skillsData from '../data/skillsData';
 import '../styles/Skills.css';
 
-const filters = [
-  { key: 'all', label: 'All' },
-  { key: 'languages', label: 'Languages' },
-  { key: 'frameworks', label: 'Frameworks & Libraries' },
-  { key: 'databases', label: 'Databases' },
-  { key: 'design-modeling', label: 'Design & Modeling' },
-  { key: 'devops', label: 'Project Management & DevOps' },
-  { key: 'ml-data', label: 'Machine Learning & Data' }
+const filterKeys = [
+  'all',
+  'languages',
+  'frameworks',
+  'databases',
+  'design-modeling',
+  'devops',
+  'ml-data'
 ];
 
 const SkillCard = ({ skill }) => (
@@ -26,6 +27,7 @@ const SkillCard = ({ skill }) => (
 );
 
 const Skills = () => {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState('all');
   const [filteredSkills, setFilteredSkills] = useState(skillsData);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -58,27 +60,27 @@ const Skills = () => {
   return (
     <section id="skills" className="skills section">
       <div className="container section-title" data-aos="fade-up">
-        <h2>Technical Skills</h2>
-        <p>My technical expertise across programming languages, frameworks, and development tools</p>
+        <h2>{t('skills.title')}</h2>
+        <p>{t('skills.intro')}</p>
       </div>
 
       <div className="container">
         <div
           className="portfolio-filters"
           role="group"
-          aria-label="Filter skills"
+          aria-label={t('skills.filterLabel')}
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          {filters.map((f) => (
+          {filterKeys.map((key) => (
             <button
-              key={f.key}
+              key={key}
               type="button"
-              className={filter === f.key ? 'filter-active' : ''}
-              aria-pressed={filter === f.key}
-              onClick={() => setFilter(f.key)}
+              className={filter === key ? 'filter-active' : ''}
+              aria-pressed={filter === key}
+              onClick={() => setFilter(key)}
             >
-              {f.label}
+              {t(`skills.filters.${key}`)}
             </button>
           ))}
         </div>

@@ -1,40 +1,36 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/img/logo_oumeyma.webp';
 import '../styles/About.css';
 
 const educationData = [
   {
-    title: 'Engineering Cycle - Software Engineering and Artificial Intelligence',
+    titleKey: 'about.education.engineering',
     period: '2024 - 2027',
     place: 'ENSA Oujda (ENSAO)'
   },
   {
-    title: 'Preparatory Cycle - Engineering Sciences',
+    titleKey: 'about.education.preparatory',
     period: '2022 - 2024',
     place: 'ENSA Oujda (ENSAO)'
   },
   {
-    title: 'Baccalaureate in Physical Sciences',
+    titleKey: 'about.education.bac',
     period: '2021 - 2022',
     place: 'Lycée Ibn Sina Oujda',
-    note: 'High Honors (Mention Très Bien)'
+    noteKey: 'about.education.honors'
   }
 ];
 
-const softSkills = [
-  'Autonomy & responsibility',
-  'Teamwork',
-  'Adaptability',
-  'Motivation & commitment',
-  'Rigor & organization'
-];
-
 const About = () => {
+  const { t } = useTranslation();
+  const softSkills = t('about.soft', { returnObjects: true });
+
   return (
     <section id="about" className="about section">
       <div className="container section-title" data-aos="fade-up">
-        <h2>About Me</h2>
-        <p>A quick look at who I am, my background and what I'm looking for.</p>
+        <h2>{t('about.title')}</h2>
+        <p>{t('about.intro')}</p>
       </div>
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
@@ -43,7 +39,7 @@ const About = () => {
             <div className="about-monogram-frame">
               <img
                 src={logo}
-                alt="EO monogram"
+                alt={t('about.monogramAlt')}
                 className="about-monogram"
                 width="220"
                 height="220"
@@ -51,14 +47,8 @@ const About = () => {
             </div>
           </div>
           <div className="col-lg-8 content">
-            <h3>Full-Stack &amp; AI Engineering Student</h3>
-            <p className="about-bio py-3">
-              I'm a final-year engineering student at ENSAO, specializing in Software Engineering
-              and Artificial Intelligence. I'm curious by nature and enjoy understanding how things
-              work, then building software that is clean, useful and easy to use. Beyond code,
-              my years in student clubs taught me to organize, lead and work well in a team.
-              I'm now looking for a PFE internship where I can grow alongside experienced engineers.
-            </p>
+            <h3>{t('about.subtitle')}</h3>
+            <p className="about-bio py-3">{t('about.bio')}</p>
           </div>
         </div>
 
@@ -66,15 +56,15 @@ const About = () => {
           <div className="col-lg-7">
             <h3 className="about-subtitle">
               <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-              Education
+              {t('about.educationTitle')}
             </h3>
             <div className="about-education">
               {educationData.map((item) => (
-                <div key={item.title} className="about-timeline-item">
-                  <h4>{item.title}</h4>
+                <div key={item.titleKey} className="about-timeline-item">
+                  <h4>{t(item.titleKey)}</h4>
                   <span className="about-period">{item.period}</span>
                   <p><em>{item.place}</em></p>
-                  {item.note && <p>{item.note}</p>}
+                  {item.noteKey && <p>{t(item.noteKey)}</p>}
                 </div>
               ))}
             </div>
@@ -83,14 +73,14 @@ const About = () => {
             <div className="about-fact">
               <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-                Location
+                {t('about.locationTitle')}
               </h3>
-              <p>Oujda / Marrakech – open to relocation anywhere in Morocco</p>
+              <p>{t('about.location')}</p>
             </div>
             <div className="about-fact">
               <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-                Email
+                {t('about.emailTitle')}
               </h3>
               <p>
                 <a href="mailto:elaammarioumeima@gmail.com">elaammarioumeima@gmail.com</a>
@@ -99,17 +89,17 @@ const About = () => {
             <div className="about-fact">
               <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-                Languages
+                {t('about.languagesTitle')}
               </h3>
-              <p>Arabic (native), French &amp; English (fluent)</p>
+              <p>{t('about.languages')}</p>
             </div>
             <div className="about-fact">
               <h3 className="about-subtitle about-subtitle-sm">
                 <i className="bi bi-chevron-right text-primary me-2" aria-hidden="true"></i>
-                Soft Skills
+                {t('about.softTitle')}
               </h3>
               <div className="about-badges">
-                {softSkills.map((skill) => (
+                {(Array.isArray(softSkills) ? softSkills : []).map((skill) => (
                   <span key={skill} className="about-badge">{skill}</span>
                 ))}
               </div>

@@ -1,15 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { experienceData, activitiesData } from '../data/experienceData';
 import '../styles/Experience.css';
 
 const Experience = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="experience" className="experience section">
       <div className="container section-title" data-aos="fade-up">
-        <h2>Experience</h2>
-        <p>
-          Internships where I delivered full-stack features and business-process automation in real teams.
-        </p>
+        <h2>{t('experience.title')}</h2>
+        <p>{t('experience.intro')}</p>
       </div>
 
       <div className="container">
@@ -17,8 +18,8 @@ const Experience = () => {
           {experienceData.map((item) => (
             <article key={item.id} className="experience-item">
               <div className="experience-meta">
-                <h3>{item.title}</h3>
-                <span className="experience-period">{item.period}</span>
+                <h3>{t(item.titleKey)}</h3>
+                <span className="experience-period">{t(item.periodKey)}</span>
               </div>
               <p className="experience-company"><em>{item.company}</em></p>
               <div className="experience-tech">
@@ -27,8 +28,8 @@ const Experience = () => {
                 ))}
               </div>
               <ul>
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
+                {item.bulletKeys.map((key) => (
+                  <li key={key}>{t(key)}</li>
                 ))}
               </ul>
             </article>
@@ -36,15 +37,17 @@ const Experience = () => {
         </div>
 
         <div className="activities-block" data-aos="fade-up" data-aos-delay="150">
-          <h3 className="activities-title">Leadership &amp; Activities</h3>
+          <h3 className="activities-title">{t('experience.activitiesTitle')}</h3>
           <div className="row gy-4 activities-row">
             {activitiesData.map((activity) => (
               <div key={activity.id} className="col-lg-4 col-md-6 d-flex">
                 <article className="activity-item">
                   <div className="activity-header">
-                    <span className="activity-icon" aria-hidden="true">
-                      <i className={`bi ${activity.icon}`} />
-                    </span>
+                    {activity.icon ? (
+                      <span className="activity-icon" aria-hidden="true">
+                        <i className={`bi ${activity.icon}`} />
+                      </span>
+                    ) : null}
                     <div className="activity-heading">
                       <h4>{activity.title}</h4>
                       {activity.subtitle ? (
@@ -54,8 +57,8 @@ const Experience = () => {
                   </div>
                   <ul className="activity-list">
                     {activity.details.map((detail) => (
-                      <li key={detail.role} className="activity-row">
-                        <span className="activity-role">{detail.role}</span>
+                      <li key={detail.roleKey} className="activity-row">
+                        <span className="activity-role">{t(detail.roleKey)}</span>
                         {detail.date ? (
                           <span className="activity-date">{detail.date}</span>
                         ) : null}

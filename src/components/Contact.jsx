@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import '../styles/Contact.css';
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,13 +35,13 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        setStatus({ type: 'success', message: 'Your message has been sent. Thank you!' });
+        setStatus({ type: 'success', message: t('contact.success') });
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
+        setStatus({ type: 'error', message: t('contact.error') });
       }
     } catch (error) {
-      setStatus({ type: 'error', message: 'Network error. Please try again.' });
+      setStatus({ type: 'error', message: t('contact.network') });
     } finally {
       setIsLoading(false);
     }
@@ -48,11 +50,11 @@ const Contact = () => {
   return (
     <section id="contact" className="contact section">
       <div className="container section-title" data-aos="fade-up">
-        <h2>Contact Me</h2>
+        <h2>{t('contact.title')}</h2>
         <p>
-          Have a project in mind or looking for a PFE intern?
+          {t('contact.intro1')}
           <br /><br />
-          Feel free to reach out! I'm always open to discussing new opportunities, collaborations, or just tech conversations ^_^
+          {t('contact.intro2')}
         </p>
       </div>
 
@@ -63,15 +65,15 @@ const Contact = () => {
               <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
                 <i className="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
-                  <h3>Location</h3>
-                  <p>Based in Oujda / Marrakech – open to relocation anywhere in Morocco</p>
+                  <h3>{t('contact.locationTitle')}</h3>
+                  <p>{t('contact.location')}</p>
                 </div>
               </div>
 
               <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                 <i className="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Email</h3>
+                  <h3>{t('contact.emailTitle')}</h3>
                   <p>elaammarioumeima@gmail.com</p>
                 </div>
               </div>
@@ -79,16 +81,16 @@ const Contact = () => {
               <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                 <i className="bi bi-github flex-shrink-0"></i>
                 <div>
-                  <h3>GitHub</h3>
-                  <p><a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">My GitHub Profile</a></p>
+                  <h3>{t('contact.githubTitle')}</h3>
+                  <p><a href="https://github.com/oumeyma-elaammari" target="_blank" rel="noopener noreferrer">{t('contact.githubLink')}</a></p>
                 </div>
               </div>
 
               <div className="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                 <i className="bi bi-linkedin flex-shrink-0"></i>
                 <div>
-                  <h3>LinkedIn</h3>
-                  <p><a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">My LinkedIn Profile</a></p>
+                  <h3>{t('contact.linkedinTitle')}</h3>
+                  <p><a href="https://www.linkedin.com/in/oumeyma-el-aammari-886115244/" target="_blank" rel="noopener noreferrer">{t('contact.linkedinLink')}</a></p>
                 </div>
               </div>
             </div>
@@ -98,7 +100,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="contact-form" data-aos="fade-up" data-aos-delay="200">
               <div className="row gy-4">
                 <div className="col-md-6">
-                  <label htmlFor="name-field" className="pb-2">Your Name</label>
+                  <label htmlFor="name-field" className="pb-2">{t('contact.name')}</label>
                   <input
                     type="text"
                     name="name"
@@ -111,7 +113,7 @@ const Contact = () => {
                 </div>
 
                 <div className="col-md-6">
-                  <label htmlFor="email-field" className="pb-2">Your Email</label>
+                  <label htmlFor="email-field" className="pb-2">{t('contact.email')}</label>
                   <input
                     type="email"
                     name="email"
@@ -124,7 +126,7 @@ const Contact = () => {
                 </div>
 
                 <div className="col-md-12">
-                  <label htmlFor="subject-field" className="pb-2">Subject</label>
+                  <label htmlFor="subject-field" className="pb-2">{t('contact.subject')}</label>
                   <input
                     type="text"
                     name="subject"
@@ -137,7 +139,7 @@ const Contact = () => {
                 </div>
 
                 <div className="col-md-12">
-                  <label htmlFor="message-field" className="pb-2">Message</label>
+                  <label htmlFor="message-field" className="pb-2">{t('contact.message')}</label>
                   <textarea
                     name="message"
                     rows="5"
@@ -151,13 +153,13 @@ const Contact = () => {
 
                 <div className="col-md-12 text-center">
                   <div className="form-status" aria-live="polite" aria-atomic="true">
-                    {isLoading && <div className="loading">Sending...</div>}
+                    {isLoading && <div className="loading">{t('contact.sending')}</div>}
                     {status.type === 'error' && <div className="error-message" role="alert">{status.message}</div>}
                     {status.type === 'success' && <div className="sent-message">{status.message}</div>}
                   </div>
 
                   <button type="submit" className="btn btn-primary send" disabled={isLoading}>
-                    Send Message
+                    {t('contact.send')}
                   </button>
                 </div>
               </div>

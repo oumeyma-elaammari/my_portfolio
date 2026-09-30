@@ -1,19 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import Typed from 'typed.js';
 import { Link } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 import cv from '../assets/cv/cv_oumeyma_elaammari.pdf';
-import { HERO_TYPED_STRINGS } from '../data/heroTypedStrings';
 import '../styles/Hero.css';
 
 const Hero = () => {
+  const { t, i18n } = useTranslation();
   const typedRef = useRef(null);
   const typedSlotRef = useRef(null);
   const taglineRef = useRef(null);
 
   useEffect(() => {
+    const typedStrings = i18n.t('hero.typed', { returnObjects: true });
     const slot = typedSlotRef.current;
     const tagline = taglineRef.current;
-    if (!slot || !tagline) return undefined;
+    if (!slot || !tagline || !Array.isArray(typedStrings)) return undefined;
 
     const measure = document.createElement('span');
     measure.style.position = 'fixed';
@@ -34,7 +36,7 @@ const Hero = () => {
       measure.style.letterSpacing = style.letterSpacing;
 
       let maxWidth = 0;
-      HERO_TYPED_STRINGS.forEach((value) => {
+      typedStrings.forEach((value) => {
         measure.textContent = value;
         maxWidth = Math.max(maxWidth, measure.offsetWidth);
       });
@@ -48,7 +50,7 @@ const Hero = () => {
     window.addEventListener('resize', applyTypedWidth);
 
     const typed = new Typed(typedRef.current, {
-      strings: HERO_TYPED_STRINGS,
+      strings: typedStrings,
       typeSpeed: 90,
       backSpeed: 50,
       backDelay: 2000,
@@ -64,29 +66,29 @@ const Hero = () => {
       window.removeEventListener('resize', applyTypedWidth);
       measure.remove();
     };
-  }, []);
+  }, [i18n]);
 
   return (
     <section id="hero" className="hero section">
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
           <p className="greeting">
-            Welcome to my portfolio<span className="greeting-end"> !</span>
+            {t('hero.welcome')}<span className="greeting-end"> !</span>
           </p>
 
           <h1>
-            Hello<span className="greeting-end"> !</span> My name is{' '}
+            {t('hero.hello')}<span className="greeting-end"> !</span> {t('hero.nameLead')}{' '}
             <span className="highlight">OUMEYMA ELAAMMARI</span>
           </h1>
 
           <p className="tagline" ref={taglineRef}>
-            <span className="tagline-prefix">I'm</span>
+            <span className="tagline-prefix">{t('hero.prefix')}</span>
             <span className="typed-slot" ref={typedSlotRef}>
               <span ref={typedRef} className="typed-text"></span>
             </span>
           </p>
 
-          <p className="availability">Available for a PFE internship from January 2027</p>
+          <p className="availability">{t('hero.availability')}</p>
 
           <div className="hero-buttons">
             <Link
@@ -96,10 +98,10 @@ const Hero = () => {
               offset={-70}
               className="btn btn-primary"
             >
-              Contact Me
+              {t('hero.contact')}
             </Link>
             <a href={cv} className="btn btn-outline">
-              My Resume
+              {t('hero.resume')}
             </a>
           </div>
         </div>

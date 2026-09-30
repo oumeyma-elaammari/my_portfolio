@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
+import { useTranslation } from 'react-i18next';
 import { HiMenu, HiX } from 'react-icons/hi';
 import logo from '../assets/img/logo_oumeyma.webp';
-import SocialLinks from './SocialLinks';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 import '../styles/Header.css';
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,13 +42,13 @@ const Header = () => {
   };
 
   const navItems = [
-    { to: 'hero', label: 'Home' },
-    { to: 'about', label: 'About' },
-    { to: 'experience', label: 'Experience' },
-    { to: 'portfolio', label: 'Projects' },
-    { to: 'skills', label: 'Skills' },
-    { to: 'certificates', label: 'Certificates' },
-    { to: 'contact', label: 'Contact' }
+    { to: 'hero', label: t('nav.home') },
+    { to: 'about', label: t('nav.about') },
+    { to: 'experience', label: t('nav.experience') },
+    { to: 'portfolio', label: t('nav.projects') },
+    { to: 'skills', label: t('nav.skills') },
+    { to: 'certificates', label: t('nav.certificates') },
+    { to: 'contact', label: t('nav.contact') }
   ];
 
   return (
@@ -57,11 +59,11 @@ const Header = () => {
             <img src={logo} alt="Oumeyma" className="header-profile-img" width="45" height="45" />
             <div className="header-info">
               <div className="header-name">OUMEYMA ELAAMMARI</div>
-              <div className="header-tag">Full-Stack &amp; AI Engineering Student</div>
+              <div className="header-tag">{t('header.tagline')}</div>
             </div>
           </div>
 
-          <nav className="navmenu" aria-label="Primary">
+          <nav className="navmenu" aria-label={t('header.primary')}>
             <ul>
               {navItems.map((item) => (
                 <li key={item.to}>
@@ -81,12 +83,12 @@ const Header = () => {
           </nav>
 
           <div className="header-social">
-            <SocialLinks />
+            <LanguageToggle />
             <ThemeToggle />
             <button
               className="mobile-nav-toggle"
               onClick={toggleMobileMenu}
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMobileMenuOpen ? t('header.menuClose') : t('header.menuOpen')}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
             >
@@ -102,11 +104,12 @@ const Header = () => {
           className="mobile-nav active"
           role="dialog"
           aria-modal="true"
-          aria-label="Mobile navigation"
+          aria-label={t('header.mobile')}
         >
-          <button className="mobile-nav-close" onClick={closeMobileMenu} aria-label="Close menu">
+          <button className="mobile-nav-close" onClick={closeMobileMenu} aria-label={t('header.menuClose')}>
             <HiX />
           </button>
+          <LanguageToggle className="lang-switch-mobile" />
           <ThemeToggle className="theme-toggle-mobile" showLabel />
           <ul>
             {navItems.map((item) => (

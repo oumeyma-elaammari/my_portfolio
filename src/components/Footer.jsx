@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import SocialLinks from './SocialLinks';
 import '../styles/Footer.css';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -12,7 +14,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6 text-center text-md-start mb-3 mb-md-0">
             <div className="footer-logo">
               <h3 className="footer-name">OUMEYMA <span>ELAAMMARI</span></h3>
-              <p className="footer-tagline">Full-Stack &amp; AI Engineering Student</p>
+              <p className="footer-tagline">{t('footer.tagline')}</p>
             </div>
           </div>
 
@@ -24,8 +26,8 @@ const Footer = () => {
 
           <div className="col-lg-4 text-center text-lg-end">
             <div className="footer-copyright">
-              <p>© {currentYear} All Rights Reserved</p>
-              <p className="footer-heart">Made with <i className="bi bi-heart-fill"></i> by Oumeyma</p>
+              <p>© {currentYear} {t('footer.rights')}</p>
+              <p className="footer-heart">{t('footer.made')} <i className="bi bi-heart-fill"></i> {t('footer.by')}</p>
             </div>
           </div>
         </div>

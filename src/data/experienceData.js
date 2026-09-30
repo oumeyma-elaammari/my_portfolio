@@ -2,27 +2,27 @@ export const experienceData = [
   {
     id: 1,
     type: 'internship',
-    title: 'Business Process Automation Intern (PFA)',
     company: 'Novelis, Oujda',
-    period: 'July – August 2026',
     technologies: ['Power Automate', 'SharePoint', 'Outlook', 'Excel', 'LaTeX'],
-    bullets: [
-      'Designed and developed a generic business-process automation solution using Power Automate, SharePoint, Outlook, and Excel — covering request validation, notifications, and status tracking with a role-based approach for reusability',
-      'Designed SharePoint list architectures with detailed field definitions to support multiple business workflows',
-      'Produced comprehensive technical documentation in LaTeX with custom diagrams'
+    titleKey: 'experience.items.1.title',
+    periodKey: 'experience.items.1.period',
+    bulletKeys: [
+      'experience.items.1.bullets.0',
+      'experience.items.1.bullets.1',
+      'experience.items.1.bullets.2'
     ]
   },
   {
     id: 2,
     type: 'internship',
-    title: 'Full-Stack Development Intern',
     company: 'Cleverix, Morocco',
-    period: 'July 2025',
     technologies: ['React', 'Laravel', 'MySQL'],
-    bullets: [
-      'Developed a full-stack e-commerce application using React and Laravel',
-      'Designed and implemented an admin dashboard for user, product, and order management',
-      'Implemented secure authentication and role-based access control'
+    titleKey: 'experience.items.2.title',
+    periodKey: 'experience.items.2.period',
+    bulletKeys: [
+      'experience.items.2.bullets.0',
+      'experience.items.2.bullets.1',
+      'experience.items.2.bullets.2'
     ]
   }
 ];
@@ -34,9 +34,9 @@ export const activitiesData = [
     subtitle: 'ENSAO',
     icon: 'bi-heart',
     details: [
-      { role: 'Head of Al-Masjid Cell', date: '2024 - 2025' },
-      { role: 'Vice President', date: '2023 - 2024' },
-      { role: 'Active Member - Design & Editing Cell' }
+      { roleKey: 'experience.activities.1.roles.0', date: '2024 - 2025' },
+      { roleKey: 'experience.activities.1.roles.1', date: '2023 - 2024' },
+      { roleKey: 'experience.activities.1.roles.2' }
     ]
   },
   {
@@ -45,9 +45,9 @@ export const activitiesData = [
     subtitle: 'ENSAO',
     icon: 'bi-code-slash',
     details: [
-      { role: 'Active Member - Design Cell' },
+      { roleKey: 'experience.activities.2.roles.0' },
       {
-        role: 'Participation in the organization of Computer Science Day (4th edition)',
+        roleKey: 'experience.activities.2.roles.1',
         date: '2024 - 2025'
       }
     ]
@@ -58,7 +58,7 @@ export const activitiesData = [
     icon: 'bi-lightbulb',
     details: [
       {
-        role: 'Participation in the Science Festival (12th edition)',
+        roleKey: 'experience.activities.3.roles.0',
         date: '2024 - 2025'
       }
     ]

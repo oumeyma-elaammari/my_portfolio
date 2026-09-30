@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Contact from './Contact';
+import i18n from '../i18n';
 
 const fillForm = () => {
   userEvent.type(screen.getByLabelText(/your name/i), 'Jane Doe');
@@ -49,4 +50,18 @@ test('shows an error message when the request fails', async () => {
   userEvent.click(screen.getByRole('button', { name: /send message/i }));
 
   expect(await screen.findByText(/something went wrong/i)).toBeInTheDocument();
+});
+
+test('shows French form labels and the French success message', async () => {
+  await i18n.changeLanguage('fr');
+  global.fetch.mockResolvedValueOnce({ ok: true });
+  render(<Contact />);
+
+  userEvent.type(screen.getByLabelText(/votre nom/i), 'Jane Doe');
+  userEvent.type(screen.getByLabelText(/votre e-mail/i), 'jane@example.com');
+  userEvent.type(screen.getByLabelText(/sujet/i), 'Bonjour');
+  userEvent.type(screen.getByLabelText(/^message$/i), 'Message de test');
+  userEvent.click(screen.getByRole('button', { name: /envoyer/i }));
+
+  expect(await screen.findByText(/votre message a été envoyé/i)).toBeInTheDocument();
 });
