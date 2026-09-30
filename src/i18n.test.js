@@ -57,11 +57,28 @@ test('uses the validated French bio, internship descriptions, and wording', asyn
   expect(i18n.t('meta.title')).toBe('Oumeyma ELAAMMARI | Portfolio Full-Stack & IA');
   expect(i18n.t('meta.description')).toMatch(/élève-ingénieure à l'ENSAO/);
   expect(i18n.t('meta.description')).toMatch(/un stage PFE à partir de janvier 2027/);
-  expect(i18n.t('hero.availability')).toBe('Disponible pour un stage PFE à partir de janvier 2027');
-  expect(i18n.t('hero.typed', { returnObjects: true })[0]).toBe('Élève-ingénieure en génie logiciel');
-  expect(i18n.t('hero.typed', { returnObjects: true })[3]).toBe('Candidate pour un stage PFE');
+  expect(i18n.t('hero.greeting')).toBe("Bonjour, je m'appelle");
+  expect(i18n.t('hero.availability')).toBe('Disponible pour un stage PFE — janvier 2027');
+  expect(i18n.t('hero.typed', { returnObjects: true })).toEqual([
+    'Élève-ingénieure en génie logiciel',
+    'Développeuse Full-Stack',
+    "Passionnée d'IA"
+  ]);
   expect(i18n.t('about.education.engineering')).toContain('–');
   expect(i18n.t('experience.activities.1.roles.2')).toBe('Membre active – cellule Design & Editing');
   expect(i18n.t('projects.items.7.description')).toMatch(/jeu de données Corel-1000/);
   expect(document.documentElement.lang).toBe('fr');
+});
+
+test('uses the English home introduction, availability line, and typed roles', async () => {
+  await i18n.changeLanguage('en');
+
+  expect(i18n.t('hero.welcome')).toBe('Welcome to my portfolio');
+  expect(i18n.t('hero.greeting')).toBe('Hello, my name is');
+  expect(i18n.t('hero.availability')).toBe('Available for a PFE internship — January 2027');
+  expect(i18n.t('hero.typed', { returnObjects: true })).toEqual([
+    'Software Engineering Student',
+    'Full-Stack Developer',
+    'AI Enthusiast'
+  ]);
 });

@@ -8,6 +8,7 @@ const LINE_FADE_BAND = 14;
 
 const CONTENT_SELECTORS = [
   '.greeting',
+  '.hero-intro',
   'h1',
   '.tagline',
   '.availability',
@@ -68,13 +69,13 @@ const HomeBackground = () => {
 
   useEffect(() => {
     const typedStrings = i18n.t('hero.typed', { returnObjects: true });
-    const typedPrefix = `${i18n.t('hero.prefix')} `;
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
 
     const ctx = canvas.getContext('2d', { alpha: true });
     const stage = canvas.closest('.home-stage') || canvas.parentElement;
     const contentEl = stage?.querySelector('.hero-content') || null;
+    const heroEl = stage?.querySelector('.hero') || null;
     const statsGridEl = stage?.querySelector('.stats-grid') || null;
 
     let animationId = 0;
@@ -125,16 +126,9 @@ const HomeBackground = () => {
       });
 
       measureNode.textContent = '|';
-      maxWidth = Math.max(maxWidth, measureNode.offsetWidth);
+      const cursorWidth = measureNode.offsetWidth;
 
-      const taglineStyle = window.getComputedStyle(taglineEl);
-      measureNode.style.font = taglineStyle.font;
-      measureNode.style.fontSize = taglineStyle.fontSize;
-      measureNode.style.fontWeight = taglineStyle.fontWeight;
-      measureNode.textContent = typedPrefix;
-      const prefixWidth = measureNode.offsetWidth;
-
-      return prefixWidth + maxWidth + 10;
+      return maxWidth + cursorWidth + 8;
     };
 
     const buildClearZone = (local) => ({
@@ -433,7 +427,10 @@ const HomeBackground = () => {
       attributeFilter: ['data-theme']
     });
 
+    let cancelled = false;
+
     const layoutObserver = new ResizeObserver(onLayoutChange);
+    if (heroEl) layoutObserver.observe(heroEl);
     if (contentEl) {
       layoutObserver.observe(contentEl);
       CONTENT_SELECTORS.forEach((selector) => {
@@ -465,8 +462,16 @@ const HomeBackground = () => {
 
     resize();
     animationId = requestAnimationFrame(loop);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (cancelled) return;
+        updateClearZones();
+        drawFrame();
+      });
+    }
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(animationId);
       observer.disconnect();
       themeObserver.disconnect();

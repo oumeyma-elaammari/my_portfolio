@@ -119,26 +119,6 @@ html[data-theme="light"] {
   }
 }
 
-.skip-link {
-  position: absolute;
-  left: 16px;
-  top: -48px;
-  z-index: 100000;
-  padding: 10px 16px;
-  background: var(--accent-color);
-  color: var(--accent-contrast);
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: top 0.2s ease;
-}
-
-.skip-link:focus {
-  top: 16px;
-  outline: 2px solid var(--contrast-color);
-  outline-offset: 2px;
-}
-
 :focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 3px;
@@ -179,7 +159,7 @@ section, .section {
 }
 
 #hero.section {
-  padding: var(--header-height, 60px) 0 0;
+  padding: 0;
 }
 
 #stats.section {

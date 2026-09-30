@@ -266,3 +266,35 @@ html[data-theme="light"] .footer-copyright p:first-child {
     font-size: 0.45rem;
   }
 }
+
+@media (max-width: 480px) {
+  .footer .row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .footer .col-lg-4 {
+    flex: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-copyright {
+    text-align: center;
+  }
+
+  .footer-name,
+  .footer-tagline,
+  .footer-copyright p {
+    white-space: normal;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}

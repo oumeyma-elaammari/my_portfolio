@@ -10,6 +10,10 @@ const Hero = () => {
   const typedRef = useRef(null);
   const typedSlotRef = useRef(null);
   const taglineRef = useRef(null);
+  const french = String(i18n.resolvedLanguage || i18n.language || 'en')
+    .toLowerCase()
+    .startsWith('fr');
+  const exclamationGap = french ? '\u00A0' : ' ';
 
   useEffect(() => {
     const typedStrings = i18n.t('hero.typed', { returnObjects: true });
@@ -26,24 +30,58 @@ const Hero = () => {
     measure.style.whiteSpace = 'nowrap';
     document.body.appendChild(measure);
 
-    const applyTypedWidth = () => {
-      const typedEl = typedRef.current;
-      const source = typedEl || tagline;
+    const syncMeasureFont = (source) => {
       const style = window.getComputedStyle(source);
       measure.style.font = style.font;
       measure.style.fontSize = style.fontSize;
       measure.style.fontWeight = style.fontWeight;
       measure.style.letterSpacing = style.letterSpacing;
+    };
 
+    const measureLongest = (source) => {
+      syncMeasureFont(source);
       let maxWidth = 0;
       typedStrings.forEach((value) => {
         measure.textContent = value;
         maxWidth = Math.max(maxWidth, measure.offsetWidth);
       });
       measure.textContent = '|';
-      maxWidth = Math.max(maxWidth, measure.offsetWidth);
+      return maxWidth + measure.offsetWidth;
+    };
 
-      slot.style.setProperty('--typed-max-width', `${Math.ceil(maxWidth + 4)}px`);
+    const applyTypedWidth = () => {
+      const typedEl = typedRef.current;
+      const source = typedEl || tagline;
+      const narrow = window.innerWidth <= 480;
+
+      if (!narrow) {
+        tagline.style.fontSize = '';
+        syncMeasureFont(source);
+        let maxWidth = 0;
+        typedStrings.forEach((value) => {
+          measure.textContent = value;
+          maxWidth = Math.max(maxWidth, measure.offsetWidth);
+        });
+        measure.textContent = '|';
+        maxWidth = Math.max(maxWidth, measure.offsetWidth);
+        slot.style.setProperty('--typed-max-width', `${Math.ceil(maxWidth + 4)}px`);
+        return;
+      }
+
+      tagline.style.fontSize = '';
+      const available = tagline.parentElement ? tagline.parentElement.clientWidth : window.innerWidth;
+      let size = parseFloat(window.getComputedStyle(tagline).fontSize);
+      const minSize = 13;
+      let maxWidth = measureLongest(source);
+
+      while (maxWidth > available && size > minSize) {
+        size = Math.max(minSize, +(size - 0.5).toFixed(1));
+        tagline.style.fontSize = `${size}px`;
+        maxWidth = measureLongest(typedEl || tagline);
+        if (size === minSize) break;
+      }
+
+      slot.style.setProperty('--typed-max-width', `${Math.ceil(maxWidth)}px`);
     };
 
     applyTypedWidth();
@@ -73,22 +111,23 @@ const Hero = () => {
       <div className="hero-stack">
         <div className="container hero-content" data-aos="fade-up" data-aos-delay="100">
           <p className="greeting">
-            {t('hero.welcome')}<span className="greeting-end"> !</span>
+            {t('hero.welcome')}<span className="greeting-end"><span className="greeting-gap">{exclamationGap}</span>!</span>
           </p>
 
-          <h1>
-            {t('hero.hello')}<span className="greeting-end"> !</span> {t('hero.nameLead')}{' '}
-            <span className="highlight">OUMEYMA ELAAMMARI</span>
-          </h1>
+          <p className="hero-intro">{t('hero.greeting')}</p>
+
+          <h1>OUMEYMA EL AAMMARI</h1>
 
           <p className="tagline" ref={taglineRef}>
-            <span className="tagline-prefix">{t('hero.prefix')}</span>
             <span className="typed-slot" ref={typedSlotRef}>
               <span ref={typedRef} className="typed-text"></span>
             </span>
           </p>
 
-          <p className="availability">{t('hero.availability')}</p>
+          <p className="availability">
+            <span className="availability-dot" aria-hidden="true" />
+            <span className="availability-text">{t('hero.availability')}</span>
+          </p>
 
           <div className="hero-buttons">
             <Link

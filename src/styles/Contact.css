@@ -187,3 +187,18 @@ html[data-theme="dark"] .contact .contact-form button[type="submit"]:hover {
     padding: 20px;
   }
 }
+
+@media (max-width: 480px) {
+  #contact.section {
+    padding-bottom: 12px;
+  }
+
+  .contact .contact-form textarea.form-control {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    resize: vertical;
+    overflow: hidden;
+    border-bottom-right-radius: 0;
+  }
+}

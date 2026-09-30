@@ -87,10 +87,11 @@ html[data-theme="dark"] .quote-section .quote-content p {
 
 @media (max-width: 480px) {
   .quote-section {
-    padding: 20px 0;
+    padding: 0 0 16px;
   }
 
   .quote-section .quote-content {
+    margin-top: 22px;
     padding: 14px 16px 14px 18px;
   }
 

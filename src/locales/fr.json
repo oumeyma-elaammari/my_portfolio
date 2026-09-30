@@ -38,17 +38,14 @@
   },
   "hero": {
     "welcome": "Bienvenue sur mon portfolio",
-    "hello": "Bonjour",
-    "nameLead": "Je m'appelle",
-    "prefix": "Je suis",
-    "availability": "Disponible pour un stage PFE à partir de janvier 2027",
+    "greeting": "Bonjour, je m'appelle",
+    "availability": "Disponible pour un stage PFE — janvier 2027",
     "contact": "Me contacter",
     "resume": "Mon CV",
     "typed": [
       "Élève-ingénieure en génie logiciel",
       "Développeuse Full-Stack",
-      "Passionnée d'IA",
-      "Candidate pour un stage PFE"
+      "Passionnée d'IA"
     ]
   },
   "stats": {
@@ -231,7 +228,6 @@
     "by": "par Oumeyma"
   },
   "app": {
-    "skip": "Aller au contenu",
     "scrollTop": "Retour en haut"
   }
 }

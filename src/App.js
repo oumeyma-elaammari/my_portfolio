@@ -36,6 +36,39 @@ function App() {
       setShowScrollTop(window.scrollY > 300);
       const footer = document.querySelector('.footer');
       const base = window.innerWidth <= 768 ? 84 : 72;
+      if (window.innerWidth <= 480) {
+        const gap = 12;
+        const buttonSize = 44;
+        const obstacles = [
+          document.querySelector('.quote-content'),
+          document.querySelector('.quote-content i'),
+          footer
+        ].filter(Boolean);
+        let bottom = base;
+        for (let pass = 0; pass < obstacles.length + 1; pass += 1) {
+          const buttonTop = window.innerHeight - bottom - buttonSize;
+          const buttonBottomEdge = window.innerHeight - bottom;
+          let raised = false;
+          for (let i = 0; i < obstacles.length; i += 1) {
+            const rect = obstacles[i].getBoundingClientRect();
+            const coversVertically = rect.bottom > buttonTop && rect.top < buttonBottomEdge;
+            const coversHorizontally = rect.right > window.innerWidth - 15 - buttonSize && rect.left < window.innerWidth - 15;
+            if (coversVertically && coversHorizontally) {
+              const needed = Math.ceil(window.innerHeight - rect.top + gap);
+              if (needed > bottom) {
+                bottom = needed;
+                raised = true;
+              }
+            }
+          }
+          if (!raised) break;
+        }
+        if (bottom + buttonSize > window.innerHeight - 8) {
+          setShowScrollTop(false);
+        }
+        setScrollTopBottom(bottom);
+        return;
+      }
       if (!footer) {
         setScrollTopBottom(base);
         return;
@@ -63,9 +96,6 @@ function App() {
   return (
     <div className="App">
       <PageBackground />
-      <a href="#main-content" className="skip-link">
-        {t('app.skip')}
-      </a>
       <Header />
       <main id="main-content" className="main" tabIndex={-1}>
         <HomeStage />

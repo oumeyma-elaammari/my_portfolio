@@ -38,17 +38,14 @@
   },
   "hero": {
     "welcome": "Welcome to my portfolio",
-    "hello": "Hello",
-    "nameLead": "My name is",
-    "prefix": "I'm",
-    "availability": "Available for a PFE internship from January 2027",
+    "greeting": "Hello, my name is",
+    "availability": "Available for a PFE internship — January 2027",
     "contact": "Contact Me",
     "resume": "My Resume",
     "typed": [
       "Software Engineering Student",
       "Full-Stack Developer",
-      "AI Enthusiast",
-      "PFE Intern Candidate"
+      "AI Enthusiast"
     ]
   },
   "stats": {
@@ -231,7 +228,6 @@
     "by": "by Oumeyma"
   },
   "app": {
-    "skip": "Skip to content",
     "scrollTop": "Scroll to top"
   }
 }
