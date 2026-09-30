@@ -4,59 +4,71 @@
 .quote-section {
   padding: 30px 0;
   background: transparent;
-  text-align: center;
 }
 
-.quote-content {
+.quote-section .quote-content {
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: start;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 18px 22px 18px 24px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-right: 3px solid var(--accent-color);
+  box-shadow: var(--card-shadow);
+  color: var(--quote-color);
 }
 
-.quote-content i {
+.quote-section .quote-content i {
   font-size: 28px;
   color: var(--accent-color);
-  margin-bottom: 15px;
-  display: inline-block;
+  margin: 0 0 12px 0;
+  display: block;
+  align-self: flex-start;
+  line-height: 1;
 }
 
-.quote-content p {
+.quote-section .quote-content p {
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: start;
   font-family: "Noto Naskh Arabic", "Amiri", serif;
   font-size: 1.05rem;
   font-style: normal;
   font-weight: 500;
-  color: var(--quote-color);
-  background: var(--quote-bg);
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 15px 25px;
-  text-align: center;
-  border-radius: 12px;
+  color: #1e293b;
+  background: transparent;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   line-height: 1.9;
 }
 
-html[data-theme="dark"] .quote-content p {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-inline-start: 3px solid var(--accent-color);
-  box-shadow: var(--card-shadow);
+html[data-theme="dark"] .quote-section .quote-content p {
+  color: var(--quote-color);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .quote-section {
     padding: 25px 0;
   }
-  
-  .quote-content i {
+
+  .quote-section .quote-content i {
     font-size: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
-  
-  .quote-content p {
+
+  .quote-section .quote-content p {
     font-size: 1rem;
-    padding: 12px 20px;
     line-height: 1.9;
   }
 }
@@ -65,15 +77,18 @@ html[data-theme="dark"] .quote-content p {
   .quote-section {
     padding: 20px 0;
   }
-  
-  .quote-content i {
-    font-size: 22px;
-    margin-bottom: 10px;
+
+  .quote-section .quote-content {
+    padding: 14px 16px 14px 18px;
   }
-  
-  .quote-content p {
+
+  .quote-section .quote-content i {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .quote-section .quote-content p {
     font-size: 0.95rem;
-    padding: 10px 15px;
     line-height: 1.9;
   }
 }
